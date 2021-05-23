@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     private float laserCooldown = 0.2f;
     private float canFire = -1f;
 
+    private int playerHealth = 3;
+
     //Public to allow changing for powerups?
     public GameObject laserPrefab;
 
@@ -76,6 +78,16 @@ public class Player : MonoBehaviour
         {
             canFire = Time.time + laserCooldown;
             Instantiate(laserPrefab, transform.position + new Vector3(0,0.7f,0), Quaternion.identity);
+        }
+    }
+
+    public void Damage()
+    {
+        playerHealth -= 1;
+
+        if (playerHealth <= 0)
+        {
+            Destroy(this.gameObject);
         }
     }
 }
