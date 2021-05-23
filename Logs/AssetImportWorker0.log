@@ -1,0 +1,172 @@
+Using pre-set license
+Built from '2020.3/staging' branch; Version is '2020.3.5f1 (8095aa901b9b) revision 8426922'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Home; OS build 19042.985; Version 2009; 64bit' Language: 'en' Physical Memory: 16344 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+G:\Program Files\Unity\2020.3.5f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+G:/Users/RowanofRohan/Documents/Unity/Space Shooter
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+49560
+Successfully changed project path to: G:/Users/RowanofRohan/Documents/Unity/Space Shooter
+G:/Users/RowanofRohan/Documents/Unity/Space Shooter
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 63.77 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.5f1 (8095aa901b9b)
+[Subsystems] Discovering subsystems at path G:/Program Files/Unity/2020.3.5f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path G:/Users/RowanofRohan/Documents/Unity/Space Shooter/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 970 (ID=0x13c2)
+    Vendor:   
+    VRAM:     4043 MB
+    Driver:   27.21.14.6089
+Initialize mono
+Mono path[0] = 'G:/Program Files/Unity/2020.3.5f1/Editor/Data/Managed'
+Mono path[1] = 'G:/Program Files/Unity/2020.3.5f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'G:/Program Files/Unity/2020.3.5f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56784
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: G:/Program Files/Unity/2020.3.5f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001120 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 27.80 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.225 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.000616 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.19 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.922 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.11 seconds
+Refreshing native plugins compatible for Editor in 0.19 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1117 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 57.5 MB.
+System memory in use after: 57.6 MB.
+
+Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 1559.
+Total: 1.939400 ms (FindLiveObjects: 0.253300 ms CreateObjectMapping: 0.063300 ms MarkObjects: 1.553500 ms  DeleteObjects: 0.067800 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Scripts/Laser.cs
+  artifactKey: Guid(3eb0977d1c850764385136f421aeffe0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Laser.cs using Guid(3eb0977d1c850764385136f421aeffe0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f4d464ce8ff1dda85c154bf2eef2e3d8') in 0.139823 seconds
+  Import took 0.173094 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 720.664054 seconds.
+  path: Assets/Scripts/Laser.cs
+  artifactKey: Guid(3eb0977d1c850764385136f421aeffe0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Laser.cs using Guid(3eb0977d1c850764385136f421aeffe0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '869942ef757f68e933ed6383e278140d') in 0.007454 seconds
+  Import took 0.028982 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000441 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.18 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.672 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.18 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1112 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 57.5 MB.
+System memory in use after: 57.5 MB.
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1562.
+Total: 2.662800 ms (FindLiveObjects: 0.318600 ms CreateObjectMapping: 0.107600 ms MarkObjects: 2.152100 ms  DeleteObjects: 0.082600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000451 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.18 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.628 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.18 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1112 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 57.5 MB.
+System memory in use after: 57.6 MB.
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1565.
+Total: 1.452900 ms (FindLiveObjects: 0.118600 ms CreateObjectMapping: 0.032800 ms MarkObjects: 1.256700 ms  DeleteObjects: 0.043700 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 50.098603 seconds.
+  path: Assets/Prefabs/Laser.prefab
+  artifactKey: Guid(219c07c51b11bab46b29b92a125fba2e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Laser.prefab using Guid(219c07c51b11bab46b29b92a125fba2e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '36f387c7d73863e93a9f05aca51e321e') in 0.144204 seconds
+  Import took 0.146153 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.975790 seconds.
+  path: Assets/Prefabs/Laser.prefab
+  artifactKey: Guid(219c07c51b11bab46b29b92a125fba2e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Laser.prefab using Guid(219c07c51b11bab46b29b92a125fba2e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8960a6e5ae17cc546ce0a0f29dfc13e1') in 0.010492 seconds
+  Import took 0.013029 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.399160 seconds.
+  path: Assets/Prefabs/Laser.prefab
+  artifactKey: Guid(219c07c51b11bab46b29b92a125fba2e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Laser.prefab using Guid(219c07c51b11bab46b29b92a125fba2e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a50a5925218638deb5eebdf4eb3cd7d7') in 0.011424 seconds
+  Import took 0.013389 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.708755 seconds.
+  path: Assets/Prefabs/Laser.prefab
+  artifactKey: Guid(219c07c51b11bab46b29b92a125fba2e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Laser.prefab using Guid(219c07c51b11bab46b29b92a125fba2e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '20af45e5cd03420a6ec5353374b17b15') in 0.011066 seconds
+  Import took 0.126961 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.694163 seconds.
+  path: Assets/Prefabs/Laser.prefab
+  artifactKey: Guid(219c07c51b11bab46b29b92a125fba2e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Laser.prefab using Guid(219c07c51b11bab46b29b92a125fba2e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '939dd9dd99f405a4ef6890cdc026c15c') in 0.010557 seconds
+  Import took 0.023268 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.949004 seconds.
+  path: Assets/Prefabs/Laser.prefab
+  artifactKey: Guid(219c07c51b11bab46b29b92a125fba2e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Laser.prefab using Guid(219c07c51b11bab46b29b92a125fba2e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cd1833c553bdd4c00d4f3b711a9b1be8') in 0.007354 seconds
+  Import took 0.020573 seconds .
+
