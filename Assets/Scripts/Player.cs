@@ -19,6 +19,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float rightScreenBound = 9.2f;
 
+    [SerializeField]
+    private float laserCooldown = 0.2f;
+    private float canFire = -1f;
+
     //Public to allow changing for powerups?
     public GameObject laserPrefab;
 
@@ -68,9 +72,10 @@ public class Player : MonoBehaviour
 
     void FireController()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && Time.time > canFire)
         {
-           Instantiate(laserPrefab, transform.position + new Vector3(0,0.7f,0), Quaternion.identity);
+            canFire = Time.time + laserCooldown;
+            Instantiate(laserPrefab, transform.position + new Vector3(0,0.7f,0), Quaternion.identity);
         }
     }
 }
