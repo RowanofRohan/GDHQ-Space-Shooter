@@ -6,6 +6,8 @@ public class Powerup : MonoBehaviour
 {
     [SerializeField]
     private float speed = 2.0f;
+    [SerializeField]
+    private int powerupID = 0;
 
     void Update()
     {
@@ -25,7 +27,7 @@ public class Powerup : MonoBehaviour
             Player player = other.transform.GetComponent<Player>();
             if (player != null)
             {
-                player.collectPowerup();
+                player.collectPowerup(powerupID);
             }
             Destroy(this.gameObject);
         }

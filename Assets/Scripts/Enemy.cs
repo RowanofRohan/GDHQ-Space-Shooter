@@ -11,6 +11,9 @@ public class Enemy : MonoBehaviour
     private float currentHealth;
 
     [SerializeField]
+    private float dropRatePercentage = 20.0f;
+
+    [SerializeField]
     private float upperScreenBound = 8.0f;
     [SerializeField]
     private float lowerScreenBound = -6.0f;
@@ -19,9 +22,18 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float rightScreenBound = 9.2f;
 
+    
+    private SpawnManager spawnManager;
+    
+
     void Start()
     {
         currentHealth = maxHealth;
+        spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
+        if (spawnManager == null)
+        {
+            Debug.LogError("Spawn Manager is NULL");
+        }
     }
 
     void Update()
@@ -52,6 +64,7 @@ public class Enemy : MonoBehaviour
                 Destroy(other.gameObject);
                 if (currentHealth <= 0.0001f)
                 {
+                    KillTrigger();
                     Destroy(this.gameObject);
                 }
             }
@@ -64,6 +77,16 @@ public class Enemy : MonoBehaviour
                 player.Damage();
             }
             Destroy(this.gameObject);
+        }
+    }
+
+    private void KillTrigger()
+    {
+        float dropCheck = Random.Range(0,100);
+        if(dropCheck <= dropRatePercentage)
+        {
+            Vector3 deathLocation = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
+            spawnManager.SpawnPowerup(deathLocation);
         }
     }
 }

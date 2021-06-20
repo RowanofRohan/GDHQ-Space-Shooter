@@ -23,8 +23,9 @@ public class SpawnManager : MonoBehaviour
     private GameObject enemyPrefab;
     [SerializeField]
     private GameObject enemyContainer;
+
     [SerializeField]
-    private GameObject powerupPrefab;
+    private GameObject[] powerups;
     [SerializeField]
     private GameObject powerupContainer;
 
@@ -37,7 +38,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(EnemySpawnRoutine());
-        StartCoroutine(PowerupSpawnRoutine());
+    //     StartCoroutine(PowerupSpawnRoutine());
     }
 
     void Update()
@@ -56,21 +57,35 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    IEnumerator PowerupSpawnRoutine()
-    {
-        while(canSpawn)
-        {
-            float randomDelay = Random.Range(minimumSpawnDelay,maximumSpawnDelay);
-            yield return new WaitForSeconds(randomDelay);
+    // IEnumerator PowerupSpawnRoutine()
+    // {
+    //     while(canSpawn)
+    //     {
+    //         float randomDelay = Random.Range(minimumSpawnDelay,maximumSpawnDelay);
+    //         yield return new WaitForSeconds(randomDelay);
             
-            if(canSpawn)
+    //         if(canSpawn)
+    //         {
+    //             float randomX = Random.Range(leftScreenBound,rightScreenBound);
+    //             spawnLocation = new Vector3(randomX, upperScreenBound - 0.0001f, 0);
+    //             GameObject newPowerup = Instantiate(tripleShotPrefab,spawnLocation,Quaternion.identity);
+    //             newPowerup.transform.parent = powerupContainer.transform;
+    //         }
+    //     }
+    // }
+
+    public void SpawnPowerup(Vector3 spawnLocation)
+    {
+        if(canSpawn)
+        {
+            int powerupRandomizer = Random.Range(0,powerups.Length);
+            if(powerups[powerupRandomizer] != null)
             {
-                float randomX = Random.Range(leftScreenBound,rightScreenBound);
-                spawnLocation = new Vector3(randomX, upperScreenBound - 0.0001f, 0);
-                GameObject newPowerup = Instantiate(powerupPrefab,spawnLocation,Quaternion.identity);
+                GameObject newPowerup = Instantiate(powerups[powerupRandomizer],spawnLocation,Quaternion.identity);
                 newPowerup.transform.parent = powerupContainer.transform;
             }
         }
+        
     }
 
     public void GameOver()

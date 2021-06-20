@@ -22,11 +22,31 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float laserCooldown = 0.2f;
     private float canFire = -1f;
+
     [SerializeField]
     private bool tripleShot = false;
     [SerializeField]
     private float tripleShotDuration = 5.0f;
+    
+    [SerializeField]
+    private bool speedBoost = false;
+    [SerializeField]
+    private float speedBoostDuration = 5.0f;
+    [SerializeField]
+    private float speedBoostIntensity = 1.5f;
+    
+    [SerializeField]
+    private bool shieldsUp = false;
+    [SerializeField]
+    private float shieldDuration = 10.0f;
+    [SerializeField]
+    private int shieldHealth = 1;
+    private int shieldCurrentHealth = 1;
+    [SerializeField]
+    private GameObject shieldVisualizer;
 
+
+    [SerializeField]
     private int playerHealth = 3;
 
     [SerializeField]
@@ -35,6 +55,7 @@ public class Player : MonoBehaviour
     private GameObject tripleShotPrefab;
     
     private SpawnManager spawnManager;
+    
 
 
     //Screen wrap code written but not used
@@ -47,12 +68,13 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        transform.position = new Vector3(0,-3,0);
         spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
-		transform.position = new Vector3(0,0,0);
         if (spawnManager == null)
         {
-        Debug.LogError("Spawn Manager is NULL");
+            Debug.LogError("Spawn Manager is NULL");
         }
+        shieldVisualizer.SetActive(shieldsUp);
     }
 
     // Update is called once per frame
@@ -69,7 +91,14 @@ public class Player : MonoBehaviour
 
         Vector3 movement = new Vector3(horizontalInput*horizontalSpeed,verticalInput*verticalSpeed,0);
 
-        transform.Translate(movement*Time.deltaTime);
+        if(speedBoost == true)
+        {
+            transform.Translate((movement*speedBoostIntensity)*Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(movement*Time.deltaTime);
+        }
 
         //Screen bounding with Clamp; does not wrap
         transform.position = new Vector3(Mathf.Clamp(transform.position.x,leftScreenBound,rightScreenBound),Mathf.Clamp(transform.position.y,lowerScreenBound,upperScreenBound),0);
@@ -103,24 +132,117 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
-        playerHealth -= 1;
-
-        if (playerHealth <= 0)
+        if(shieldsUp == false)
         {
-            spawnManager.GameOver();
-            Destroy(this.gameObject);
+            playerHealth -= 1;
+
+            if (playerHealth <= 0)
+            {
+                spawnManager.GameOver();
+                Destroy(this.gameObject);
+            }
+        }
+        else
+        {
+            shieldCurrentHealth -= 1;
+
+            if (shieldCurrentHealth <= 0)
+            {
+                shieldsUp = false;
+                shieldVisualizer.SetActive(shieldsUp);
+                StopCoroutine(ShieldTimer());
+            }
         }
     }
 
-    public void collectPowerup()
+    public void collectPowerup(int powerupID)
     {
-        tripleShot = true;
-        StartCoroutine(PowerupTimer());
+        switch(powerupID)
+        {
+            case 1:
+                //Triple Shot ID: 1
+                TripleShotController();
+                break;
+            case 2:
+                //Speed Boost ID: 2
+                SpeedBoostController();
+                break;
+            case 3:
+                //Shield ID: 3
+                ShieldController();
+                break;
+            default:
+                Debug.Log("Bad ID!");
+                break;
+        }
     }
 
-    IEnumerator PowerupTimer()
+    private void TripleShotController()
+    {
+        if(tripleShot == true)
+        {
+            StopCoroutine(TripleShotTimer());
+            StartCoroutine(TripleShotTimer());
+        }
+        else
+        {
+            tripleShot = true;
+            StartCoroutine(TripleShotTimer());
+        }
+    }
+
+    IEnumerator TripleShotTimer()
     {
         yield return new WaitForSeconds(tripleShotDuration);
         tripleShot = false;
     }
+
+    private void SpeedBoostController()
+    {
+        if(speedBoost == true)
+        {
+            StopCoroutine(SpeedBoostTimer());
+            StartCoroutine(SpeedBoostTimer());
+        }
+        else
+        {
+            speedBoost = true;
+            StartCoroutine(SpeedBoostTimer());
+        }
+    }
+
+    IEnumerator SpeedBoostTimer()
+    {
+        yield return new WaitForSeconds(speedBoostDuration);
+        speedBoost = false;
+    }
+
+    private void ShieldController()
+    {
+        if(shieldsUp == true)
+        {
+            StopCoroutine(ShieldTimer());
+            StartCoroutine(ShieldTimer());
+        }
+        else
+        {
+            shieldsUp = true;
+            StartCoroutine(ShieldTimer());
+        }
+    }
+
+    IEnumerator ShieldTimer()
+    {
+        shieldVisualizer.SetActive(shieldsUp);
+        shieldCurrentHealth = shieldHealth;
+        yield return new WaitForSeconds(shieldDuration);
+        shieldsUp = false;
+        shieldVisualizer.SetActive(shieldsUp);
+    }
+
+    // IEnumerator PowerupTimer(float powerupDuration)
+    // {
+    //     yield return new WaitForSeconds(powerupDuration);
+    //     tripleShot = false;
+    // }
 }
