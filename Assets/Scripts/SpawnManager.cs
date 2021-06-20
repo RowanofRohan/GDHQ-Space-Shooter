@@ -63,10 +63,13 @@ public class SpawnManager : MonoBehaviour
             float randomDelay = Random.Range(minimumSpawnDelay,maximumSpawnDelay);
             yield return new WaitForSeconds(randomDelay);
             
-            float randomX = Random.Range(leftScreenBound,rightScreenBound);
-            spawnLocation = new Vector3(randomX, upperScreenBound - 0.0001f, 0);
-            GameObject newPowerup = Instantiate(powerupPrefab,spawnLocation,Quaternion.identity);
-            newPowerup.transform.parent = powerupContainer.transform;
+            if(canSpawn)
+            {
+                float randomX = Random.Range(leftScreenBound,rightScreenBound);
+                spawnLocation = new Vector3(randomX, upperScreenBound - 0.0001f, 0);
+                GameObject newPowerup = Instantiate(powerupPrefab,spawnLocation,Quaternion.identity);
+                newPowerup.transform.parent = powerupContainer.transform;
+            }
         }
     }
 

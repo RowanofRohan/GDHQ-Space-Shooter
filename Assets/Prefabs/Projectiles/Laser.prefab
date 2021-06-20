@@ -10,16 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6135389382332620693}
   - component: {fileID: 788528755865709923}
-<<<<<<< Updated upstream
-  - component: {fileID: -1014739748294913158}
-=======
   - component: {fileID: 2319677610398360616}
   - component: {fileID: -6535679754069490487}
   - component: {fileID: 6948135516672350893}
->>>>>>> Stashed changes
   m_Layer: 0
   m_Name: Laser
-  m_TagString: Untagged
+  m_TagString: Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,40 +130,6 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-<<<<<<< Updated upstream
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &788528755865709923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4176383718462431938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eb0977d1c850764385136f421aeffe0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 8
---- !u!114 &-1014739748294913158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4176383718462431938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eb0977d1c850764385136f421aeffe0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 8
-=======
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -184,4 +146,3 @@ MonoBehaviour:
   serializedVersion: 2
   m_Size: {x: 0.4986093, y: 2.8067105}
   m_EdgeRadius: 0
->>>>>>> Stashed changes
