@@ -27,10 +27,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float tripleShotDuration = 5.0f;
 
-<<<<<<< Updated upstream
-    //Public to allow changing for powerups?
-    public GameObject laserPrefab;
-=======
     private int playerHealth = 3;
 
     [SerializeField]
@@ -39,7 +35,6 @@ public class Player : MonoBehaviour
     private GameObject tripleShotPrefab;
     
     private SpawnManager spawnManager;
->>>>>>> Stashed changes
 
 
     //Screen wrap code written but not used
@@ -105,8 +100,6 @@ public class Player : MonoBehaviour
             }
         }
     }
-<<<<<<< Updated upstream
-=======
 
     public void Damage()
     {
@@ -130,5 +123,4 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(tripleShotDuration);
         tripleShot = false;
     }
->>>>>>> Stashed changes
 }
