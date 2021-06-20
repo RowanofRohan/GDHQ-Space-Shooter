@@ -22,9 +22,24 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float laserCooldown = 0.2f;
     private float canFire = -1f;
+    [SerializeField]
+    private bool tripleShot = false;
+    [SerializeField]
+    private float tripleShotDuration = 5.0f;
 
+<<<<<<< Updated upstream
     //Public to allow changing for powerups?
     public GameObject laserPrefab;
+=======
+    private int playerHealth = 3;
+
+    [SerializeField]
+    private GameObject laserPrefab;
+    [SerializeField]
+    private GameObject tripleShotPrefab;
+    
+    private SpawnManager spawnManager;
+>>>>>>> Stashed changes
 
 
     //Screen wrap code written but not used
@@ -37,7 +52,12 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
 		transform.position = new Vector3(0,0,0);
+        if (spawnManager == null)
+        {
+        Debug.LogError("Spawn Manager is NULL");
+        }
     }
 
     // Update is called once per frame
@@ -75,7 +95,40 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && Time.time > canFire)
         {
             canFire = Time.time + laserCooldown;
-            Instantiate(laserPrefab, transform.position + new Vector3(0,0.7f,0), Quaternion.identity);
+            if (tripleShot == true)
+            {
+                Instantiate(tripleShotPrefab, transform.position + new Vector3 (0,0,0), Quaternion.identity);
+            }
+            else 
+            {
+                Instantiate(laserPrefab, transform.position + new Vector3(0,0.7f,0), Quaternion.identity);
+            }
         }
     }
+<<<<<<< Updated upstream
+=======
+
+    public void Damage()
+    {
+        playerHealth -= 1;
+
+        if (playerHealth <= 0)
+        {
+            spawnManager.GameOver();
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void collectPowerup()
+    {
+        tripleShot = true;
+        StartCoroutine(PowerupTimer());
+    }
+
+    IEnumerator PowerupTimer()
+    {
+        yield return new WaitForSeconds(tripleShotDuration);
+        tripleShot = false;
+    }
+>>>>>>> Stashed changes
 }

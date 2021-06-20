@@ -7,6 +7,8 @@ public class Laser : MonoBehaviour
 
     [SerializeField]
     private float speed = 8f;
+    [SerializeField]
+    private float damage = 1f;
 
     void Update()
     {
@@ -15,7 +17,16 @@ public class Laser : MonoBehaviour
 
         if (transform.position.y >= 8)
         {
+            if(transform.parent != null)
+            {
+                Destroy(transform.parent.gameObject);
+            }
             Destroy(this.gameObject);
         }
+    }
+
+    public float CallDamage()
+    {
+        return damage;
     }
 }
