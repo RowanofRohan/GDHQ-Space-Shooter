@@ -132,17 +132,7 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
-        if(shieldsUp == false)
-        {
-            playerHealth -= 1;
-
-            if (playerHealth <= 0)
-            {
-                spawnManager.GameOver();
-                Destroy(this.gameObject);
-            }
-        }
-        else
+        if(shieldsUp == true)
         {
             shieldCurrentHealth -= 1;
 
@@ -151,6 +141,16 @@ public class Player : MonoBehaviour
                 shieldsUp = false;
                 shieldVisualizer.SetActive(shieldsUp);
                 StopCoroutine(ShieldTimer());
+            }
+        }
+        else
+        {
+            playerHealth -= 1;
+
+            if (playerHealth <= 0)
+            {
+                spawnManager.GameOver();
+                Destroy(this.gameObject);
             }
         }
     }
@@ -176,6 +176,11 @@ public class Player : MonoBehaviour
                 break;
         }
     }
+
+    // private void PowerUpController(void TargetController(), )
+    // {
+
+    // }
 
     private void TripleShotController()
     {
@@ -239,10 +244,4 @@ public class Player : MonoBehaviour
         shieldsUp = false;
         shieldVisualizer.SetActive(shieldsUp);
     }
-
-    // IEnumerator PowerupTimer(float powerupDuration)
-    // {
-    //     yield return new WaitForSeconds(powerupDuration);
-    //     tripleShot = false;
-    // }
 }
