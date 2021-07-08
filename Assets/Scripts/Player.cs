@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class Player : MonoBehaviour
 {
+    //Movement
     [SerializeField]
     private float horizontalSpeed = 3.5f;
     [SerializeField]
     private float verticalSpeed = 3.5f;
 
+    //Screen Bounds
     [SerializeField]
     private float upperScreenBound = 6f;
     [SerializeField]
@@ -19,15 +22,18 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float rightScreenBound = 9.2f;
 
+    //Fire Cotroller
     [SerializeField]
     private float laserCooldown = 0.2f;
     private float canFire = -1f;
 
+    //Triple Shot
     [SerializeField]
     private bool tripleShot = false;
     [SerializeField]
     private float tripleShotDuration = 5.0f;
     
+    //SpeedBoost
     [SerializeField]
     private bool speedBoost = false;
     [SerializeField]
@@ -35,6 +41,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float speedBoostIntensity = 1.5f;
     
+    //Shields
     [SerializeField]
     private bool shieldsUp = false;
     [SerializeField]
@@ -45,16 +52,24 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject shieldVisualizer;
 
-
+    //Health _ Lives
     [SerializeField]
     private int playerHealth = 3;
 
+    //Projectile Handles
     [SerializeField]
     private GameObject laserPrefab;
     [SerializeField]
     private GameObject tripleShotPrefab;
     
+    //Spawn Managwer Handle
     private SpawnManager spawnManager;
+
+    //UI Handles
+    [SerializeField]
+    private UIManager uiManager;
+    [SerializeField]
+    private int score = 0;
     
 
 
@@ -146,10 +161,12 @@ public class Player : MonoBehaviour
         else
         {
             playerHealth -= 1;
+            uiManager.UpdateHealth(playerHealth);
 
             if (playerHealth <= 0)
             {
                 spawnManager.GameOver();
+                uiManager.GameOver();
                 Destroy(this.gameObject);
             }
         }
@@ -243,5 +260,11 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(shieldDuration);
         shieldsUp = false;
         shieldVisualizer.SetActive(shieldsUp);
+    }
+
+    public void ScoreUpdate(int addScore)
+    {
+        score += addScore;
+        uiManager.UpdateScore(score);
     }
 }

@@ -24,6 +24,10 @@ public class Enemy : MonoBehaviour
 
     
     private SpawnManager spawnManager;
+    private Player player;
+
+    [SerializeField]
+    private int killScore = 100;
     
 
     void Start()
@@ -33,6 +37,11 @@ public class Enemy : MonoBehaviour
         if (spawnManager == null)
         {
             Debug.LogError("Spawn Manager is NULL");
+        }
+        player = GameObject.Find("Player").GetComponent<Player>();
+        if (player == null)
+        {
+            Debug.LogError("Cannot find player!");
         }
     }
 
@@ -71,7 +80,6 @@ public class Enemy : MonoBehaviour
         }
         else if (other.transform.tag == "Player")
         {
-            Player player = other.transform.GetComponent<Player>();
             if (player != null)
             {
                 player.Damage();
@@ -82,6 +90,10 @@ public class Enemy : MonoBehaviour
 
     private void KillTrigger()
     {
+        if (player != null)
+        {
+            player.ScoreUpdate(killScore);
+        }
         float dropCheck = Random.Range(0,100);
         if(dropCheck <= dropRatePercentage)
         {
