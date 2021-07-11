@@ -47,10 +47,17 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float shieldDuration = 10.0f;
     [SerializeField]
-    private int shieldHealth = 1;
-    private int shieldCurrentHealth = 1;
+    private float shieldHealth = 3.0f;
+    private float shieldCurrentHealth = 3.0f;
+
+    //Shield Visuals
     [SerializeField]
     private GameObject shieldVisualizer;
+    private SpriteRenderer shieldRenderer;
+    [SerializeField]
+    private Color shieldStrongColor = new Vector4(1,1,1,0.75f);
+    [SerializeField]
+    private Color shieldWeakcolor = new Vector4(1,0,0,0.75f);
 
     //Health _ Lives
     [SerializeField]
@@ -103,6 +110,8 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("Spawn Manager is NULL");
         }
+        shieldRenderer = shieldVisualizer.GetComponent<SpriteRenderer>();
+        shieldRenderer.color = shieldStrongColor;
         shieldVisualizer.SetActive(shieldsUp);
         playerAudio = GetComponent<AudioSource>();
         if (playerAudio == null)
@@ -176,13 +185,16 @@ public class Player : MonoBehaviour
     {
         if(shieldsUp == true)
         {
-            shieldCurrentHealth -= 1;
+            shieldCurrentHealth = shieldCurrentHealth - 1.0f;
+
+            ShieldColorController((shieldCurrentHealth-1)/(shieldHealth-1));
+            uiManager.UpdateShield(shieldCurrentHealth, shieldHealth);
 
             if (shieldCurrentHealth <= 0)
             {
                 shieldsUp = false;
                 shieldVisualizer.SetActive(shieldsUp);
-                StopCoroutine(ShieldTimer());
+                //StopCoroutine(ShieldTimer());
             }
         }
         else
@@ -294,16 +306,30 @@ public class Player : MonoBehaviour
 
     private void ShieldController()
     {
-        if(shieldsUp == true)
-        {
-            StopCoroutine(ShieldTimer());
-            StartCoroutine(ShieldTimer());
-        }
-        else
-        {
-            shieldsUp = true;
-            StartCoroutine(ShieldTimer());
-        }
+        //Uses overall health, has no duration limit
+        shieldsUp = true;
+        shieldVisualizer.SetActive(shieldsUp);
+        shieldCurrentHealth = shieldHealth;
+        ShieldColorController(1.0f);
+        uiManager.UpdateShield(shieldCurrentHealth, shieldHealth);
+
+        
+        //This if statement uses shield timers; ignored in favor of health system
+        // if(shieldsUp == true)
+        // {
+        //     StopCoroutine(ShieldTimer());
+        //     StartCoroutine(ShieldTimer());
+        // }
+        // else
+        // {
+        //     shieldsUp = true;
+        //     StartCoroutine(ShieldTimer());
+        // }
+    }
+
+    private void ShieldColorController(float shieldPercent)
+    {
+        shieldRenderer.color = Color.Lerp(shieldWeakcolor,shieldStrongColor,shieldPercent);
     }
 
     IEnumerator ShieldTimer()

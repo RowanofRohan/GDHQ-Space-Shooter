@@ -19,10 +19,15 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text restartText;
 
+    //Health Handles
     [SerializeField]
     private Image healthImage;
     [SerializeField]
     private Sprite[] healthSprites;
+
+    //Shield Handles
+    [SerializeField]
+    private Image shieldStatus;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +40,7 @@ public class UIManager : MonoBehaviour
         scoreText.text = "Score: " + score;
         gameOvertext.gameObject.SetActive(false);
         restartText.gameObject.SetActive(false);
+        shieldStatus.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -52,6 +58,20 @@ public class UIManager : MonoBehaviour
     public void UpdateHealth(int currentHealth)
     {
         healthImage.sprite = healthSprites[currentHealth];
+    }
+
+    public void UpdateShield(float shieldCurrentHealth, float shieldMaxhealth)
+    {
+        if (shieldCurrentHealth != 0 && shieldMaxhealth !=0)
+        {
+            shieldStatus.gameObject.SetActive(true);
+            shieldStatus.fillAmount = shieldCurrentHealth/shieldMaxhealth;
+        }
+        else
+        {
+            shieldStatus.fillAmount = 0;
+            shieldStatus.gameObject.SetActive(false);
+        }
     }
 
     public void GameOver()

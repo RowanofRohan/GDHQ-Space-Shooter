@@ -113,7 +113,6 @@ public class Enemy : MonoBehaviour
             newLaser.GetComponent<Laser>().SetHostile(true);
             audioSource.clip = laserShot;
             audioSource.Play();
-            Debug.Break();
         }
     }
 
