@@ -29,15 +29,17 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject powerupContainer;
 
+    // [SerializeField]
+    // private float minimumSpawnDelay = 7.0f;
+    // [SerializeField]
+    // private float maximumSpawnDelay = 13.0f;
     [SerializeField]
-    private float minimumSpawnDelay = 7.0f;
-    [SerializeField]
-    private float maximumSpawnDelay = 13.0f;
+    private float initialSpawnDelay = 3.0f;
 
 
     void Start()
     {
-        StartCoroutine(EnemySpawnRoutine());
+        canSpawn = false;
     //     StartCoroutine(PowerupSpawnRoutine());
     }
 
@@ -47,6 +49,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator EnemySpawnRoutine()
     {
+        yield return new WaitForSeconds(initialSpawnDelay);
         while(canSpawn)
         {
             float randomX = Random.Range(leftScreenBound,rightScreenBound);
@@ -86,6 +89,12 @@ public class SpawnManager : MonoBehaviour
             }
         }
         
+    }
+
+    public void StartSpawning()
+    {
+        canSpawn = true;
+        StartCoroutine(EnemySpawnRoutine());
     }
 
     public void GameOver()

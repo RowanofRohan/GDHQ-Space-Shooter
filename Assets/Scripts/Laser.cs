@@ -9,13 +9,21 @@ public class Laser : MonoBehaviour
     private float speed = 8f;
     [SerializeField]
     private float damage = 1f;
+    [SerializeField]
+    private bool hostile = false;
 
     void Update()
     {
         Vector3 laserMovement = new Vector3(0,speed,0);
-        transform.Translate(laserMovement*Time.deltaTime);
-
-        if (transform.position.y >= 8)
+        if(hostile == false)
+        {
+            transform.Translate(laserMovement*Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate (laserMovement*-1*Time.deltaTime);
+        }
+        if (transform.position.y >= 8 || transform.position.y <= -8)
         {
             if(transform.parent != null)
             {
@@ -25,8 +33,23 @@ public class Laser : MonoBehaviour
         }
     }
 
+    public void SetDamage(float damageCheck)
+    {
+        damage = damageCheck;
+    }
+
     public float CallDamage()
     {
         return damage;
+    }
+
+    public void SetHostile(bool hostility)
+    {
+        hostile = hostility;
+    }
+
+    public bool CallAllegiance()
+    {
+        return hostile;
     }
 }

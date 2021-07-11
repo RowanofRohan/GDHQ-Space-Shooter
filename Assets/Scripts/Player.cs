@@ -55,6 +55,10 @@ public class Player : MonoBehaviour
     //Health _ Lives
     [SerializeField]
     private int playerHealth = 3;
+    [SerializeField]
+    private GameObject leftDamageFire;
+    [SerializeField]
+    private GameObject rightDamageFire;
 
     //Projectile Handles
     [SerializeField]
@@ -62,7 +66,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject tripleShotPrefab;
     
-    //Spawn Managwer Handle
+    //Spawn Manager Handle
     private SpawnManager spawnManager;
 
     //UI Handles
@@ -70,6 +74,16 @@ public class Player : MonoBehaviour
     private UIManager uiManager;
     [SerializeField]
     private int score = 0;
+
+    //Audio Handles
+    [SerializeField]
+    private AudioSource playerAudio;
+    [SerializeField]
+    private AudioClip laserShot;
+
+    //Explosion Handles
+    [SerializeField]
+    private GameObject explosionPrefab;
     
 
 
@@ -90,6 +104,17 @@ public class Player : MonoBehaviour
             Debug.LogError("Spawn Manager is NULL");
         }
         shieldVisualizer.SetActive(shieldsUp);
+        playerAudio = GetComponent<AudioSource>();
+        if (playerAudio == null)
+        {
+            Debug.LogError("Player audio source is NULL");
+        }
+        else
+        {
+            playerAudio.clip = laserShot;
+        }
+        leftDamageFire.SetActive(false);
+        rightDamageFire.SetActive(false);
     }
 
     // Update is called once per frame
@@ -142,6 +167,8 @@ public class Player : MonoBehaviour
             {
                 Instantiate(laserPrefab, transform.position + new Vector3(0,0.7f,0), Quaternion.identity);
             }
+
+           playerAudio.Play();
         }
     }
 
@@ -162,14 +189,40 @@ public class Player : MonoBehaviour
         {
             playerHealth -= 1;
             uiManager.UpdateHealth(playerHealth);
+            DamageFX();
 
             if (playerHealth <= 0)
             {
                 spawnManager.GameOver();
                 uiManager.GameOver();
+                GameObject explosion = Instantiate(explosionPrefab,transform.position, Quaternion.identity);
+                Destroy(explosion.gameObject,2.0f);
                 Destroy(this.gameObject);
             }
         }
+    }
+
+    private void DamageFX()
+    {
+        if (playerHealth == 2)
+        {
+            float randomSide = Random.Range(0.0f, 100.0f);
+            if (randomSide <= 50.0f)
+            {
+                leftDamageFire.SetActive(true);
+            }
+            else
+            {
+                rightDamageFire.SetActive(true);
+            }
+
+        }
+        else if (playerHealth <= 1)
+        {
+            leftDamageFire.SetActive(true);
+            rightDamageFire.SetActive(true);
+        }
+
     }
 
     public void collectPowerup(int powerupID)
@@ -266,5 +319,21 @@ public class Player : MonoBehaviour
     {
         score += addScore;
         uiManager.UpdateScore(score);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.transform.tag == "Laser")
+        {
+            Laser laser = other.transform.GetComponent<Laser>();
+            if (laser != null)
+            {
+                //Checks hostilitiy; "true" represents hostile
+                if(other.GetComponent<Laser>().CallAllegiance() == true)
+                {
+                    Damage();
+                }
+            }
+        }
     }
 }

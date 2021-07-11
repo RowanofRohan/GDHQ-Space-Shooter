@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   powerupID: 2
+  audioClip: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
 --- !u!212 &4391880903207725476
 SpriteRenderer:
   m_ObjectHideFlags: 0

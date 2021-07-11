@@ -8,6 +8,8 @@ public class Powerup : MonoBehaviour
     private float speed = 2.0f;
     [SerializeField]
     private int powerupID = 0;
+    [SerializeField]
+    private AudioClip audioClip;
 
     void Update()
     {
@@ -29,6 +31,7 @@ public class Powerup : MonoBehaviour
             {
                 player.collectPowerup(powerupID);
             }
+            AudioSource.PlayClipAtPoint(audioClip,transform.position,1.0f);
             Destroy(this.gameObject);
         }
     }
