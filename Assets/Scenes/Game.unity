@@ -2247,8 +2247,8 @@ MonoBehaviour:
   pickups:
   - {fileID: 6790051428632783503, guid: a7b4c76cc7d45d44c882523a56abfc24, type: 3}
   powerupContainer: {fileID: 463736140}
-  minimumPickupSpawnDelay: 3
-  maximumPickupSpawnDelay: 5
+  minimumPickupSpawnDelay: 5
+  maximumPickupSpawnDelay: 10
   initialSpawnDelay: 3
 --- !u!4 &1994322987
 Transform:
@@ -2457,6 +2457,7 @@ MonoBehaviour:
   thrusterMinimumCharge: 25
   thrusterChargeDelay: 0.5
   playerHealth: 3
+  maxHealth: 3
   leftDamageFire: {fileID: 847771944}
   rightDamageFire: {fileID: 1379369576}
   laserPrefab: {fileID: 4176383718462431938, guid: 219c07c51b11bab46b29b92a125fba2e, type: 3}

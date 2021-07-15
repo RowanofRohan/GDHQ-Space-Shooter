@@ -101,6 +101,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int playerHealth = 3;
     [SerializeField]
+    private int maxHealth = 3;
+    [SerializeField]
     private GameObject leftDamageFire;
     [SerializeField]
     private GameObject rightDamageFire;
@@ -365,6 +367,27 @@ public class Player : MonoBehaviour
 
     }
 
+    private void RepairFX()
+    {
+        if(playerHealth == 2)
+        {
+            float randomSide = Random.Range(0.0f, 100.0f);
+            if (randomSide <= 50.0f)
+            {
+                leftDamageFire.SetActive(false);
+            }
+            else
+            {
+                rightDamageFire.SetActive(false);
+            }
+        }
+        else if (playerHealth >= 3)
+        {
+            leftDamageFire.SetActive(false);
+            rightDamageFire.SetActive(false);
+        }
+    }
+
     public void collectPowerup(int powerupID)
     {
         switch(powerupID)
@@ -384,6 +407,10 @@ public class Player : MonoBehaviour
             case 4:
                 //Ammo ID: 4
                 AmmoController();
+                break;
+            case 5:
+                //1UP ID: 5
+                OneUPController();
                 break;
             default:
                 Debug.Log("Bad ID!");
@@ -470,6 +497,17 @@ public class Player : MonoBehaviour
         SendAmmoUpdate();
     }
 
+    private void OneUPController()
+    {
+        playerHealth += 1;
+        if(playerHealth > maxHealth)
+        {
+            playerHealth = maxHealth;
+        }
+        uiManager.UpdateHealth(playerHealth);
+        RepairFX();
+    }
+
     private void SendAmmoUpdate()
     {
         if (infiniteAmmo != true)
@@ -508,6 +546,7 @@ public class Player : MonoBehaviour
                 if(other.GetComponent<Laser>().CallAllegiance() == true)
                 {
                     Damage();
+                    Destroy(other.gameObject);
                 }
             }
         }
