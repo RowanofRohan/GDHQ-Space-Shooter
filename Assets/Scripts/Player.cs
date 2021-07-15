@@ -30,6 +30,10 @@ public class Player : MonoBehaviour
     private int maxAmmo = 15;
     [SerializeField]
     private int currentAmmo = 0;
+    [SerializeField]
+    private bool infiniteAmmo = false;
+    [SerializeField]
+    private bool consumeAmmo = false;
 
     //Triple Shot
     [SerializeField]
@@ -128,16 +132,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject explosionPrefab;
     
-
-
-    //Screen wrap code written but not used
-    //[SerializeField]
-    //private float leftScreenBound = -11.2f;
-    //[SerializeField]
-    //private float rightScreenBound = 11.2f;
-
-    
-    // Start is called before the first frame update
     void Start()
     {
         transform.position = new Vector3(0,-3,0);
@@ -166,9 +160,11 @@ public class Player : MonoBehaviour
         canUsethrusters = true;
 
         currentAmmo = maxAmmo;
+        infiniteAmmo = false;
+        consumeAmmo = true;
+        SendAmmoUpdate();
     }
 
-    // Update is called once per frame
     void Update()
     {
         MovementController();
@@ -294,14 +290,16 @@ public class Player : MonoBehaviour
                 if (tripleShot == true)
                 {
                     Instantiate(tripleShotPrefab, transform.position + new Vector3 (0,0,0), Quaternion.identity);
-                    currentAmmo -= 1;
                 }
                 else 
                 {
                     Instantiate(laserPrefab, transform.position + new Vector3(0,0.7f,0), Quaternion.identity);
+                }
+                if(infiniteAmmo != true && consumeAmmo != true)
+                {
                     currentAmmo -= 1;
                 }
-                uiManager.UpdateAmmo(currentAmmo);
+                SendAmmoUpdate();
             }
             else
             {
@@ -383,30 +381,15 @@ public class Player : MonoBehaviour
                 //Shield ID: 3
                 ShieldController();
                 break;
+            case 4:
+                //Ammo ID: 4
+                AmmoController();
+                break;
             default:
                 Debug.Log("Bad ID!");
                 break;
         }
     }
-
-    // private void thrusterFX()
-    // {
-    //     if (thrustersActive = true)
-    //     {
-    //         thrusterVisualizer.transform.localScale = new Vector3(transform.localScale.x,thrusterMaxY,transform.localScale.z);
-    //         thrusterVisualizer.transform.localPosition = new Vector3(0,thrusterEndY,0);
-    //     }
-    //     else
-    //     {
-    //         thrusterVisualizer.transform.localScale = new Vector3(transform.localScale.x,thrusterMinY,transform.localScale.z);
-    //         thrusterVisualizer.transform.localPosition = new Vector3(0,thrusterStartY,0);
-    //     }
-    // }
-
-    // private void PowerUpController(void TargetController(), )
-    // {
-
-    // }
 
     private void TripleShotController()
     {
@@ -424,8 +407,13 @@ public class Player : MonoBehaviour
 
     IEnumerator TripleShotTimer()
     {
+        infiniteAmmo = true;
+        SendAmmoUpdate();
         yield return new WaitForSeconds(tripleShotDuration);
+        infiniteAmmo = false;
+        currentAmmo = maxAmmo;
         tripleShot = false;
+        SendAmmoUpdate();
     }
 
     private void SpeedBoostController()
@@ -476,6 +464,24 @@ public class Player : MonoBehaviour
         shieldRenderer.color = Color.Lerp(shieldWeakcolor,shieldStrongColor,shieldPercent);
     }
 
+    private void AmmoController()
+    {
+        currentAmmo = maxAmmo;
+        SendAmmoUpdate();
+    }
+
+    private void SendAmmoUpdate()
+    {
+        if (infiniteAmmo != true)
+        {
+            uiManager.UpdateAmmo(currentAmmo);
+        }
+        else
+        {
+            uiManager.UpdateAmmo(999);
+        }
+    }
+
     IEnumerator ShieldTimer()
     {
         shieldVisualizer.SetActive(shieldsUp);
@@ -505,5 +511,11 @@ public class Player : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void GameStart()
+    {
+        consumeAmmo = false;
+        SendAmmoUpdate();
     }
 }

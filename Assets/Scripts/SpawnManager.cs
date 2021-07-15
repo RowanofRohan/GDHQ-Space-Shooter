@@ -27,12 +27,14 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject[] powerups;
     [SerializeField]
+    private GameObject[] pickups;
+    [SerializeField]
     private GameObject powerupContainer;
 
-    // [SerializeField]
-    // private float minimumSpawnDelay = 7.0f;
-    // [SerializeField]
-    // private float maximumSpawnDelay = 13.0f;
+    [SerializeField]
+    private float minimumPickupSpawnDelay = 7.0f;
+    [SerializeField]
+    private float maximumPickupSpawnDelay = 13.0f;
     [SerializeField]
     private float initialSpawnDelay = 3.0f;
 
@@ -40,7 +42,6 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         canSpawn = false;
-    //     StartCoroutine(PowerupSpawnRoutine());
     }
 
     void Update()
@@ -60,22 +61,26 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    // IEnumerator PowerupSpawnRoutine()
-    // {
-    //     while(canSpawn)
-    //     {
-    //         float randomDelay = Random.Range(minimumSpawnDelay,maximumSpawnDelay);
-    //         yield return new WaitForSeconds(randomDelay);
-            
-    //         if(canSpawn)
-    //         {
-    //             float randomX = Random.Range(leftScreenBound,rightScreenBound);
-    //             spawnLocation = new Vector3(randomX, upperScreenBound - 0.0001f, 0);
-    //             GameObject newPowerup = Instantiate(tripleShotPrefab,spawnLocation,Quaternion.identity);
-    //             newPowerup.transform.parent = powerupContainer.transform;
-    //         }
-    //     }
-    // }
+    IEnumerator PickupSpawnRoutine()
+    {
+        while(canSpawn)
+        {
+            float randomDelay = Random.Range(minimumPickupSpawnDelay,maximumPickupSpawnDelay);
+            yield return new WaitForSeconds(randomDelay);
+         
+            if(canSpawn)
+            {
+                float randomX = Random.Range(leftScreenBound,rightScreenBound);
+                spawnLocation = new Vector3(randomX, upperScreenBound - 0.0001f, 0);
+                int pickupRandomizer = Random.Range(0,pickups.Length);
+                if(pickups[pickupRandomizer] != null)
+                {
+                    GameObject newPickup = Instantiate(pickups[pickupRandomizer],spawnLocation,Quaternion.identity);
+                    newPickup.transform.parent = powerupContainer.transform;
+                }
+            }
+        }
+    }
 
     public void SpawnPowerup(Vector3 spawnLocation)
     {
@@ -94,6 +99,7 @@ public class SpawnManager : MonoBehaviour
     public void StartSpawning()
     {
         canSpawn = true;
+        StartCoroutine(PickupSpawnRoutine());
         StartCoroutine(EnemySpawnRoutine());
     }
 

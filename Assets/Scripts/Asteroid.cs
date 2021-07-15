@@ -67,6 +67,7 @@ public class Asteroid : MonoBehaviour
         GameObject explosion = Instantiate(explosionPrefab,transform.position, Quaternion.identity);
         asteroidCollider.enabled = false;
         spawnManager.StartSpawning();
+        player.GameStart();
         Destroy(explosion.gameObject, 1.5f);
         Destroy(this.gameObject,0.5f);
     }
