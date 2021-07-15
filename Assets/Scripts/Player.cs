@@ -26,6 +26,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float laserCooldown = 0.2f;
     private float canFire = -1f;
+    [SerializeField]
+    private int maxAmmo = 15;
+    [SerializeField]
+    private int currentAmmo = 0;
 
     //Triple Shot
     [SerializeField]
@@ -117,6 +121,8 @@ public class Player : MonoBehaviour
     private AudioSource playerAudio;
     [SerializeField]
     private AudioClip laserShot;
+    [SerializeField]
+    private AudioClip laserEmptySound;
 
     //Explosion Handles
     [SerializeField]
@@ -156,7 +162,10 @@ public class Player : MonoBehaviour
         rightDamageFire.SetActive(false);
 
         thrusterCurrentDuration = thrusterMaxDuration;
+        canChargeThrusters = true;
         canUsethrusters = true;
+
+        currentAmmo = maxAmmo;
     }
 
     // Update is called once per frame
@@ -279,16 +288,26 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && Time.time > canFire)
         {
             canFire = Time.time + laserCooldown;
-            if (tripleShot == true)
+            if(currentAmmo > 0)
             {
-                Instantiate(tripleShotPrefab, transform.position + new Vector3 (0,0,0), Quaternion.identity);
+                playerAudio.clip = laserShot;
+                if (tripleShot == true)
+                {
+                    Instantiate(tripleShotPrefab, transform.position + new Vector3 (0,0,0), Quaternion.identity);
+                    currentAmmo -= 1;
+                }
+                else 
+                {
+                    Instantiate(laserPrefab, transform.position + new Vector3(0,0.7f,0), Quaternion.identity);
+                    currentAmmo -= 1;
+                }
+                uiManager.UpdateAmmo(currentAmmo);
             }
-            else 
+            else
             {
-                Instantiate(laserPrefab, transform.position + new Vector3(0,0.7f,0), Quaternion.identity);
+                playerAudio.clip = laserEmptySound;
             }
-
-           playerAudio.Play();
+            playerAudio.Play();
         }
     }
 

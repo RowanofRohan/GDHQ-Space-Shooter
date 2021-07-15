@@ -39,6 +39,13 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Color thrusterEmptyColor = Color.red;
 
+    //Ammo Handles
+    [SerializeField]
+    private Text ammoText;
+    [SerializeField]
+    private Image ammoImage;
+    private int ammoCount = 15;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +58,7 @@ public class UIManager : MonoBehaviour
         gameOvertext.gameObject.SetActive(false);
         restartText.gameObject.SetActive(false);
         shieldStatus.gameObject.SetActive(false);
+        ammoText.text = "x " + ammoCount;
     }
 
     // Update is called once per frame
@@ -103,6 +111,12 @@ public class UIManager : MonoBehaviour
                 thrusterStatus.color = thrusterEmptyColor;
             }
         }
+    }
+
+    public void UpdateAmmo(int currentAmmo)
+    {
+        ammoCount = currentAmmo;
+        ammoText.text = "x " + ammoCount;
     }
 
     public void GameOver()
