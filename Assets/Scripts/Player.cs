@@ -59,6 +59,30 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Color shieldWeakcolor = new Vector4(1,0,0,0.75f);
 
+    //Thrusters
+    [SerializeField]
+    private float thrusterMultiplier = 1.5f;
+    // [SerializeField]
+    // private float thrusterMaxDuration = 100.0f;
+    // private float thrusterCurrentDuration = 0.0f;
+    // [SerializeField]
+    // private float thrusterDrainRate = 40.0f;
+    // [SerializeField]
+    // private float thrusterRechargeRate = 10.0f;
+    private bool thrustersActive = false;
+
+    //Thruster Visuals
+    // [SerializeField]
+    // private GameObject thrusterVisualizer;
+    // [SerializeField]
+    // private float thrusterMinY = 0.4f;
+    // [SerializeField]
+    // private float thrusterMaxY = 0.8f;
+    // [SerializeField]
+    // private float thrusterStartY = -1.375f;
+    // [SerializeField]
+    // private float thrusterEndY = -2.75f;
+
     //Health _ Lives
     [SerializeField]
     private int playerHealth = 3;
@@ -124,6 +148,9 @@ public class Player : MonoBehaviour
         }
         leftDamageFire.SetActive(false);
         rightDamageFire.SetActive(false);
+
+        //thrusterCurrentDuration = thrusterMaxDuration;
+        thrustersActive = false;
     }
 
     // Update is called once per frame
@@ -138,16 +165,28 @@ public class Player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            thrustersActive = true;
+        }
+        else
+        {
+            thrustersActive = false;
+        }
+
         Vector3 movement = new Vector3(horizontalInput*horizontalSpeed,verticalInput*verticalSpeed,0);
 
         if(speedBoost == true)
         {
-            transform.Translate((movement*speedBoostIntensity)*Time.deltaTime);
+            movement = movement*speedBoostIntensity;
         }
-        else
+        if (thrustersActive == true)
         {
-            transform.Translate(movement*Time.deltaTime);
+            movement = movement*thrusterMultiplier;
         }
+        
+        transform.Translate(movement*Time.deltaTime);
+        //thrusterFX();
 
         //Screen bounding with Clamp; does not wrap
         transform.position = new Vector3(Mathf.Clamp(transform.position.x,leftScreenBound,rightScreenBound),Mathf.Clamp(transform.position.y,lowerScreenBound,upperScreenBound),0);
@@ -258,6 +297,20 @@ public class Player : MonoBehaviour
                 break;
         }
     }
+
+    // private void thrusterFX()
+    // {
+    //     if (thrustersActive = true)
+    //     {
+    //         thrusterVisualizer.transform.localScale = new Vector3(transform.localScale.x,thrusterMaxY,transform.localScale.z);
+    //         thrusterVisualizer.transform.localPosition = new Vector3(0,thrusterEndY,0);
+    //     }
+    //     else
+    //     {
+    //         thrusterVisualizer.transform.localScale = new Vector3(transform.localScale.x,thrusterMinY,transform.localScale.z);
+    //         thrusterVisualizer.transform.localPosition = new Vector3(0,thrusterStartY,0);
+    //     }
+    // }
 
     // private void PowerUpController(void TargetController(), )
     // {
