@@ -62,14 +62,20 @@ public class Player : MonoBehaviour
     //Thrusters
     [SerializeField]
     private float thrusterMultiplier = 1.5f;
-    // [SerializeField]
-    // private float thrusterMaxDuration = 100.0f;
-    // private float thrusterCurrentDuration = 0.0f;
-    // [SerializeField]
-    // private float thrusterDrainRate = 40.0f;
-    // [SerializeField]
-    // private float thrusterRechargeRate = 10.0f;
-    private bool thrustersActive = false;
+    [SerializeField]
+    private float thrusterMaxDuration = 100.0f;
+    private float thrusterCurrentDuration = 0.0f;
+    [SerializeField]
+    private float thrusterDrainRate = 40.0f;
+    [SerializeField]
+    private float thrusterRechargeRate = 10.0f;
+    [SerializeField]
+    private float thrusterMinimumCharge = 25.0f;
+    private bool canUsethrusters = true;
+    [SerializeField]
+    private float thrusterChargeDelay = 1.0f;
+
+    private bool canChargeThrusters = true;
 
     //Thruster Visuals
     // [SerializeField]
@@ -149,8 +155,8 @@ public class Player : MonoBehaviour
         leftDamageFire.SetActive(false);
         rightDamageFire.SetActive(false);
 
-        //thrusterCurrentDuration = thrusterMaxDuration;
-        thrustersActive = false;
+        thrusterCurrentDuration = thrusterMaxDuration;
+        canUsethrusters = true;
     }
 
     // Update is called once per frame
@@ -165,24 +171,18 @@ public class Player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        if(Input.GetKey(KeyCode.LeftShift))
+        Vector3 movement = new Vector3(horizontalInput*horizontalSpeed,verticalInput*verticalSpeed,0);
+
+        if (ThrusterController())
         {
-            thrustersActive = true;
-        }
-        else
-        {
-            thrustersActive = false;
+            movement = movement*thrusterMultiplier;
         }
 
-        Vector3 movement = new Vector3(horizontalInput*horizontalSpeed,verticalInput*verticalSpeed,0);
+        uiManager.UpdateThruster(thrusterCurrentDuration,thrusterMaxDuration,thrusterMinimumCharge);
 
         if(speedBoost == true)
         {
             movement = movement*speedBoostIntensity;
-        }
-        if (thrustersActive == true)
-        {
-            movement = movement*thrusterMultiplier;
         }
         
         transform.Translate(movement*Time.deltaTime);
@@ -200,6 +200,78 @@ public class Player : MonoBehaviour
         //{
         //    transform.position = new Vector3(leftScreenBound + 0.0001f,transform.position.y,0);
         //}
+    }
+
+    private bool ThrusterController()
+    {
+        if(Input.GetKeyUp(KeyCode.LeftShift) == true)
+        {
+            if(canChargeThrusters == true && canUsethrusters == true)
+            {
+                StartCoroutine(ThrusterDelay());
+            }
+        }
+        if(Input.GetKey(KeyCode.LeftShift) == false)
+        {
+            if (canChargeThrusters)
+            {
+                thrusterCurrentDuration += thrusterRechargeRate*Time.deltaTime;
+                if (thrusterCurrentDuration >= thrusterMaxDuration)
+                {
+                    thrusterCurrentDuration = thrusterMaxDuration;
+                }
+            }
+            if(thrusterCurrentDuration >= thrusterMinimumCharge)
+            {
+                canUsethrusters = true;
+            }
+            else
+            {
+                canUsethrusters = false;
+            }
+            return false;
+        }
+        else
+        {
+            if(canUsethrusters)
+            {
+                thrusterCurrentDuration -= thrusterDrainRate * Time.deltaTime;
+                if(thrusterCurrentDuration <= 0.0f)
+                {
+                    canUsethrusters = false;
+                    thrusterCurrentDuration = 0.0f;
+                    if(canChargeThrusters)
+                    {
+                        StartCoroutine(ThrusterDelay());
+                    }
+                }
+                return true;
+            }
+            else
+            {
+                if(canChargeThrusters)
+                {
+                    thrusterCurrentDuration += thrusterRechargeRate*Time.deltaTime;
+                    if (thrusterCurrentDuration >= thrusterMaxDuration)
+                    {
+                        thrusterCurrentDuration = thrusterMaxDuration;
+                    }
+                }
+                if(thrusterCurrentDuration >= thrusterMinimumCharge)
+                {
+                    canUsethrusters = true;
+                }
+                return false;
+            }
+        }
+
+    }
+
+    IEnumerator ThrusterDelay()
+    {
+        canChargeThrusters = false;
+        yield return new WaitForSeconds(thrusterChargeDelay);
+        canChargeThrusters = true;
     }
 
     void FireController()

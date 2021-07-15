@@ -29,6 +29,16 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Image shieldStatus;
 
+    //Thruster Bar Handles
+    [SerializeField]
+    private Image thrusterStatus;
+    [SerializeField]
+    private Color thrusterFullColor = new Vector4(0,155, 236,1);
+    [SerializeField]
+    private Color thrusterPartialColor = Color.yellow;
+    [SerializeField]
+    private Color thrusterEmptyColor = Color.red;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +81,27 @@ public class UIManager : MonoBehaviour
         {
             shieldStatus.fillAmount = 0;
             shieldStatus.gameObject.SetActive(false);
+        }
+    }
+
+    public void UpdateThruster(float thrusterCurrentDuration, float thrusterMaxDuration, float thrusterMinimumCharge)
+    {
+        if (thrusterMaxDuration != 0.0f)
+        {
+            float thrusterPercentage = thrusterCurrentDuration/thrusterMaxDuration;
+            thrusterStatus.fillAmount = thrusterPercentage;
+            if (thrusterPercentage >= 0.5f)
+            {
+                thrusterStatus.color = thrusterFullColor;
+            }
+            else if (thrusterCurrentDuration >= thrusterMinimumCharge)
+            {
+                thrusterStatus.color = thrusterPartialColor;
+            }
+            else
+            {
+                thrusterStatus.color = thrusterEmptyColor;
+            }
         }
     }
 
