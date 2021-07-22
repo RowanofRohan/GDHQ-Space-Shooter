@@ -49,7 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  maxHealth: 5
+  maxHealth: 3
+  currentHealth: 0
   dropRatePercentage: 20
   upperScreenBound: 8
   lowerScreenBound: -6
@@ -59,7 +60,6 @@ MonoBehaviour:
   explosionSound: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
   laserPrefab: {fileID: 4176383718462431938, guid: 219c07c51b11bab46b29b92a125fba2e, type: 3}
   laserCooldown: 0.2
-  canFire: 3
   laserMinCD: 3
   laserMaxCD: 7
   laserShot: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}

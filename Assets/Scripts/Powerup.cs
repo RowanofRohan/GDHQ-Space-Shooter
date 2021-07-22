@@ -10,6 +10,8 @@ public class Powerup : MonoBehaviour
     private int powerupID = 0;
     [SerializeField]
     private AudioClip audioClip;
+    [SerializeField]
+    private float dropRatio = 20.0f;
 
     void Update()
     {
@@ -34,5 +36,10 @@ public class Powerup : MonoBehaviour
             AudioSource.PlayClipAtPoint(audioClip,transform.position,1.0f);
             Destroy(this.gameObject);
         }
+    }
+
+    public float CallDropChance()
+    {
+        return dropRatio;
     }
 }

@@ -34,12 +34,20 @@ public class Player : MonoBehaviour
     private bool infiniteAmmo = false;
     [SerializeField]
     private bool consumeAmmo = false;
+    [SerializeField]
+    private bool laserOverride = false;
 
     //Triple Shot
     [SerializeField]
     private bool tripleShot = false;
     [SerializeField]
     private float tripleShotDuration = 5.0f;
+
+    //Giant Laser
+    [SerializeField]
+    private bool giantLaser = false;
+    [SerializeField]
+    private float giantLaserDuration = 5.0f;
     
     //SpeedBoost
     [SerializeField]
@@ -112,6 +120,8 @@ public class Player : MonoBehaviour
     private GameObject laserPrefab;
     [SerializeField]
     private GameObject tripleShotPrefab;
+    [SerializeField]
+    private GameObject giantLaserPrefab;
     
     //Spawn Manager Handle
     private SpawnManager spawnManager;
@@ -145,6 +155,7 @@ public class Player : MonoBehaviour
         shieldRenderer = shieldVisualizer.GetComponent<SpriteRenderer>();
         shieldRenderer.color = shieldStrongColor;
         shieldVisualizer.SetActive(shieldsUp);
+        giantLaserPrefab.SetActive(false);
         playerAudio = GetComponent<AudioSource>();
         if (playerAudio == null)
         {
@@ -283,31 +294,34 @@ public class Player : MonoBehaviour
 
     void FireController()
     {
-        if (Input.GetKey(KeyCode.Space) && Time.time > canFire)
+        if (laserOverride != true)
         {
-            canFire = Time.time + laserCooldown;
-            if(currentAmmo > 0)
+            if (Input.GetKey(KeyCode.Space) && Time.time > canFire)
             {
-                playerAudio.clip = laserShot;
-                if (tripleShot == true)
+                canFire = Time.time + laserCooldown;
+                if(currentAmmo > 0)
                 {
-                    Instantiate(tripleShotPrefab, transform.position + new Vector3 (0,0,0), Quaternion.identity);
+                    playerAudio.clip = laserShot;
+                    if (tripleShot == true)
+                    {
+                        Instantiate(tripleShotPrefab, transform.position + new Vector3 (0,0,0), Quaternion.identity);
+                    }
+                    else 
+                    {
+                        Instantiate(laserPrefab, transform.position + new Vector3(0,0.7f,0), Quaternion.identity);
+                    }
+                    if(infiniteAmmo != true && consumeAmmo != true)
+                    {
+                        currentAmmo -= 1;
+                    }
+                    SendAmmoUpdate();
                 }
-                else 
+                else
                 {
-                    Instantiate(laserPrefab, transform.position + new Vector3(0,0.7f,0), Quaternion.identity);
+                    playerAudio.clip = laserEmptySound;
                 }
-                if(infiniteAmmo != true && consumeAmmo != true)
-                {
-                    currentAmmo -= 1;
-                }
-                SendAmmoUpdate();
+                playerAudio.Play();
             }
-            else
-            {
-                playerAudio.clip = laserEmptySound;
-            }
-            playerAudio.Play();
         }
     }
 
@@ -412,6 +426,10 @@ public class Player : MonoBehaviour
                 //1UP ID: 5
                 OneUPController();
                 break;
+            case 6:
+                //Giant Laser ID: 6
+                GiantLaserController();
+                break;
             default:
                 Debug.Log("Bad ID!");
                 break;
@@ -440,6 +458,35 @@ public class Player : MonoBehaviour
         infiniteAmmo = false;
         currentAmmo = maxAmmo;
         tripleShot = false;
+        SendAmmoUpdate();
+    }
+
+    private void GiantLaserController()
+    {
+        if(giantLaser == true)
+        {
+            StopCoroutine(GiantLaserTimer());
+            StartCoroutine(GiantLaserTimer());
+        }
+        else
+        {
+            giantLaser = true;
+            StartCoroutine(GiantLaserTimer());
+        }
+    }
+
+    IEnumerator GiantLaserTimer()
+    {
+        infiniteAmmo = true;
+        laserOverride = true;
+        giantLaserPrefab.SetActive(true);
+        SendAmmoUpdate();
+        yield return new WaitForSeconds(giantLaserDuration);
+        infiniteAmmo = false;
+        currentAmmo = maxAmmo;
+        giantLaser = false;
+        laserOverride = false;
+        giantLaserPrefab.SetActive(false);
         SendAmmoUpdate();
     }
 

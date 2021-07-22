@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     private float speed = 4.0f;
     [SerializeField]
     private float maxHealth = 5.0f;
+    [SerializeField]
     private float currentHealth;
 
     [SerializeField]
@@ -142,6 +143,26 @@ public class Enemy : MonoBehaviour
                 player.Damage();
             }
             DeathTrigger();
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if(other.transform.tag == "Laser")
+        {
+            GiantLaser giantLaser = other.transform.GetComponent<GiantLaser>();
+            if (giantLaser != null)
+            {
+                if (giantLaser.CallAllegiance() == false)
+                {
+                    currentHealth -= giantLaser.CallDamage() * Time.deltaTime;
+                    if (currentHealth <= 0.0001f)
+                    {
+                        KillTrigger();
+                        DeathTrigger();
+                    }
+                }
+            }
         }
     }
 

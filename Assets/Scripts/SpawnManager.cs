@@ -30,6 +30,10 @@ public class SpawnManager : MonoBehaviour
     private GameObject[] pickups;
     [SerializeField]
     private GameObject powerupContainer;
+    [SerializeField]
+    private float maxDropTable = 0.0f;
+    [SerializeField]
+    private float currentDropCheck = 0.0f;
 
     [SerializeField]
     private float minimumPickupSpawnDelay = 7.0f;
@@ -86,15 +90,46 @@ public class SpawnManager : MonoBehaviour
     {
         if(canSpawn)
         {
-            int powerupRandomizer = Random.Range(0,powerups.Length);
-            if(powerups[powerupRandomizer] != null)
+            maxDropTable = 0.0f;
+            for (int i = 0; i < powerups.Length; i++)
             {
-                GameObject newPowerup = Instantiate(powerups[powerupRandomizer],spawnLocation,Quaternion.identity);
-                newPowerup.transform.parent = powerupContainer.transform;
+                if (powerups[i]!= null)
+                {
+                    maxDropTable += powerups[i].GetComponent<Powerup>().CallDropChance();
+                }
+            }
+            float powerupRandomizer = Random.Range(0.0f, maxDropTable);
+            currentDropCheck = 0.0f;
+            for(int i = 0; i < powerups.Length; i++)
+            {
+                if (powerups[i]!= null)
+                {
+                    currentDropCheck += powerups[i].GetComponent<Powerup>().CallDropChance();
+                    if(currentDropCheck >= powerupRandomizer)
+                    {
+                        GameObject newPowerup = Instantiate(powerups[i],spawnLocation,Quaternion.identity);
+                        newPowerup.transform.parent = powerupContainer.transform;
+                        i = powerups.Length + 1;
+                    }
+                }
             }
         }
-        
     }
+
+
+    // Original spawn routine for powerups when killing enemies; unweighted drop rates
+    // public void SpawnPowerup(Vector3 spawnLocation)
+    // {
+    //     if(canSpawn)
+    //     {
+    //         int powerupRandomizer = Random.Range(0,powerups.Length);
+    //         if(powerups[powerupRandomizer] != null)
+    //         {
+    //             GameObject newPowerup = Instantiate(powerups[powerupRandomizer],spawnLocation,Quaternion.identity);
+    //             newPowerup.transform.parent = powerupContainer.transform;
+    //         }
+    //     }
+    // }
 
     public void StartSpawning()
     {
