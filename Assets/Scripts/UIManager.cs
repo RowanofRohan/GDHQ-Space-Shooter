@@ -113,10 +113,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UpdateAmmo(int currentAmmo)
+    public void UpdateAmmo(int currentAmmo, int maximumAmmo)
     {
         ammoCount = currentAmmo;
-        ammoText.text = "x " + ammoCount;
+        ammoText.text = "x " + ammoCount + " / " + maximumAmmo;
     }
 
     public void GameOver()

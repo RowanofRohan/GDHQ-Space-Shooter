@@ -452,11 +452,11 @@ public class Player : MonoBehaviour
 
     IEnumerator TripleShotTimer()
     {
+        currentAmmo = maxAmmo;
         infiniteAmmo = true;
         SendAmmoUpdate();
         yield return new WaitForSeconds(tripleShotDuration);
         infiniteAmmo = false;
-        currentAmmo = maxAmmo;
         tripleShot = false;
         SendAmmoUpdate();
     }
@@ -559,11 +559,11 @@ public class Player : MonoBehaviour
     {
         if (infiniteAmmo != true)
         {
-            uiManager.UpdateAmmo(currentAmmo);
+            uiManager.UpdateAmmo(currentAmmo,maxAmmo);
         }
         else
         {
-            uiManager.UpdateAmmo(999);
+            uiManager.UpdateAmmo(999,999);
         }
     }
 
