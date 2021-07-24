@@ -1434,7 +1434,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 959726841}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!20 &959726843
 Camera:
   m_ObjectHideFlags: 0
@@ -2449,7 +2449,6 @@ MonoBehaviour:
   - {fileID: 6790051428632783503, guid: a7b4c76cc7d45d44c882523a56abfc24, type: 3}
   - {fileID: 6228896963562281445, guid: 41cb42cef0b591f429f33171d2f31710, type: 3}
   - {fileID: 6505452107067732267, guid: 66a613e3252606740ac27e2a97329d25, type: 3}
-  powerupHandle: []
   pickups:
   - {fileID: 6790051428632783503, guid: a7b4c76cc7d45d44c882523a56abfc24, type: 3}
   - {fileID: 6228896963562281445, guid: 41cb42cef0b591f429f33171d2f31710, type: 3}
