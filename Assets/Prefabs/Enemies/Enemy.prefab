@@ -51,7 +51,7 @@ MonoBehaviour:
   speed: 4
   maxHealth: 3
   currentHealth: 0
-  dropRatePercentage: 20
+  dropRatePercentage: 50
   upperScreenBound: 8
   lowerScreenBound: -6
   leftScreenBound: -9.2

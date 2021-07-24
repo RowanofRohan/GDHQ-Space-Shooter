@@ -40,7 +40,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2325451421579205932, guid: 382b8190c5d0fc941bc007e4f3780279, type: 3}
       propertyPath: dropRatio
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2325451421579205932, guid: 382b8190c5d0fc941bc007e4f3780279, type: 3}
       propertyPath: powerupID
