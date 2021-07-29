@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    //Movement Controller
     [SerializeField]
     private float speed = 4.0f;
+    [SerializeField]
+    private int movementID = 0;
+    [SerializeField]
+    private bool randomRespawn = true;
+
+    //Additional Move Parameters
+    [SerializeField]
+    private float accelerationFactor = 0.5f;
+    
+    private Vector3 destination;
+
+    //Health
     [SerializeField]
     private float maxHealth = 5.0f;
     private float currentHealth;
 
+    //Item Drops
     [SerializeField]
     private float dropRatePercentage = 20.0f;
 
+    //Screen Bounds
     [SerializeField]
     private float upperScreenBound = 8.0f;
     [SerializeField]
@@ -22,6 +37,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float rightScreenBound = 9.2f;
 
+    //Ojbject Handles
     private Animator enemyAnimator;
     private Collider2D enemyCollider;
     private SpawnManager spawnManager;
@@ -30,6 +46,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private int killScore = 100;
 
+    //Audio handles
     private AudioSource audioSource;
     [SerializeField]
     private AudioClip explosionSound;
@@ -40,6 +57,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float laserCooldown = 3.0f;
 
+    //Fire Controller
     private float canFire = -1.0f;
     [SerializeField]
     private float laserMinCD = 3.0f;
@@ -77,6 +95,7 @@ public class Enemy : MonoBehaviour
             Debug.LogError("Player audio source is NULL");
         }
         canFire = Time.time + laserCooldown;
+        destination = transform.position;
     }
 
     void Update()
@@ -91,16 +110,89 @@ public class Enemy : MonoBehaviour
         //}
     }
 
+    public void SetMovementID(int newMoveID)
+    {
+        movementID = newMoveID;
+    }
+
+    public void SetMovementParameters(bool respawnType = randomRespawn, float newSpeed = speed, float newAcceleration = accelerationFactor)
+    {
+        randomRespawn = respawnType;
+        speed = newSpeed;
+        accelerationFactor = newAcceleration;
+    }
+
     private void MovementController()
+    {
+        switch(movementID)
+        {
+            case 0:
+                //Default Movement
+                DefaultMovement();
+                break;
+            case 1:
+                //Burst Movement
+                BurstMovement();
+                break;
+            case 2:
+                //Serpentine
+                SerpentinMovement();
+                break;
+            case 3:
+                //Circular
+                CircularMovement();
+                break;
+            case 4:
+                //Reverse Movement
+                ReverseMovement();
+                break;
+        }
+    }
+
+    private void DefaultMovement()
     {
         Vector3 enemyMovement = new Vector3(0,speed*-1,0);
         transform.Translate(enemyMovement*Time.deltaTime);
 
         if (transform.position.y <= lowerScreenBound)
         {
-            float randomX = Random.Range(leftScreenBound,rightScreenBound);
-            transform.position = new Vector3(randomX,upperScreenBound - 0.0001f,0);
+            if (randomRespawn = true)
+            {
+                float randomX = Random.Range(leftScreenBound,rightScreenBound);
+                transform.position = new Vector3(randomX,upperScreenBound - 0.0001f,0);
+            }
+            else
+            {
+                transform.position = new Vector3(transform.position.x,upperScreenBound - 0.0001f,0);
+            }
         }
+    }
+
+    private void BurstMovement()
+    {
+        StartCoroutine(BurstMoveTimer());
+        //transform
+    }
+
+    private IEnumerator BurstMoveTimer()
+    {
+        //destination
+        yield return null;
+    }
+
+    private void SerpentinMovement()
+    {
+
+    }
+
+    private void CircularMovement()
+    {
+
+    }
+
+    private void ReverseMovement()
+    {
+
     }
 
     private void FireController()
