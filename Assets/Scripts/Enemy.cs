@@ -32,6 +32,27 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     Quaternion rotation;
 
+    //Aggression Support
+    [SerializeField]
+    private bool rammingSpeed = false;
+    [SerializeField]
+    private bool isAggro = false;
+    [SerializeField]
+    private float aggroVelocity = 6.0f;
+    //[SerializeField]
+    //private float aggroMaxVelocity = 6.0f;
+    //[SerializeField]
+    //private float aggroAccelTime = 0.5f;
+    //[SerializeField]
+    //private float aggroStickiness = 0.4f;
+    //[SerializeField]
+    //private float aggroAngle = 0.0f;
+    [SerializeField]
+    private Vector3 targetDirection;
+    //[SerializeField]
+    //private Vector3 aggroDirection;
+    //[SerializeField]
+    //private Vector3 aggroDestination;
 
     //Health
     [SerializeField]
@@ -52,7 +73,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float rightScreenBound = 9.2f;
 
-    //Ojbject Handles
+    //Object Handles
     private Animator enemyAnimator;
     private Collider2D enemyCollider;
     private SpawnManager spawnManager;
@@ -127,30 +148,37 @@ public class Enemy : MonoBehaviour
 
     private void MovementController()
     {
-        switch(movementID)
+        if(rammingSpeed == false || isAggro == false)
         {
-            case 0:
-                //Halts
-                break;
-            case 1:
-                //Default Movement
-                DefaultMovement();
-                break;
-            case 2:
-                //Burst Movement
-                BurstMovement();
-                break;
-            case 3:
-                //Serpentine
-                SerpentineMovement();
-                break;
-            case 4:
-                //Circular
-                CircularMovement();
-                break;
-            default:
-                Debug.Log("Bad Movement ID!");
-                break;
+            switch(movementID)
+            {
+                case 0:
+                    //Halts
+                    break;
+                case 1:
+                    //Default Movement
+                    DefaultMovement();
+                    break;
+                case 2:
+                    //Burst Movement
+                    BurstMovement();
+                    break;
+                case 3:
+                    //Serpentine
+                    SerpentineMovement();
+                    break;
+                case 4:
+                    //Circular
+                    CircularMovement();
+                    break;
+                default:
+                    Debug.Log("Bad Movement ID!");
+                    break;
+            }
+        }
+        else
+        {
+            RammingAttack();
         }
     }
 
@@ -239,6 +267,21 @@ public class Enemy : MonoBehaviour
         ScreenBoundCheck();
     }
 
+    private void RammingAttack()
+    {
+        //Mathf.SmoothDamp(verticalSpeed, aggroMaxVelocity, ref aggroVelocity, aggroAccelTime);
+        targetDirection = player.transform.position - gameObject.transform.position;
+        transform.Translate (targetDirection.normalized * aggroVelocity *Time.deltaTime);
+
+        //transform.position = Vector3.SmoothDamp(aggroDestination,Vector3.Lerp(aggroDestination,targetDirection,aggroStickiness),ref aggroDirection,aggroAccelTime);
+        //transform.Translate(Vector3.Lerp(transform.position, targetDirection, aggroStickiness)*Time.deltaTime);
+        // float targetAngle = Vector3.Angle(targetDirection, transform.forward);
+        // aggroAngle = Mathf.LerpAngle(0,targetAngle,aggroStickiness);
+        // Vector3 enemyMovement = new Vector3(0,aggroVelocity*-1,0);
+        // transform.Translate(Quaternion.Euler(0,0,aggroAngle)*enemyMovement*Time.deltaTime);
+        // destination = gameObject.transform.position;
+    }
+
     private void FireController()
     {
         if (Time.time > canFire)
@@ -279,6 +322,12 @@ public class Enemy : MonoBehaviour
             }
             DeathTrigger();
         }
+        else if (other.transform.tag == "Aggro Radius" && isAggro == true)
+        {
+            rammingSpeed = true;
+            //aggroDestination = destination;
+            destination = other.transform.position;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -298,6 +347,14 @@ public class Enemy : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.transform.tag == "Aggro Radius")
+        {
+            rammingSpeed = false;
         }
     }
 
