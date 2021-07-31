@@ -48,9 +48,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf35b40064709e428bbb94ce5b97f13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  movementID: 1
+  verticalSpeed: 4
+  horizontalSpeed: 0
+  accelerationFactor: 0.15
+  randomRespawn: 1
+  initialAngle: 0
+  currentDirection: 0
+  movementDelay: 0
+  timerActive: 0
+  destination: {x: 0, y: 0, z: 0}
+  rotation: {x: 0, y: 0, z: 0, w: 0}
   maxHealth: 3
-  currentHealth: 0
   dropRatePercentage: 50
   upperScreenBound: 8
   lowerScreenBound: -6
