@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     private bool consumeAmmo = false;
     [SerializeField]
     private bool laserOverride = false;
+    [SerializeField]
+    private float stunTimer = 1.0f;
 
     //Triple Shot
     [SerializeField]
@@ -294,7 +296,7 @@ public class Player : MonoBehaviour
 
     void FireController()
     {
-        if (laserOverride != true)
+        if (laserOverride != true && giantLaser != true)
         {
             if (Input.GetKey(KeyCode.Space) && Time.time > canFire)
             {
@@ -430,6 +432,10 @@ public class Player : MonoBehaviour
                 //Giant Laser ID: 6
                 GiantLaserController();
                 break;
+            case 7:
+                //Land Mine ID: 7
+                LandMineController();
+                break;
             default:
                 Debug.Log("Bad ID!");
                 break;
@@ -477,6 +483,10 @@ public class Player : MonoBehaviour
 
     IEnumerator GiantLaserTimer()
     {
+        while(laserOverride == true)
+        {
+            yield return null;
+        }
         infiniteAmmo = true;
         laserOverride = true;
         giantLaserPrefab.SetActive(true);
@@ -488,6 +498,31 @@ public class Player : MonoBehaviour
         laserOverride = false;
         giantLaserPrefab.SetActive(false);
         SendAmmoUpdate();
+    }
+
+    private void LandMineController()
+    {
+        Damage();
+        if(playerHealth > 0)
+        {
+            GameObject explosion = Instantiate(explosionPrefab,transform.position, Quaternion.identity);
+            Destroy(explosion.gameObject,2.0f);
+            StartCoroutine(StunPlayer());
+        }
+    }
+
+    private IEnumerator StunPlayer()
+    {
+        if(laserOverride != true)
+        {
+            laserOverride = true;
+            yield return new WaitForSeconds(stunTimer);
+            laserOverride = false;
+        }
+        else
+        {
+            yield return null;
+        }
     }
 
     private void SpeedBoostController()

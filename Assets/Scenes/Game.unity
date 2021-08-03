@@ -2497,6 +2497,7 @@ MonoBehaviour:
   - {fileID: 6505452107067732267, guid: 66a613e3252606740ac27e2a97329d25, type: 3}
   pickups:
   - {fileID: 6790051428632783503, guid: a7b4c76cc7d45d44c882523a56abfc24, type: 3}
+  - {fileID: 7531922224484937168, guid: 85031ef79475bec43aa015901a960941, type: 3}
   powerupContainer: {fileID: 463736140}
   maxDropTable: 0
   currentDropCheck: 0
@@ -2693,6 +2694,7 @@ MonoBehaviour:
   infiniteAmmo: 0
   consumeAmmo: 0
   laserOverride: 0
+  stunTimer: 1
   tripleShot: 0
   tripleShotDuration: 5
   giantLaser: 0
