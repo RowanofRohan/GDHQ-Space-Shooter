@@ -46,6 +46,14 @@ PrefabInstance:
       propertyPath: powerupID
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 2325451421579205932, guid: 382b8190c5d0fc941bc007e4f3780279, type: 3}
+      propertyPath: hazardFlag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325451421579205932, guid: 382b8190c5d0fc941bc007e4f3780279, type: 3}
+      propertyPath: explosionPrefab
+      value: 
+      objectReference: {fileID: 520391828762354306, guid: 88e9e55d16641f24c9235d5876ff18c8, type: 3}
     - target: {fileID: 2617367403608062938, guid: 382b8190c5d0fc941bc007e4f3780279, type: 3}
       propertyPath: m_RootOrder
       value: 0

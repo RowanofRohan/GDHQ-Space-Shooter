@@ -95,12 +95,15 @@ public class Enemy : MonoBehaviour
 
     //Fire Controller
     private float canFire = -1.0f;
+    private float altFire = -1.0f;
     [SerializeField]
     private float laserMinCD = 3.0f;
     [SerializeField]
     private float laserMaxCD = 7.0f;
     [SerializeField]
     private AudioClip laserShot;
+
+    //Item Destruction
 
     void Start()
     {
@@ -288,11 +291,29 @@ public class Enemy : MonoBehaviour
         {
             laserCooldown = Random.Range(laserMinCD,laserMaxCD);
             canFire = Time.time + laserCooldown;
-            GameObject newLaser = Instantiate(laserPrefab, transform.position + new Vector3 (0,-0.7f,0), Quaternion.identity);
-            newLaser.GetComponent<Laser>().SetHostile(true);
-            audioSource.clip = laserShot;
-            audioSource.Play();
+            FireLaser();
         }
+        else
+        {
+            RaycastHit2D detect = Physics2D.Raycast(transform.position - new Vector3(0, 2, 0), new Vector3(0,-1,0));
+            if(detect.collider != null)
+            {
+                if (detect.collider.transform.tag == "Powerup" && Time.time > altFire)
+                {
+                    laserCooldown = Random.Range(laserMinCD,laserMaxCD);
+                    altFire = Time.time + laserCooldown;
+                    FireLaser();
+                }
+            }
+        }
+    }
+
+    private void FireLaser()
+    {
+        GameObject newLaser = Instantiate(laserPrefab, transform.position + new Vector3 (0,-0.7f,0), Quaternion.identity);
+        newLaser.GetComponent<Laser>().SetHostile(true);
+        audioSource.clip = laserShot;
+        audioSource.Play();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
