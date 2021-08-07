@@ -298,7 +298,7 @@ public class Enemy : MonoBehaviour
             RaycastHit2D detect = Physics2D.Raycast(transform.position - new Vector3(0, 2, 0), new Vector3(0,-1,0));
             if(detect.collider != null)
             {
-                if (detect.collider.transform.tag == "Powerup" && Time.time > altFire)
+                if (detect.collider.transform.tag == "Powerup" && Time.time > altFire && detect.collider.transform.GetComponent<Powerup>().hazardCheck() == false)
                 {
                     laserCooldown = Random.Range(laserMinCD,laserMaxCD);
                     altFire = Time.time + laserCooldown;

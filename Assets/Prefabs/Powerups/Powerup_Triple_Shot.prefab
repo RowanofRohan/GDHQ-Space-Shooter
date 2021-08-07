@@ -53,6 +53,7 @@ MonoBehaviour:
   dropRatio: 20
   hazardFlag: 0
   explosionPrefab: {fileID: 520391828762354306, guid: 88e9e55d16641f24c9235d5876ff18c8, type: 3}
+  magneticBoost: 3
 --- !u!212 &1225035351572904700
 SpriteRenderer:
   m_ObjectHideFlags: 0

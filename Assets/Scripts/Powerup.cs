@@ -16,11 +16,34 @@ public class Powerup : MonoBehaviour
     private bool hazardFlag = false;
     [SerializeField]
     private GameObject explosionPrefab;
+    //[SerializeField]
+    //private bool magnetized = false;
+    [SerializeField]
+    private float magneticBoost = 1.5f;
+
+    private Player player;
+
+    void Start()
+    {
+        player = GameObject.Find("Player").GetComponent<Player>();
+        if (player == null)
+        {
+            Debug.LogError("Cannot find player!");
+        }
+    }
 
     void Update()
     {
-        Vector3 powerupMovement = new Vector3(0,speed*-1,0);
-        transform.Translate(powerupMovement*Time.deltaTime);
+        if (Input.GetKey(KeyCode.C) && hazardFlag == false)
+        {
+            PickupCollect();
+        }
+        else
+        {   
+            //magnetized = false;
+            Vector3 powerupMovement = new Vector3(0,speed*-1,0);
+            transform.Translate(powerupMovement*Time.deltaTime);
+        }
 
         if (transform.position.y <= -6.0f)
         {
@@ -63,8 +86,20 @@ public class Powerup : MonoBehaviour
         }
     }
 
+    private void PickupCollect()
+    {
+        //magnetized = true;
+        Vector3 pickupMovement = player.transform.position - transform.position;
+        transform.Translate(pickupMovement.normalized*speed*magneticBoost*Time.deltaTime);
+    }
+
     public float CallDropChance()
     {
         return dropRatio;
+    }
+
+    public bool hazardCheck()
+    {
+        return hazardFlag;
     }
 }

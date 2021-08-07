@@ -123,6 +123,7 @@ MonoBehaviour:
   dropRatio: 40
   hazardFlag: 0
   explosionPrefab: {fileID: 520391828762354306, guid: 88e9e55d16641f24c9235d5876ff18c8, type: 3}
+  magneticBoost: 3
 --- !u!58 &6790051428632783493
 CircleCollider2D:
   m_ObjectHideFlags: 0
