@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
     private Vector3 destination;
     [SerializeField]
     Quaternion rotation;
+    private bool isDying = false;
 
     //Aggression Support
     [SerializeField]
@@ -316,6 +317,16 @@ public class Enemy : MonoBehaviour
         audioSource.Play();
     }
 
+    public void TakeDamage(float damageTaken)
+    {
+        currentHealth -= damageTaken;
+        if (currentHealth <= 0.0001f)
+        {
+            KillTrigger();
+            DeathTrigger();
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.transform.tag == "Laser")
@@ -325,13 +336,9 @@ public class Enemy : MonoBehaviour
             {
                 if (other.GetComponent<Laser>().CallAllegiance() == false)
                 {
-                    currentHealth -= laser.CallDamage();
+                    float damageTemp = laser.CallDamage();
                     Destroy(other.gameObject);
-                    if (currentHealth <= 0.0001f)
-                    {
-                        KillTrigger();
-                        DeathTrigger();
-                    }
+                    TakeDamage(damageTemp);
                 }
             }
         }
@@ -360,12 +367,7 @@ public class Enemy : MonoBehaviour
             {
                 if (giantLaser.CallAllegiance() == false)
                 {
-                    currentHealth -= giantLaser.CallDamage() * Time.deltaTime;
-                    if (currentHealth <= 0.0001f)
-                    {
-                        KillTrigger();
-                        DeathTrigger();
-                    }
+                    TakeDamage(giantLaser.CallDamage() * Time.deltaTime);
                 }
             }
         }
@@ -395,11 +397,17 @@ public class Enemy : MonoBehaviour
 
     private void DeathTrigger()
     {
+        isDying = true;
         enemyAnimator.SetTrigger("onEnemyDeath");
         audioSource.clip = explosionSound;
         audioSource.Play();
         enemyCollider.enabled = false;
         lowerScreenBound = -60000.0f;
         Destroy(this.gameObject, 2.65f);
+    }
+
+    public bool DeathCheck()
+    {
+        return isDying;
     }
 }

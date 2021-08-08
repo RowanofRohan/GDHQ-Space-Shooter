@@ -25,6 +25,12 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Sprite[] healthSprites;
 
+    //Missile Handles
+    [SerializeField]
+    private Image missileImage;
+    [SerializeField]
+    private Sprite[] missileSprites;
+
     //Shield Handles
     [SerializeField]
     private Image shieldStatus;
@@ -46,7 +52,6 @@ public class UIManager : MonoBehaviour
     private Image ammoImage;
     private int ammoCount = 15;
 
-    // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
@@ -61,7 +66,6 @@ public class UIManager : MonoBehaviour
         ammoText.text = "x " + ammoCount;
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -76,6 +80,11 @@ public class UIManager : MonoBehaviour
     public void UpdateHealth(int currentHealth)
     {
         healthImage.sprite = healthSprites[currentHealth];
+    }
+
+    public void UpdateMissiles(int currentMissiles)
+    {
+        missileImage.sprite = missileSprites[currentMissiles];
     }
 
     public void UpdateShield(float shieldCurrentHealth, float shieldMaxhealth)

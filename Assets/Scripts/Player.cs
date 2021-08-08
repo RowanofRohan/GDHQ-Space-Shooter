@@ -117,6 +117,22 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject rightDamageFire;
 
+    //Missiles
+    [SerializeField]
+    private int currentMissiles = 3;
+    [SerializeField]
+    private int maxMissiles = 3;
+    [SerializeField]
+    private float missileCooldown = 3.0f;
+    [SerializeField]
+    private int maxMissileTargets = 4;
+    private float canMissile = -1.0f;
+
+    [SerializeField]
+    private float missileLaunchAngle = 45;
+    [SerializeField]
+    private float missileLaunchDuration = 1.0f;
+
     //Projectile Handles
     [SerializeField]
     private GameObject laserPrefab;
@@ -124,6 +140,10 @@ public class Player : MonoBehaviour
     private GameObject tripleShotPrefab;
     [SerializeField]
     private GameObject giantLaserPrefab;
+    [SerializeField]
+    private GameObject missilePrefab;
+    [SerializeField]
+    private GameObject targetCrosshairPrefab;
     
     //Spawn Manager Handle
     private SpawnManager spawnManager;
@@ -184,6 +204,7 @@ public class Player : MonoBehaviour
     {
         MovementController();
         FireController();
+        MissileController();
     }
     
     void MovementController()
@@ -327,6 +348,120 @@ public class Player : MonoBehaviour
         }
     }
 
+    void MissileController()
+    {
+        if (Input.GetKeyDown(KeyCode.E) == true)
+        {
+            if(currentMissiles >= 1 && Time.time > canMissile)
+            {
+                canMissile = Time.time + missileCooldown;
+
+                GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
+                int livingTargets = 0;
+                for (int i = 0; i < targets.Length; i++)
+                {
+                    if (targets[i].transform.GetComponent<Enemy>().DeathCheck() == false)
+                    {
+                        livingTargets += 1;
+                    }
+                }
+                GameObject[] sortedTargets = new GameObject[livingTargets];
+
+                for (int i = 0; i < targets.Length; i++)
+                {
+                    if (targets[i].GetComponent<Enemy>().DeathCheck() == false)
+                    {
+                        for (int j = 0; j < sortedTargets.Length; j++)
+                        {
+                            if(sortedTargets[j] == null)
+                            {
+                                sortedTargets[j] = targets[i];
+                                j = sortedTargets.Length;
+                            }
+                            else if (Vector3.Distance(targets[i].transform.position, transform.position) <= Vector3.Distance(sortedTargets[j].transform.position, transform.position))
+                            {
+                                for(int k = sortedTargets.Length - 1; k > j; k--)
+                                {
+                                    if(sortedTargets[k-1] != null)
+                                    {
+                                        sortedTargets[k] = sortedTargets[k-1];
+                                    }
+                                }
+                                sortedTargets[j] = targets[i];
+                                j = sortedTargets.Length;
+                            }
+                        }
+                    }
+                }
+
+
+                int currentMissileTargets = maxMissileTargets;
+                if (sortedTargets.Length < maxMissileTargets)
+                {
+                    currentMissileTargets = sortedTargets.Length;
+                }
+
+                if (sortedTargets.Length > 0)
+                {
+                    float minLaunchAngle = -1*missileLaunchAngle*maxMissileTargets/2;
+                    float maxLaunchAngle = missileLaunchAngle*maxMissileTargets/2;
+                    float missileAngle;
+                    int currentTarget; 
+
+                    for(int i = 0; i < maxMissileTargets; i++)
+                    {
+                        float ratio;
+                        float currentWait;
+                        if(maxMissileTargets > 1)
+                        {
+                            ratio = (float)i/(maxMissileTargets-1);
+                            currentWait = Mathf.Lerp(0.0f, missileLaunchDuration, ratio);
+                        }
+                        else
+                        {
+                            ratio = 0.5f;
+                            currentWait = 0.0f;
+                        }
+                        missileAngle = Mathf.LerpAngle(minLaunchAngle, maxLaunchAngle, ratio)*-1;
+
+                        currentTarget = i % (sortedTargets.Length);
+
+                        if (sortedTargets[currentTarget] == null)
+                        {
+                            Debug.Log("Sorted Slot " + currentTarget + " is NULL!");
+                        }
+                        
+                        StartCoroutine(SpawnMissile(sortedTargets[currentTarget],missileAngle,currentWait));
+                    }
+                }
+                if(currentMissileTargets >= 1)
+                {
+                    currentMissiles -= 1;
+                    SendMissileUpdate();
+                }
+                else
+                {
+                    playerAudio.clip = laserEmptySound;
+                    playerAudio.Play();
+                }
+            }
+            else
+            {
+                playerAudio.clip = laserEmptySound;
+                playerAudio.Play();
+            }
+        }
+    }
+
+    private IEnumerator SpawnMissile(GameObject enemyTarget, float launchAngle, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        GameObject newMissile = Instantiate(missilePrefab, transform.position, Quaternion.identity);
+        GameObject newCrosshair = Instantiate(targetCrosshairPrefab, enemyTarget.transform.position, Quaternion.identity);
+        newMissile.GetComponent<Missiles>().SetTargets(enemyTarget,newCrosshair,launchAngle);
+        newCrosshair.transform.SetParent(enemyTarget.transform);
+    }
+
     public void Damage()
     {
         if(shieldsUp == true)
@@ -436,6 +571,10 @@ public class Player : MonoBehaviour
                 //Land Mine ID: 7
                 LandMineController();
                 break;
+            case 8:
+                //Missile Pickup ID: 8
+                MissilePickup();
+                break;
             default:
                 Debug.Log("Bad ID!");
                 break;
@@ -523,6 +662,17 @@ public class Player : MonoBehaviour
         {
             yield return null;
         }
+    }
+
+    private void MissilePickup()
+    {
+        currentMissiles = maxMissiles;
+        SendMissileUpdate();
+    }
+
+    private void SendMissileUpdate()
+    {
+        uiManager.UpdateMissiles(currentMissiles);
     }
 
     private void SpeedBoostController()
