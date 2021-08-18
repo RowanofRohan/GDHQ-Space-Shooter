@@ -1827,13 +1827,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canSpawn: 1
-  spawnDelay: 5
   leftScreenBound: -9.2
   rightScreenBound: 9.2
   upperScreenBound: 8
   spawnLocation: {x: 0, y: 0, z: 0}
   enemyPrefab: {fileID: 1450494416923494977, guid: a317d6075101f4f47a14101b74ff350e, type: 3}
   enemyContainer: {fileID: 478048717}
+  wavePrefabs:
+  - {fileID: 2303150409266962249, guid: 38b357cd498ea8f4185c7457e143e66d, type: 3}
+  - {fileID: 2303150409266962249, guid: 38b357cd498ea8f4185c7457e143e66d, type: 3}
+  - {fileID: 2303150409266962249, guid: 38b357cd498ea8f4185c7457e143e66d, type: 3}
+  waveDelays:
+  - 1
+  - 6
+  - 6
   powerups:
   - {fileID: 1225035351572904696, guid: 87a63fbaa3ef94a44ac3f3db63662b60, type: 3}
   - {fileID: 4391880903207725464, guid: 96ff93a45f594fa4980cff16d61ee874, type: 3}
@@ -1849,7 +1856,6 @@ MonoBehaviour:
   currentDropCheck: 0
   minimumPickupSpawnDelay: 5
   maximumPickupSpawnDelay: 10
-  initialSpawnDelay: 3
 --- !u!4 &1994322987
 Transform:
   m_ObjectHideFlags: 0

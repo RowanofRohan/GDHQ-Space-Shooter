@@ -6,8 +6,6 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField]
     private bool canSpawn = true;
-    [SerializeField]
-    private float spawnDelay = 1.0f;
     
     [SerializeField]
     private float leftScreenBound = -9.2f;
@@ -23,6 +21,10 @@ public class SpawnManager : MonoBehaviour
     private GameObject enemyPrefab;
     [SerializeField]
     private GameObject enemyContainer;
+    [SerializeField]
+    private GameObject[] wavePrefabs;
+    [SerializeField]
+    private float[] waveDelays;
 
     [SerializeField]
     private GameObject[] powerups;
@@ -39,8 +41,6 @@ public class SpawnManager : MonoBehaviour
     private float minimumPickupSpawnDelay = 7.0f;
     [SerializeField]
     private float maximumPickupSpawnDelay = 13.0f;
-    [SerializeField]
-    private float initialSpawnDelay = 3.0f;
 
 
     void Start()
@@ -52,17 +52,36 @@ public class SpawnManager : MonoBehaviour
     {
     }
 
+    // OLD spawn routine; simply spawns continuously until game over. Deprecated. 
+    // IEnumerator EnemySpawnRoutine()
+    // {
+    //     yield return new WaitForSeconds(initialSpawnDelay);
+    //     while(canSpawn)
+    //     {
+    //         float randomX = Random.Range(leftScreenBound,rightScreenBound);
+    //         spawnLocation = new Vector3(randomX, upperScreenBound - 0.0001f, 0);
+    //         GameObject newEnemy = Instantiate(enemyPrefab,spawnLocation,Quaternion.identity);
+    //         newEnemy.transform.parent = enemyContainer.transform;
+    //         yield return new WaitForSeconds(spawnDelay);
+    //     }
+    // }
+
     IEnumerator EnemySpawnRoutine()
     {
-        yield return new WaitForSeconds(initialSpawnDelay);
-        while(canSpawn)
+        for(int i = 0; i < wavePrefabs.Length; i++)
         {
-            float randomX = Random.Range(leftScreenBound,rightScreenBound);
-            spawnLocation = new Vector3(randomX, upperScreenBound - 0.0001f, 0);
-            GameObject newEnemy = Instantiate(enemyPrefab,spawnLocation,Quaternion.identity);
-            newEnemy.transform.parent = enemyContainer.transform;
-            yield return new WaitForSeconds(spawnDelay);
+            yield return new WaitForSeconds(waveDelays[i]);
+            if(canSpawn)
+            {
+                spawnLocation = new Vector3(0,0,0);
+                GameObject newWave = Instantiate(wavePrefabs[i],spawnLocation,Quaternion.identity);
+            }
+            else
+            {
+                i = wavePrefabs.Length;
+            }
         }
+
     }
 
     IEnumerator PickupSpawnRoutine()
@@ -136,6 +155,11 @@ public class SpawnManager : MonoBehaviour
         canSpawn = true;
         StartCoroutine(PickupSpawnRoutine());
         StartCoroutine(EnemySpawnRoutine());
+    }
+
+    public bool CheckSpawning()
+    {
+        return canSpawn;
     }
 
     public void GameOver()

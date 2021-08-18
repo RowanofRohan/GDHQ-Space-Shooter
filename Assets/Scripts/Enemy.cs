@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float accelerationFactor = 0.5f;
     [SerializeField]
-    private bool randomRespawn = true;
+    private int respawnType = 0;
 
     //Specialized Movement
     [SerializeField]
@@ -23,13 +23,40 @@ public class Enemy : MonoBehaviour
     private float currentDirection = 0.0f;
     [SerializeField]
     private float movementDelay = 0.0f;
-    [SerializeField]
     private bool timerActive = false;
+    [SerializeField]
+    private float moveTimeTracker = 0.0f;
+    private bool isDirectionReversed = false;
+    private int currentCycle = 0;
+    [SerializeField]
+    private int maxCycles = 0;
+
+    //Wave System Support and Movement Pattern Support
+    [SerializeField]
+    private Vector3 spawnLocation;
+    [SerializeField]
+    private int[] movementIDList;
+    [SerializeField]
+    private float[] initialDelays;
+    [SerializeField]
+    private float[] vertSpeedList;
+    [SerializeField]
+    private float[] horzSpeedList;
+    [SerializeField]
+    private float[] moveAngleList;
+    [SerializeField]
+    private float[] moveDelayList;
+    [SerializeField]
+    private float[] accelerationList;
+    [SerializeField]
+    private bool[] reverseDirectionList;
+    [SerializeField]
+    private Vector3[] teleportLocations;
+    [SerializeField]
+    private int[] respawnTypeList;
 
     //Internal Variables
-    [SerializeField]
     private Vector3 destination;
-    [SerializeField]
     Quaternion rotation;
     private bool isDying = false;
 
@@ -40,20 +67,8 @@ public class Enemy : MonoBehaviour
     private bool isAggro = false;
     [SerializeField]
     private float aggroVelocity = 6.0f;
-    //[SerializeField]
-    //private float aggroMaxVelocity = 6.0f;
-    //[SerializeField]
-    //private float aggroAccelTime = 0.5f;
-    //[SerializeField]
-    //private float aggroStickiness = 0.4f;
-    //[SerializeField]
-    //private float aggroAngle = 0.0f;
     [SerializeField]
     private Vector3 targetDirection;
-    //[SerializeField]
-    //private Vector3 aggroDirection;
-    //[SerializeField]
-    //private Vector3 aggroDestination;
 
     //Health
     [SerializeField]
@@ -104,8 +119,6 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private AudioClip laserShot;
 
-    //Item Destruction
-
     void Start()
     {
         currentHealth = maxHealth;
@@ -135,7 +148,10 @@ public class Enemy : MonoBehaviour
             Debug.LogError("Player audio source is NULL");
         }
         canFire = Time.time + laserCooldown;
+        transform.position = spawnLocation;
         destination = transform.position;
+
+        InitializeMovement();
     }
 
     void Update()
@@ -148,6 +164,53 @@ public class Enemy : MonoBehaviour
         //{
         //    Destroy(this.gameObject);
         //}
+    }
+
+    private void InitializeMovement()
+    {
+        float currentDelay = 0.0f;
+        for(int i = 0; i< movementIDList.Length; i++)
+        {
+            currentDelay += initialDelays[i];
+            if(movementIDList[i] != 5)
+            {
+                StartCoroutine(MovementChanger(movementIDList[i], currentDelay, vertSpeedList[i], horzSpeedList[i], moveAngleList[i], moveDelayList[i], accelerationList[i], reverseDirectionList[i], respawnTypeList[i]));
+            }
+            else
+            {
+                StartCoroutine(TeleportController(currentDelay, teleportLocations[i],respawnTypeList[i]));
+            }
+        }
+    }
+
+    private IEnumerator MovementChanger(int newID, float startDelay, float newVertSpeed, float newHorzSpeed, float newAngle, float newBurstDelay, float newAcceleration, bool directionCheck, int newRespawn)
+    {
+        int cycleCheck = currentCycle;
+        yield return new WaitForSeconds(startDelay);
+        if(cycleCheck == currentCycle)
+        {
+            movementID = newID;
+            verticalSpeed = newVertSpeed;
+            initialAngle = newAngle;
+            movementDelay = newBurstDelay;
+            accelerationFactor = newAcceleration;
+            horizontalSpeed = newHorzSpeed;
+            isDirectionReversed = directionCheck;
+            moveTimeTracker = 0.0f;
+            respawnType = newRespawn;
+        }
+    }
+
+    private IEnumerator TeleportController(float startDelay, Vector3 newLocation, int newRespawn)
+    {
+        int cycleCheck = currentCycle;
+        yield return new WaitForSeconds(startDelay);
+        if(cycleCheck == currentCycle)
+        {
+            respawnType = newRespawn;
+            spawnLocation = newLocation;
+            TeleportMovement();
+        }
     }
 
     private void MovementController()
@@ -175,6 +238,10 @@ public class Enemy : MonoBehaviour
                     //Circular
                     CircularMovement();
                     break;
+                case 5:
+                    //Teleport; This is handled primarily by the pattern controller and should never be called here. 
+                    TeleportMovement();
+                    break;
                 default:
                     Debug.Log("Bad Movement ID!");
                     break;
@@ -187,26 +254,53 @@ public class Enemy : MonoBehaviour
     }
 
     private void ScreenBoundCheck()
-    {
+    {        
         if (transform.position.y <= lowerScreenBound)
         {
-            Vector3 distancetoGo = destination - gameObject.transform.position;
-            if (randomRespawn == true)
+            Vector3 distancetoGo;
+            switch(respawnType)
             {
-                float randomX = Random.Range(leftScreenBound,rightScreenBound);
-                transform.position = new Vector3(randomX,upperScreenBound - 0.0001f,0);
+                case 0:
+                    //Do nothing; relies on teleports. Will be the most common type for patterned enemies.
+                    break;
+                case 1:
+                    //Respawns at top of screen in same X.
+                    distancetoGo = destination - gameObject.transform.position;
+                    transform.position = new Vector3(transform.position.x,upperScreenBound - 0.0001f,0);
+                    destination = gameObject.transform.position + distancetoGo;
+                    break;
+                case 2:
+                    //Respawns at top of screen in random X.
+                    distancetoGo = destination - gameObject.transform.position;
+                    float randomX = Random.Range(leftScreenBound,rightScreenBound);
+                    transform.position = new Vector3(randomX,upperScreenBound - 0.0001f,0);
+                    destination = gameObject.transform.position + distancetoGo;
+                    break;
+                case 3:
+                    //Respawns at top of screen, and re-initializes movement. Should be used in place of 1 or 2 for all patterned enemies.
+                    currentCycle += 1;
+                    if(currentCycle >= maxCycles)
+                    {
+                        Despawn();
+                    }
+                    else
+                    {
+                        transform.position = new Vector3(transform.position.x,upperScreenBound - 0.0001f,0);
+                        InitializeMovement();
+                    }
+                    break;
+                case 4:
+                    //Self-Destructs once off screen
+                    Despawn();
+                    break;
             }
-            else
-            {
-                transform.position = new Vector3(transform.position.x,upperScreenBound - 0.0001f,0);
-            }
-            destination = gameObject.transform.position + distancetoGo;
         }
     }
 
     private void DefaultMovement()
     {
         //ID: 1
+        //Recommended settings: Vertical speed 3
         Vector3 enemyMovement = new Vector3(0,verticalSpeed*-1,0);
         rotation = Quaternion.Euler(0,0,initialAngle);
         transform.Translate(rotation * enemyMovement * Time.deltaTime);
@@ -218,6 +312,7 @@ public class Enemy : MonoBehaviour
     private void BurstMovement()
     {
         //ID: 2
+        //Recommended settings: vertical speed 3, movement delay 2, acceleration 0.05
         if(timerActive != true)
         {
             StartCoroutine(BurstMoveTimer());
@@ -242,8 +337,15 @@ public class Enemy : MonoBehaviour
     private void SerpentineMovement()
     {
         //ID: 3
-        currentDirection = Mathf.Lerp(horizontalSpeed,horizontalSpeed*-1,Mathf.PingPong(Time.time*accelerationFactor, 1));
+        //Recommended Settings: Vertical Speed 2, Horizontal Speed 5, Acceleration 0.45
+        //Reversing direction alters initial direction
+        currentDirection = Mathf.Lerp(horizontalSpeed,horizontalSpeed*-1,Mathf.PingPong(moveTimeTracker*accelerationFactor, 1));
+        moveTimeTracker += Time.deltaTime;
         Vector3 enemyMovement = new Vector3(currentDirection,verticalSpeed*-1,0);
+        if(isDirectionReversed)
+        {
+            enemyMovement.x = enemyMovement.x * -1;
+        }
         transform.Translate(enemyMovement*Time.deltaTime);
         ScreenBoundCheck();
 
@@ -252,8 +354,9 @@ public class Enemy : MonoBehaviour
     private void CircularMovement()
     {
         //ID: 4
-        var currentLook = gameObject.transform.rotation;
-        currentDirection = Mathf.Lerp(0.0f,360.0f,Mathf.Repeat(Time.time*accelerationFactor, 1)) - initialAngle;
+        //Recommended Settings: Acceleration 0.15-0.2, Vertical Speed 3
+        currentDirection = Mathf.Lerp(0.0f,360.0f,Mathf.Repeat(moveTimeTracker*accelerationFactor, 1)) - initialAngle;
+        moveTimeTracker += Time.deltaTime;
         if(currentDirection < 0.0f)
         {
             currentDirection += 360.0f;
@@ -263,27 +366,27 @@ public class Enemy : MonoBehaviour
             currentDirection -= 360.0f;
         }
         rotation = Quaternion.Euler(0,0,currentDirection);
-        Vector3 enemyMovement = new Vector3(0,verticalSpeed*-1,0);
-        transform.Translate(rotation * enemyMovement * Time.deltaTime);
+        Vector3 enemyMovement = rotation * new Vector3(0,verticalSpeed*-1,0);
+        if(isDirectionReversed)
+        {
+            enemyMovement.x = enemyMovement.x * -1;
+        }
+        transform.Translate(enemyMovement * Time.deltaTime);
         destination = gameObject.transform.position;
-        gameObject.transform.rotation = currentLook;
 
         ScreenBoundCheck();
     }
 
+    private void TeleportMovement()
+    {
+        transform.position = spawnLocation;
+        movementID = 0;
+    }
+
     private void RammingAttack()
     {
-        //Mathf.SmoothDamp(verticalSpeed, aggroMaxVelocity, ref aggroVelocity, aggroAccelTime);
         targetDirection = player.transform.position - gameObject.transform.position;
         transform.Translate (targetDirection.normalized * aggroVelocity *Time.deltaTime);
-
-        //transform.position = Vector3.SmoothDamp(aggroDestination,Vector3.Lerp(aggroDestination,targetDirection,aggroStickiness),ref aggroDirection,aggroAccelTime);
-        //transform.Translate(Vector3.Lerp(transform.position, targetDirection, aggroStickiness)*Time.deltaTime);
-        // float targetAngle = Vector3.Angle(targetDirection, transform.forward);
-        // aggroAngle = Mathf.LerpAngle(0,targetAngle,aggroStickiness);
-        // Vector3 enemyMovement = new Vector3(0,aggroVelocity*-1,0);
-        // transform.Translate(Quaternion.Euler(0,0,aggroAngle)*enemyMovement*Time.deltaTime);
-        // destination = gameObject.transform.position;
     }
 
     private void FireController()
@@ -404,6 +507,15 @@ public class Enemy : MonoBehaviour
         enemyCollider.enabled = false;
         lowerScreenBound = -60000.0f;
         Destroy(this.gameObject, 2.65f);
+    }
+
+    private void Despawn()
+    {
+        isDying = true;
+        movementID = 0;
+        StopAllCoroutines();
+        lowerScreenBound = -60000.0f;
+        Destroy(this.gameObject,0.1f);
     }
 
     public bool DeathCheck()

@@ -52,7 +52,7 @@ MonoBehaviour:
   verticalSpeed: 3
   horizontalSpeed: 0
   accelerationFactor: 0.15
-  randomRespawn: 1
+  randomRespawn: 0
   initialAngle: 0
   currentDirection: 0
   movementDelay: 0
