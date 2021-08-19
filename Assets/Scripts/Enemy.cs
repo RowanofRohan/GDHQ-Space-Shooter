@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
     private int currentCycle = 0;
     [SerializeField]
     private int maxCycles = 0;
+    private float tempSpeed = 0.0f;
 
     //Wave System Support and Movement Pattern Support
     [SerializeField]
@@ -37,7 +38,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private int[] movementIDList;
     [SerializeField]
-    private float[] initialDelays;
+    private float[] moveDurationList;
     [SerializeField]
     private float[] vertSpeedList;
     [SerializeField]
@@ -147,8 +148,9 @@ public class Enemy : MonoBehaviour
         {
             Debug.LogError("Player audio source is NULL");
         }
+        laserCooldown = Random.Range(laserMinCD,laserMaxCD);
         canFire = Time.time + laserCooldown;
-        transform.position = spawnLocation;
+        //transform.position = spawnLocation;
         destination = transform.position;
 
         InitializeMovement();
@@ -171,7 +173,6 @@ public class Enemy : MonoBehaviour
         float currentDelay = 0.0f;
         for(int i = 0; i< movementIDList.Length; i++)
         {
-            currentDelay += initialDelays[i];
             if(movementIDList[i] != 5)
             {
                 StartCoroutine(MovementChanger(movementIDList[i], currentDelay, vertSpeedList[i], horzSpeedList[i], moveAngleList[i], moveDelayList[i], accelerationList[i], reverseDirectionList[i], respawnTypeList[i]));
@@ -180,6 +181,7 @@ public class Enemy : MonoBehaviour
             {
                 StartCoroutine(TeleportController(currentDelay, teleportLocations[i],respawnTypeList[i]));
             }
+            currentDelay += moveDurationList[i];
         }
     }
 
@@ -198,6 +200,11 @@ public class Enemy : MonoBehaviour
             isDirectionReversed = directionCheck;
             moveTimeTracker = 0.0f;
             respawnType = newRespawn;
+            if (movementID != 2)
+            {
+                StopCoroutine(BurstMoveTimer());
+                timerActive = false;
+            }
         }
     }
 
@@ -221,6 +228,7 @@ public class Enemy : MonoBehaviour
             {
                 case 0:
                     //Halts
+                    ScreenBoundCheck();
                     break;
                 case 1:
                     //Default Movement
@@ -301,9 +309,9 @@ public class Enemy : MonoBehaviour
     {
         //ID: 1
         //Recommended settings: Vertical speed 3
-        Vector3 enemyMovement = new Vector3(0,verticalSpeed*-1,0);
         rotation = Quaternion.Euler(0,0,initialAngle);
-        transform.Translate(rotation * enemyMovement * Time.deltaTime);
+        Vector3 enemyMovement = rotation * new Vector3(0,verticalSpeed*-1,0);
+        transform.Translate(enemyMovement * Time.deltaTime);
         destination = gameObject.transform.position;
 
         ScreenBoundCheck();
@@ -317,7 +325,22 @@ public class Enemy : MonoBehaviour
         {
             StartCoroutine(BurstMoveTimer());
         }
-        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,destination,accelerationFactor);
+        if(isDirectionReversed == false)
+        {
+            Vector3 newDirection = Vector3.Lerp(gameObject.transform.position,destination,accelerationFactor) - gameObject.transform.position;
+            transform.Translate(newDirection);
+        }
+        else
+        {
+            tempSpeed += accelerationFactor * verticalSpeed;
+            // if(Mathf.Abs(tempSpeed) >= Mathf.Abs(verticalSpeed))
+            // {
+            //     tempSpeed = verticalSpeed;
+            // }
+            rotation = Quaternion.Euler(0,0,initialAngle);
+            Vector3 enemyMovement = rotation * new Vector3(0,tempSpeed*-1,0);
+            transform.Translate(enemyMovement * Time.deltaTime);
+        }
         ScreenBoundCheck();
     }
 
@@ -326,9 +349,10 @@ public class Enemy : MonoBehaviour
         timerActive = true;
         while(movementID == 2)
         {
-            Vector3 enemyMovement = new Vector3(0,verticalSpeed*-1,0);
             rotation = Quaternion.Euler(0,0,initialAngle);
+            Vector3 enemyMovement = rotation * new Vector3(0,verticalSpeed*-1,0);
             destination = gameObject.transform.position + enemyMovement;
+            tempSpeed = 0.0f;
             yield return new WaitForSeconds(movementDelay);
         }
         timerActive = false;
@@ -391,25 +415,29 @@ public class Enemy : MonoBehaviour
 
     private void FireController()
     {
-        if (Time.time > canFire)
+        if (isDying == false)
         {
-            laserCooldown = Random.Range(laserMinCD,laserMaxCD);
-            canFire = Time.time + laserCooldown;
-            FireLaser();
-        }
-        else
-        {
-            RaycastHit2D detect = Physics2D.Raycast(transform.position - new Vector3(0, 2, 0), new Vector3(0,-1,0));
-            if(detect.collider != null)
+            if (Time.time > canFire)
             {
-                if (detect.collider.transform.tag == "Powerup" && Time.time > altFire && detect.collider.transform.GetComponent<Powerup>().hazardCheck() == false)
+                laserCooldown = Random.Range(laserMinCD,laserMaxCD);
+                canFire = Time.time + laserCooldown;
+                FireLaser();
+            }
+            else
+            {
+                RaycastHit2D detect = Physics2D.Raycast(transform.position - new Vector3(0, 2, 0), new Vector3(0,-1,0));
+                if(detect.collider != null)
                 {
-                    laserCooldown = Random.Range(laserMinCD,laserMaxCD);
-                    altFire = Time.time + laserCooldown;
-                    FireLaser();
+                    if (detect.collider.transform.tag == "Powerup" && Time.time > altFire && detect.collider.transform.GetComponent<Powerup>().hazardCheck() == false)
+                    {
+                        laserCooldown = Random.Range(laserMinCD,laserMaxCD);
+                        altFire = Time.time + laserCooldown;
+                        FireLaser();
+                    }
                 }
             }
         }
+        
     }
 
     private void FireLaser()

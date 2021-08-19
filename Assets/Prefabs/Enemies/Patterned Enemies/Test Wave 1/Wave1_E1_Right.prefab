@@ -12,7 +12,23 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1095130645587700466, guid: 6f34fd04444d44c4cad629fc16c27cb7, type: 3}
+      propertyPath: moveAngleList.Array.data[4]
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095130645587700466, guid: 6f34fd04444d44c4cad629fc16c27cb7, type: 3}
+      propertyPath: teleportLocations.Array.data[3].x
+      value: 11.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095130645587700466, guid: 6f34fd04444d44c4cad629fc16c27cb7, type: 3}
+      propertyPath: teleportLocations.Array.data[3].y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095130645587700466, guid: 6f34fd04444d44c4cad629fc16c27cb7, type: 3}
       propertyPath: reverseDirectionList.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095130645587700466, guid: 6f34fd04444d44c4cad629fc16c27cb7, type: 3}
+      propertyPath: reverseDirectionList.Array.data[6]
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4949329067074759868, guid: 6f34fd04444d44c4cad629fc16c27cb7, type: 3}

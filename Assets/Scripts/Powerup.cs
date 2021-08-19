@@ -66,10 +66,12 @@ public class Powerup : MonoBehaviour
         else if(other.transform.tag == "Laser")
         {
             Laser laser = other.transform.GetComponent<Laser>();
+            GiantLaser giantLaser = other.transform.GetComponent<GiantLaser>();
+            bool laserAllegience = false;
             if(laser != null)
             {
-                bool laserAllegience = other.GetComponent<Laser>().CallAllegiance();
                 //False means non-hostile (player controlled)
+                laserAllegience = laser.CallAllegiance();
                 if (laserAllegience == false && hazardFlag == true)
                 {
                     Destroy(other.gameObject);
@@ -80,6 +82,20 @@ public class Powerup : MonoBehaviour
                 else if (laserAllegience == true && hazardFlag == false)
                 {
                     Destroy(other.gameObject);
+                    Destroy(this.gameObject);
+                }
+            }
+            else if(giantLaser != null)
+            {
+                laserAllegience = giantLaser.CallAllegiance();
+                if (laserAllegience == false && hazardFlag == true)
+                {
+                    GameObject explosion = Instantiate(explosionPrefab,transform.position, Quaternion.identity);
+                    Destroy(explosion.gameObject,2.0f);
+                    Destroy(this.gameObject);
+                }
+                else if (laserAllegience == true && hazardFlag == false)
+                {
                     Destroy(this.gameObject);
                 }
             }

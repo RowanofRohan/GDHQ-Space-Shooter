@@ -81,7 +81,6 @@ public class SpawnManager : MonoBehaviour
                 i = wavePrefabs.Length;
             }
         }
-
     }
 
     IEnumerator PickupSpawnRoutine()
