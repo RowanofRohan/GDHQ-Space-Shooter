@@ -1367,3 +1367,1030 @@ Received Import Request.
 Start importing Assets/Prefabs/Enemies/Waves/Wave1.prefab using Guid(38b357cd498ea8f4185c7457e143e66d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e749900a34c46a86c360ea60e0d7d1b4') in 0.071938 seconds
   Import took 0.075306 seconds .
 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.010587 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.49 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.863 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.40 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1519 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 77.2 MB.
+System memory in use after: 77.4 MB.
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 2090.
+Total: 2.964600 ms (FindLiveObjects: 0.291100 ms CreateObjectMapping: 0.101100 ms MarkObjects: 2.544300 ms  DeleteObjects: 0.026200 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.466005 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.41 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  4.073 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.35 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1519 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 77.3 MB.
+System memory in use after: 77.4 MB.
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 2093.
+Total: 2.518000 ms (FindLiveObjects: 0.173400 ms CreateObjectMapping: 0.044300 ms MarkObjects: 2.261200 ms  DeleteObjects: 0.037700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005183 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.41 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.702 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.46 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1519 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 77.3 MB.
+System memory in use after: 77.4 MB.
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 2096.
+Total: 2.752000 ms (FindLiveObjects: 0.188500 ms CreateObjectMapping: 0.061400 ms MarkObjects: 2.479800 ms  DeleteObjects: 0.020700 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 163337.966659 seconds.
+  path: Assets/Scenes/Test Bed.unity
+  artifactKey: Guid(859cf642c1633e641957673c1149d900) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Test Bed.unity using Guid(859cf642c1633e641957673c1149d900) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3b10a10275852c2cf73a09c6b810bb5c') in 5.599922 seconds
+  Import took 8.793944 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.237954 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.55 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.983 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.38 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1519 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 77.3 MB.
+System memory in use after: 77.4 MB.
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 2099.
+Total: 2.835100 ms (FindLiveObjects: 0.279700 ms CreateObjectMapping: 0.103700 ms MarkObjects: 2.410700 ms  DeleteObjects: 0.039900 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 269.106091 seconds.
+  path: Assets/Scripts/Powerup.cs
+  artifactKey: Guid(24de52b9fdf2c0542af16df4924b18a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Powerup.cs using Guid(24de52b9fdf2c0542af16df4924b18a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7b2e71875cb1fc351f3e8760590b299b') in 0.392881 seconds
+  Import took 0.469565 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004666 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.44 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.307 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.49 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1519 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 77.3 MB.
+System memory in use after: 77.4 MB.
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 2102.
+Total: 2.733200 ms (FindLiveObjects: 0.167500 ms CreateObjectMapping: 0.059200 ms MarkObjects: 2.479100 ms  DeleteObjects: 0.025700 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 85685.879230 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial
+  artifactKey: Guid(b7d055a5f74895b4abbe9d4556d0d3e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial using Guid(b7d055a5f74895b4abbe9d4556d0d3e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '645b945a004bc9cd94350abf5f827d8f') in 1.617684 seconds
+  Import took 3.441247 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.408197 seconds.
+  path: Assets/Imports/SMC Pack 1
+  artifactKey: Guid(91801202569ab3c40bde9c7032883d33) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/SMC Pack 1 using Guid(91801202569ab3c40bde9c7032883d33) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '05eca21d4fea2b0efd6bf4b9590d39c4') in 0.054889 seconds
+  Import took 0.057675 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.631483 seconds.
+  path: Assets/Imports/2D_sci-fi_weapon
+  artifactKey: Guid(ea4d8ef4242dbd541902506ae4332907) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2D_sci-fi_weapon using Guid(ea4d8ef4242dbd541902506ae4332907) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3531588d6a413937ae65ec560ffb96cc') in 0.053214 seconds
+  Import took 0.075411 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.122958 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial
+  artifactKey: Guid(b5cb45ac6b81c0e4787924a28ebe3344) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial using Guid(b5cb45ac6b81c0e4787924a28ebe3344) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3709654bd086cbd042ee7dbd0b48d7f9') in 0.014698 seconds
+  Import took 0.043737 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.230591 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.57 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  8.051 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.37 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1528 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 77.5 MB.
+System memory in use after: 77.6 MB.
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 2114.
+Total: 61.919500 ms (FindLiveObjects: 0.168300 ms CreateObjectMapping: 0.277000 ms MarkObjects: 61.071600 ms  DeleteObjects: 0.401200 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 422.025067 seconds.
+  path: Assets/Imports/2D Space Kit
+  artifactKey: Guid(808793608f094484abee4f5f96be997d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2D Space Kit using Guid(808793608f094484abee4f5f96be997d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f1c85e92701a65011a63779ee0e493e6') in 0.050432 seconds
+  Import took 0.083172 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.002822 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.49 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.498 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.36 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1528 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 77.5 MB.
+System memory in use after: 77.6 MB.
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 2117.
+Total: 2.054200 ms (FindLiveObjects: 0.173100 ms CreateObjectMapping: 0.050700 ms MarkObjects: 1.812600 ms  DeleteObjects: 0.016900 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 531.739402 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/ExampleScene+Readme/ExampleScene.unity
+  artifactKey: Guid(d51b98e64ff2a394891e043eda332d18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/ExampleScene+Readme/ExampleScene.unity using Guid(d51b98e64ff2a394891e043eda332d18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c3103ab2550c7f09518bed0f68d7e7a9') in 1.867388 seconds
+  Import took 1.959275 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.489053 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/ExampleScene+Readme/Readme2DSpaceships.pdf
+  artifactKey: Guid(6bcd3a07d19b7764aaa3e373d1c2c285) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/ExampleScene+Readme/Readme2DSpaceships.pdf using Guid(6bcd3a07d19b7764aaa3e373d1c2c285) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd9a3bd78bbd49495d4b0905b8aa42ca7') in 0.061501 seconds
+  Import took 0.064750 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 127.527784 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DScifiFighterWeapons
+  artifactKey: Guid(ea0894f8ad9d0a740bda6a519765f083) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DScifiFighterWeapons using Guid(ea0894f8ad9d0a740bda6a519765f083) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '281cff13b65c15250b1ba493568401f5') in 0.007626 seconds
+  Import took 0.173262 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.235486 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DScifiFighterWeapons/2DFighterCanon.prefab
+  artifactKey: Guid(c1a1526c30c3195409d7a0dd052b974c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DScifiFighterWeapons/2DFighterCanon.prefab using Guid(c1a1526c30c3195409d7a0dd052b974c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '02e80e4ed96d2878644cad2e74041df1') in 1.290094 seconds
+  Import took 1.301159 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 222.176697 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DShipMissilesTorpedoes/2DShipsMissileMedium.prefab
+  artifactKey: Guid(3952c3fe53f74a0409f716652bd8d27d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DShipMissilesTorpedoes/2DShipsMissileMedium.prefab using Guid(3952c3fe53f74a0409f716652bd8d27d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63801a6a71d683c9a691c975489bd653') in 0.113276 seconds
+  Import took 0.120794 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.663469 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DShipMissilesTorpedoes/2DShipsMissileSmall.prefab
+  artifactKey: Guid(53c54a58f50e3f946a07359f340491f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DShipMissilesTorpedoes/2DShipsMissileSmall.prefab using Guid(53c54a58f50e3f946a07359f340491f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6eee43688d15104d73ead05b3a72cb95') in 0.088798 seconds
+  Import took 0.095350 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.039732 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DShipMissilesTorpedoes/2DShipsTorpedo.prefab
+  artifactKey: Guid(cc37bc98d98663343a34aa2a097f4150) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DShipMissilesTorpedoes/2DShipsTorpedo.prefab using Guid(cc37bc98d98663343a34aa2a097f4150) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5205f69d162debbdd87627448affc60b') in 0.035051 seconds
+  Import took 0.063509 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.495306 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DShipsStandardWeapons
+  artifactKey: Guid(0b83083640e20c048994aa16c8ef38ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DShipsStandardWeapons using Guid(0b83083640e20c048994aa16c8ef38ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a7c1ac460855e92581f6a70782282301') in 0.005894 seconds
+  Import took 0.022840 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.520119 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DShipsStandardWeapons/SideView
+  artifactKey: Guid(9628bbcb0b0ae414d9f45982a99e2c9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DShipsStandardWeapons/SideView using Guid(9628bbcb0b0ae414d9f45982a99e2c9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8c8ea2e5d592e78932cf48fcbe35be26') in 0.011183 seconds
+  Import took 0.013637 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.755169 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DShipsStandardWeapons/TopView
+  artifactKey: Guid(9e8bda020ee105c43aab5ae8b32e293d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DShipsStandardWeapons/TopView using Guid(9e8bda020ee105c43aab5ae8b32e293d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2ff8e7e7a0cce84fa3b004b261111899') in 0.009933 seconds
+  Import took 0.014340 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.383837 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DShipsStandardWeapons/TopView/MissileLauncher
+  artifactKey: Guid(1b6a8e7ace8ea5844ad15ab3b13cd3ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DShipsStandardWeapons/TopView/MissileLauncher using Guid(1b6a8e7ace8ea5844ad15ab3b13cd3ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1a3f8a912f2fda30bf770f2e4fc1703f') in 0.013409 seconds
+  Import took 0.016368 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.663446 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DShipsStandardWeapons/TopView/MissileLauncher/2DShipsMissileLauncherTopView.prefab
+  artifactKey: Guid(88f8f7d77bc4a284298b36aeb4065952) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DShipsStandardWeapons/TopView/MissileLauncher/2DShipsMissileLauncherTopView.prefab using Guid(88f8f7d77bc4a284298b36aeb4065952) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4a4e6ac43adbf8c277c7113244341490') in 0.147610 seconds
+  Import took 0.150194 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 29.130113 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DSpaceshipsFreeTrialTopView/2DScifiDestroyerPhoenixTopViewMasterPrefab.prefab
+  artifactKey: Guid(6185077c5c222024e8cf1cc5d6ed9ef8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DSpaceshipsFreeTrialTopView/2DScifiDestroyerPhoenixTopViewMasterPrefab.prefab using Guid(6185077c5c222024e8cf1cc5d6ed9ef8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b9ac1a8a5463fd80fad252dc1c374976') in 0.224086 seconds
+  Import took 0.247268 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.139493 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DSpaceshipsFreeTrialTopView/2DScifiFighterExcaliburTopViewMasterPrefab.prefab
+  artifactKey: Guid(ceb2e69d6fcbbcf4eb36a02462f60ce6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DSpaceshipsFreeTrialTopView/2DScifiFighterExcaliburTopViewMasterPrefab.prefab using Guid(ceb2e69d6fcbbcf4eb36a02462f60ce6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5c4bdc117ab0b5e77db769065a9fc062') in 1.321231 seconds
+  Import took 1.343706 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.360198 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DSpaceshipsFreeTrialTopView/2DScifiFrigateCorsairTopViewMasterPrefab.prefab
+  artifactKey: Guid(fedd70b28e1d0bc44b3cb74a02d982d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DSpaceshipsFreeTrialTopView/2DScifiFrigateCorsairTopViewMasterPrefab.prefab using Guid(fedd70b28e1d0bc44b3cb74a02d982d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e949faf8781dcd7136d241a37aa3cd88') in 0.089786 seconds
+  Import took 0.096144 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.046872 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DSpaceshipsFreeTrialTopViewScaleInRelation/2DScifiDestroyerPhoenixTopViewMasterPrefab.prefab
+  artifactKey: Guid(94daddc54f3285e44bf9b06fcd28a0ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DSpaceshipsFreeTrialTopViewScaleInRelation/2DScifiDestroyerPhoenixTopViewMasterPrefab.prefab using Guid(94daddc54f3285e44bf9b06fcd28a0ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '10d64b6f1f26284e76ae579663e1007b') in 0.134422 seconds
+  Import took 0.156557 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.335939 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DSpaceshipsFreeTrialSideView/2DSpaceshipsFreeTrialAtlasSideViewBlack.png
+  artifactKey: Guid(b9c9b3ee7e1cd8c40b152ba6485ba796) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DSpaceshipsFreeTrialSideView/2DSpaceshipsFreeTrialAtlasSideViewBlack.png using Guid(b9c9b3ee7e1cd8c40b152ba6485ba796) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '13820e38f5fc23c55144f298e79ee165') in 0.563060 seconds
+  Import took 0.566265 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 8.545806 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/ExampleScene+Readme
+  artifactKey: Guid(c8213c1d2ae3c5140b694c40340b9845) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/ExampleScene+Readme using Guid(c8213c1d2ae3c5140b694c40340b9845) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c923b82cd2c9fe3085e5a1cfcf9cc663') in 0.005734 seconds
+  Import took 0.008375 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.812422 seconds.
+  path: Assets/Imports/2D Space Kit/Ships and Stations/Alien 1.png
+  artifactKey: Guid(f7eb00cb3ec9bab45b85d561558c4250) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2D Space Kit/Ships and Stations/Alien 1.png using Guid(f7eb00cb3ec9bab45b85d561558c4250) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b45ac03a92a8943d7e76ba43903ba6fc') in 0.020402 seconds
+  Import took 0.030175 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.204100 seconds.
+  path: Assets/Imports/2D Space Kit/Ships and Stations/Alien 1.png
+  artifactKey: Guid(f7eb00cb3ec9bab45b85d561558c4250) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2D Space Kit/Ships and Stations/Alien 1.png using Guid(f7eb00cb3ec9bab45b85d561558c4250) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b45ac03a92a8943d7e76ba43903ba6fc') in 0.034693 seconds
+  Import took 0.038112 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 112.800414 seconds.
+  path: Assets/Imports/2D Space Kit/Turrets/Turret Large 1.png
+  artifactKey: Guid(f94df059a55ade342918fe7d0e8c2299) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2D Space Kit/Turrets/Turret Large 1.png using Guid(f94df059a55ade342918fe7d0e8c2299) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fbd68cec142b3234e6fd91a64f7dd950') in 0.028941 seconds
+  Import took 0.031590 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.592761 seconds.
+  path: Assets/Imports/2D Space Kit/Ships and Stations/Huge 1.png
+  artifactKey: Guid(19ea3c87eb07d7f429b7164c647f167f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2D Space Kit/Ships and Stations/Huge 1.png using Guid(19ea3c87eb07d7f429b7164c647f167f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '51c209e2d9e6f7e3a450327ef8132f7b') in 0.016713 seconds
+  Import took 0.020107 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 47.670730 seconds.
+  path: Assets/Imports/2D Space Kit/Ships and Stations/Huge 1.png
+  artifactKey: Guid(19ea3c87eb07d7f429b7164c647f167f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2D Space Kit/Ships and Stations/Huge 1.png using Guid(19ea3c87eb07d7f429b7164c647f167f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68fa8579ec5edcd92d88a6818f1bc050') in 0.013629 seconds
+  Import took 0.017091 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 100.129695 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DShipsStandardWeapons/SideView/MissileLauncher
+  artifactKey: Guid(2e4097cfb6103214c9c7675dfb58ed9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Prefabs/2DShipsStandardWeapons/SideView/MissileLauncher using Guid(2e4097cfb6103214c9c7675dfb58ed9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5e5ed61d3a3e0e83ba6d76eabf73add7') in 1.023983 seconds
+  Import took 1.027198 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2721.531477 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DSpaceshipsFreeTrialTopView
+  artifactKey: Guid(a04a9e7c8c255cd449ab7b8ca1cea8d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DSpaceshipsFreeTrialTopView using Guid(a04a9e7c8c255cd449ab7b8ca1cea8d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9d4fd116e3212a1f08f9b941d8aec1d9') in 0.007034 seconds
+  Import took 0.271155 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.658714 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DSpaceshipsFreeTrialTopView/2DSpaceshipsFreeTrialAtlasTopViewBlack.png
+  artifactKey: Guid(c91ca482c2d65c04bbd61802e93740bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DSpaceshipsFreeTrialTopView/2DSpaceshipsFreeTrialAtlasTopViewBlack.png using Guid(c91ca482c2d65c04bbd61802e93740bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '638f1a0fbae7b60acdccf306e784e035') in 0.110264 seconds
+  Import took 0.113161 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 25.194967 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss
+  artifactKey: Guid(2efde76f7f4895f47b82d21344e40658) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss using Guid(2efde76f7f4895f47b82d21344e40658) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a717d157fdaf42702e61e362dc7e09f0') in 0.005683 seconds
+  Import took 0.098159 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 15.298815 seconds.
+  path: Assets/Sprites/FinalBoss
+  artifactKey: Guid(fb02308a34a81c74b83c02ecd4a6db50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/FinalBoss using Guid(fb02308a34a81c74b83c02ecd4a6db50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '22a6d0f754371fc79d4f4d9126f60dc6') in 0.002798 seconds
+  Import took 0.020908 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 21.803000 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DSpaceshipsFreeTrialTopView/2DSpaceshipsFreeTrialAtlasTopViewBlack 1.png
+  artifactKey: Guid(f088ca0af03ed294eb1ac17cf997727b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DSpaceshipsFreeTrialTopView/2DSpaceshipsFreeTrialAtlasTopViewBlack 1.png using Guid(f088ca0af03ed294eb1ac17cf997727b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '81545947d5f3a058b09f857132851a7f') in 0.071536 seconds
+  Import took 0.108262 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 27.523253 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DShipsStandardWeapons/2DShipsStandardWeaponsAtlas.png
+  artifactKey: Guid(ea47199b715e6c047909c1486562c340) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DShipsStandardWeapons/2DShipsStandardWeaponsAtlas.png using Guid(ea47199b715e6c047909c1486562c340) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ffd4933210553fe440f92c03d4f4aa0a') in 0.694923 seconds
+  Import took 0.698238 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 17.599021 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DScifiFighterWeapons/ScifiFighterWeaponsAtlas.png
+  artifactKey: Guid(23a10fa0df1140746adb7bda3d420aba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DScifiFighterWeapons/ScifiFighterWeaponsAtlas.png using Guid(23a10fa0df1140746adb7bda3d420aba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '73812257b7ea21bc569aebee8d274026') in 0.113357 seconds
+  Import took 0.143861 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.284010 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Textures
+  artifactKey: Guid(8931546c313db8f49ac9bba47f2eb19b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Textures using Guid(8931546c313db8f49ac9bba47f2eb19b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0227951cec6c3be4e9e2fb76f0b77398') in 0.007663 seconds
+  Import took 0.029325 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.490675 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DShipMissilesTorpedoes
+  artifactKey: Guid(87dbefec6ae963140824734a272a23b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DShipMissilesTorpedoes using Guid(87dbefec6ae963140824734a272a23b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2dd7cc2cf2d55a7be8ff04602252fd8e') in 0.006060 seconds
+  Import took 0.062401 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 11.350750 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DShipsStandardWeapons/2DShipsStandardWeaponsAtlas 1.png
+  artifactKey: Guid(df5b36181bfe91b49917f3ce042bf339) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DShipsStandardWeapons/2DShipsStandardWeaponsAtlas 1.png using Guid(df5b36181bfe91b49917f3ce042bf339) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4993ea25149d2cd60822eb3a8e942fac') in 0.101545 seconds
+  Import took 0.126598 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 12.733249 seconds.
+  path: Assets/Sprites/FinalBoss/2DShipsMissilesTorpedoesAtlas 1.png
+  artifactKey: Guid(65bbc9531ca97174e8ad3479c9a6e4b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/FinalBoss/2DShipsMissilesTorpedoesAtlas 1.png using Guid(65bbc9531ca97174e8ad3479c9a6e4b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e73b31456e49d2881405347599fec2ff') in 0.168815 seconds
+  Import took 0.189899 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 114.800659 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Destroyer_Boss.prefab
+  artifactKey: Guid(24bd2027d42d82641999af7764c67908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Destroyer_Boss.prefab using Guid(24bd2027d42d82641999af7764c67908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cc34d9016e2b3aa40bc00168ac8973fd') in 0.152356 seconds
+  Import took 0.246692 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 109.622192 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DShipsStandardWeapons/2DShipsStandardWeaponsAtlas 1.png
+  artifactKey: Guid(d83940e948846694abda1ca84ee22858) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DShipsStandardWeapons/2DShipsStandardWeaponsAtlas 1.png using Guid(d83940e948846694abda1ca84ee22858) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3040777a22d31e9c3d7d050fecc34bd4') in 0.047479 seconds
+  Import took 0.100750 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 162.056115 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets
+  artifactKey: Guid(53e5e8982f87b974785e6539e33709da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets using Guid(53e5e8982f87b974785e6539e33709da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '30b3ec3c33117f2085cc17755cd1f858') in 0.006347 seconds
+  Import took 0.009318 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.577573 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Large.prefab
+  artifactKey: Guid(408a5ab39934aed409e45d1f58c4bf9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Large.prefab using Guid(408a5ab39934aed409e45d1f58c4bf9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '93ae7dfcd698502468d219c637379509') in 0.015092 seconds
+  Import took 0.026455 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 45.090377 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Medium.prefab
+  artifactKey: Guid(5dcf41ce23d3f0f4f9b8807aec679272) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Medium.prefab using Guid(5dcf41ce23d3f0f4f9b8807aec679272) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f7295314012629574c2366425aac8c36') in 0.013127 seconds
+  Import took 0.037838 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.273339 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Small.prefab
+  artifactKey: Guid(243b6017d462c2c44b2d63b4ec1d1bad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Small.prefab using Guid(243b6017d462c2c44b2d63b4ec1d1bad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7404e47f14950b6bb312f16bb162444b') in 0.012559 seconds
+  Import took 0.029240 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000549 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Small.prefab
+  artifactKey: Guid(243b6017d462c2c44b2d63b4ec1d1bad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Small.prefab using Guid(243b6017d462c2c44b2d63b4ec1d1bad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7404e47f14950b6bb312f16bb162444b') in 0.009320 seconds
+  Import took 0.012578 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 15.991256 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Launcher.prefab
+  artifactKey: Guid(e6e6ce70e6fed554291876ad5cb9a34a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Launcher.prefab using Guid(e6e6ce70e6fed554291876ad5cb9a34a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e821e8464bf641110a5e8e7923ecf426') in 0.014730 seconds
+  Import took 0.018411 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.173940 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Launcher.prefab
+  artifactKey: Guid(e6e6ce70e6fed554291876ad5cb9a34a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Launcher.prefab using Guid(e6e6ce70e6fed554291876ad5cb9a34a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '746ca56c62c8fa3bf205b1347bcd7296') in 0.026082 seconds
+  Import took 0.029580 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.228615 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Large.prefab
+  artifactKey: Guid(408a5ab39934aed409e45d1f58c4bf9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Large.prefab using Guid(408a5ab39934aed409e45d1f58c4bf9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ddc8b3aa37c1735c09d4eb4bc453b40f') in 0.035142 seconds
+  Import took 0.113773 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.281797 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Small.prefab
+  artifactKey: Guid(243b6017d462c2c44b2d63b4ec1d1bad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Small.prefab using Guid(243b6017d462c2c44b2d63b4ec1d1bad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '36ec6a0e2ef8d420545ce3b9b10c312c') in 0.244716 seconds
+  Import took 0.267228 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 713.458524 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Destroyer_Boss.prefab
+  artifactKey: Guid(24bd2027d42d82641999af7764c67908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Destroyer_Boss.prefab using Guid(24bd2027d42d82641999af7764c67908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8f1e77e0ba260259616bb549d3bf63a8') in 0.099764 seconds
+  Import took 0.115910 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1207.633642 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Radar.prefab
+  artifactKey: Guid(987461c12283f4b45a2c35cb70612294) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Radar.prefab using Guid(987461c12283f4b45a2c35cb70612294) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a5d2b9d92948df1ba32439979386549') in 0.037198 seconds
+  Import took 0.092654 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 249.774537 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turret_Launcher_Alt.prefab
+  artifactKey: Guid(42048b2ea0c76d642a5defac033a170e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turret_Launcher_Alt.prefab using Guid(42048b2ea0c76d642a5defac033a170e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '077edd888e888184e2b2520a771b12ac') in 0.016207 seconds
+  Import took 0.020122 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.407352 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Launcher_Alt.prefab
+  artifactKey: Guid(42048b2ea0c76d642a5defac033a170e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Launcher_Alt.prefab using Guid(42048b2ea0c76d642a5defac033a170e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '76c0553be9d3a66ed0a6f3c3041f4569') in 0.009945 seconds
+  Import took 0.027539 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.999884 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Launcher_Alt.prefab
+  artifactKey: Guid(42048b2ea0c76d642a5defac033a170e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Launcher_Alt.prefab using Guid(42048b2ea0c76d642a5defac033a170e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57e06a5eda9b901de5a83e5d05aba7b9') in 0.009654 seconds
+  Import took 0.013230 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016433 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Launcher_Alt.prefab
+  artifactKey: Guid(42048b2ea0c76d642a5defac033a170e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Launcher_Alt.prefab using Guid(42048b2ea0c76d642a5defac033a170e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57e06a5eda9b901de5a83e5d05aba7b9') in 0.007852 seconds
+  Import took 0.011757 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.308316 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Large.prefab
+  artifactKey: Guid(408a5ab39934aed409e45d1f58c4bf9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Large.prefab using Guid(408a5ab39934aed409e45d1f58c4bf9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bdce54a8df9217464472a59228a30866') in 0.055614 seconds
+  Import took 0.058320 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.885976 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Medium.prefab
+  artifactKey: Guid(5dcf41ce23d3f0f4f9b8807aec679272) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Medium.prefab using Guid(5dcf41ce23d3f0f4f9b8807aec679272) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9dcb56678dbdb15afe3214422d542cf7') in 0.025839 seconds
+  Import took 0.028841 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.242456 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Small.prefab
+  artifactKey: Guid(243b6017d462c2c44b2d63b4ec1d1bad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Small.prefab using Guid(243b6017d462c2c44b2d63b4ec1d1bad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '933db0a2e94b5a4fc061c5018ef290cf') in 0.027232 seconds
+  Import took 0.030680 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 33.666611 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Launcher_Alt.prefab
+  artifactKey: Guid(42048b2ea0c76d642a5defac033a170e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Launcher_Alt.prefab using Guid(42048b2ea0c76d642a5defac033a170e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2696c407410a50b950ffac5cd08bd994') in 0.008374 seconds
+  Import took 0.024915 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.005704 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Launcher_Alt.prefab
+  artifactKey: Guid(42048b2ea0c76d642a5defac033a170e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Launcher_Alt.prefab using Guid(42048b2ea0c76d642a5defac033a170e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2696c407410a50b950ffac5cd08bd994') in 0.008332 seconds
+  Import took 0.011486 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.961770 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Radar.prefab
+  artifactKey: Guid(987461c12283f4b45a2c35cb70612294) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Radar.prefab using Guid(987461c12283f4b45a2c35cb70612294) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d522c075b6b831d14d7b4e5e25b2ff1') in 0.035828 seconds
+  Import took 0.040548 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.714219 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Large.prefab
+  artifactKey: Guid(408a5ab39934aed409e45d1f58c4bf9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Large.prefab using Guid(408a5ab39934aed409e45d1f58c4bf9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fb06070609c36e164b4af06f866ff87f') in 0.009181 seconds
+  Import took 0.013478 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.079247 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Large.prefab
+  artifactKey: Guid(408a5ab39934aed409e45d1f58c4bf9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Large.prefab using Guid(408a5ab39934aed409e45d1f58c4bf9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '065a370c951c3e26f6f96c95d8e8a2e0') in 0.008480 seconds
+  Import took 0.011892 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.524029 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Destroyer_Boss.prefab
+  artifactKey: Guid(24bd2027d42d82641999af7764c67908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Destroyer_Boss.prefab using Guid(24bd2027d42d82641999af7764c67908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4ff109b9b08b20de1b339b1922ec0b13') in 0.021364 seconds
+  Import took 0.024779 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.298646 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Destroyer_Boss.prefab
+  artifactKey: Guid(24bd2027d42d82641999af7764c67908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Destroyer_Boss.prefab using Guid(24bd2027d42d82641999af7764c67908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd8f79b0a5b7e6db21c7ecb01379d3b6b') in 0.012486 seconds
+  Import took 0.037807 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 9.629128 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Destroyer_Boss.prefab
+  artifactKey: Guid(24bd2027d42d82641999af7764c67908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Destroyer_Boss.prefab using Guid(24bd2027d42d82641999af7764c67908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db9a0df2957a765088a7a32599d15f58') in 0.013031 seconds
+  Import took 0.045791 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 573.835888 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Destroyer_Boss.prefab
+  artifactKey: Guid(24bd2027d42d82641999af7764c67908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Destroyer_Boss.prefab using Guid(24bd2027d42d82641999af7764c67908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '20772415f9e2016512e6d8a76437b172') in 0.047321 seconds
+  Import took 0.051025 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 26.973558 seconds.
+  path: Assets/Prefabs/Misc/Asteroid.prefab
+  artifactKey: Guid(b11cd2c9873d6ce459a43369618d7b1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Misc/Asteroid.prefab using Guid(b11cd2c9873d6ce459a43369618d7b1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1309f62745b164b0cc6e251a01da038e') in 0.192930 seconds
+  Import took 0.195863 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 63.647987 seconds.
+  path: Assets/Prefabs/Projectiles/Missile.prefab
+  artifactKey: Guid(b89df52975746d7478ff2c9a55a2eacb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Projectiles/Missile.prefab using Guid(b89df52975746d7478ff2c9a55a2eacb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8997d5e87d351a313e3c675268d3c52d') in 1.105771 seconds
+  Import took 1.109278 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1889.746909 seconds.
+  path: Assets/Sprites/FinalBoss/Rear Missile Bay.png
+  artifactKey: Guid(fda7e3f233edb774f95a8b4feae257b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/FinalBoss/Rear Missile Bay.png using Guid(fda7e3f233edb774f95a8b4feae257b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '167b5762808bbc1d203665ecb2e4c859') in 0.038766 seconds
+  Import took 0.059837 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.357705 seconds.
+  path: Assets/Sprites/FinalBoss/Rear Missile Bay.png
+  artifactKey: Guid(fda7e3f233edb774f95a8b4feae257b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/FinalBoss/Rear Missile Bay.png using Guid(fda7e3f233edb774f95a8b4feae257b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c29b41c95233715759ad3463d7f24117') in 0.018562 seconds
+  Import took 0.033454 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 44.599953 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Missiles.prefab
+  artifactKey: Guid(33e096906f0627343aef815b45bedf63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Missiles.prefab using Guid(33e096906f0627343aef815b45bedf63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'baf8fa79ae80e9bc089df697ea40a265') in 0.012194 seconds
+  Import took 0.036249 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.001936 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Missiles.prefab
+  artifactKey: Guid(33e096906f0627343aef815b45bedf63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Missiles.prefab using Guid(33e096906f0627343aef815b45bedf63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'baf8fa79ae80e9bc089df697ea40a265') in 0.041920 seconds
+  Import took 0.044700 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 479.567345 seconds.
+  path: Assets/Sprites/FinalBoss/Rear Mines.png
+  artifactKey: Guid(dd261503734ad0b4a8d894095e3e6d33) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/FinalBoss/Rear Mines.png using Guid(dd261503734ad0b4a8d894095e3e6d33) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '786d059d64abc85e68b3b8aa05c8d6b5') in 0.027804 seconds
+  Import took 0.030876 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 8.417363 seconds.
+  path: Assets/Sprites/FinalBoss/Rear Mines.png
+  artifactKey: Guid(dd261503734ad0b4a8d894095e3e6d33) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/FinalBoss/Rear Mines.png using Guid(dd261503734ad0b4a8d894095e3e6d33) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '058fdd413f89b6949b5518e476f7f2fd') in 0.033391 seconds
+  Import took 0.056083 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 53.643213 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Mines.prefab
+  artifactKey: Guid(b90618d9f787a5246a8c41272ca9c710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Mines.prefab using Guid(b90618d9f787a5246a8c41272ca9c710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8db32970410195aae78065cb3a937067') in 0.053165 seconds
+  Import took 0.075477 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 574.105061 seconds.
+  path: Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DShipMissilesTorpedoes/2DShipsMissilesTorpedoesAtlas.png
+  artifactKey: Guid(da841e0ed6399bd4695ebcfa661935f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Imports/2DSpaceshipsFreeTrial/Textures/2DShipMissilesTorpedoes/2DShipsMissilesTorpedoesAtlas.png using Guid(da841e0ed6399bd4695ebcfa661935f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2e5a77053cc1925cf5d6a5092d8e050f') in 0.287757 seconds
+  Import took 0.311813 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 370.848970 seconds.
+  path: Assets/Prefabs/Projectiles/Boss_Missile.prefab
+  artifactKey: Guid(a1d437934d3aefb44b9ba7018fdbcd5e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Projectiles/Boss_Missile.prefab using Guid(a1d437934d3aefb44b9ba7018fdbcd5e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7b08a86e2e6fe6ed9ba0763a233c6b72') in 0.805365 seconds
+  Import took 0.853125 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 81.917809 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Mines.prefab
+  artifactKey: Guid(b90618d9f787a5246a8c41272ca9c710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Mines.prefab using Guid(b90618d9f787a5246a8c41272ca9c710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '628b2b5133eea7fe0eb3c7541a6f8e2e') in 0.010228 seconds
+  Import took 0.067319 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 9.495671 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Destroyer_Boss.prefab
+  artifactKey: Guid(24bd2027d42d82641999af7764c67908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Destroyer_Boss.prefab using Guid(24bd2027d42d82641999af7764c67908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ca15d48dfb031718b5669c25dd9bf141') in 0.859073 seconds
+  Import took 0.863232 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 8.371365 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Mines.prefab
+  artifactKey: Guid(b90618d9f787a5246a8c41272ca9c710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Mines.prefab using Guid(b90618d9f787a5246a8c41272ca9c710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '38e1e5e85f4ae7d69a1771e022d57656') in 0.046371 seconds
+  Import took 0.049202 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.965187 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Mines.prefab
+  artifactKey: Guid(b90618d9f787a5246a8c41272ca9c710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Mines.prefab using Guid(b90618d9f787a5246a8c41272ca9c710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ceb9d73018c86e913c5bba0608559697') in 0.007833 seconds
+  Import took 0.010616 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.259624 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Mines.prefab
+  artifactKey: Guid(b90618d9f787a5246a8c41272ca9c710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Mines.prefab using Guid(b90618d9f787a5246a8c41272ca9c710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '22c1f46daa629f5845e6821f14d50339') in 0.028256 seconds
+  Import took 0.031729 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 12.154626 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Mines.prefab
+  artifactKey: Guid(b90618d9f787a5246a8c41272ca9c710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Mines.prefab using Guid(b90618d9f787a5246a8c41272ca9c710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fd3de372d28f7b08006cd2e267a187dd') in 0.007180 seconds
+  Import took 0.010582 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.984650 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Mines.prefab
+  artifactKey: Guid(b90618d9f787a5246a8c41272ca9c710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Mines.prefab using Guid(b90618d9f787a5246a8c41272ca9c710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fc33b7dd9a21a65aea79a0d04e2b9437') in 0.008867 seconds
+  Import took 0.012464 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.558398 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Mines.prefab
+  artifactKey: Guid(b90618d9f787a5246a8c41272ca9c710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Mines.prefab using Guid(b90618d9f787a5246a8c41272ca9c710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4583c638fd88cb7ba571eef6057acc33') in 0.006660 seconds
+  Import took 0.009893 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.155651 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Mines.prefab
+  artifactKey: Guid(b90618d9f787a5246a8c41272ca9c710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Mines.prefab using Guid(b90618d9f787a5246a8c41272ca9c710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d56049c9b107123f22cb9a1bbbff860') in 0.007610 seconds
+  Import took 0.026151 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 16.778062 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Missiles.prefab
+  artifactKey: Guid(33e096906f0627343aef815b45bedf63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Missiles.prefab using Guid(33e096906f0627343aef815b45bedf63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5cff4664d2b500d2f37bdbe0b6fd2536') in 0.038270 seconds
+  Import took 0.042222 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 16.593914 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Missiles.prefab
+  artifactKey: Guid(33e096906f0627343aef815b45bedf63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Missiles.prefab using Guid(33e096906f0627343aef815b45bedf63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cb741097cc077854e3a6c7abf22e3517') in 0.137911 seconds
+  Import took 0.159677 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.191247 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Missiles.prefab
+  artifactKey: Guid(33e096906f0627343aef815b45bedf63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Stage3_Missiles.prefab using Guid(33e096906f0627343aef815b45bedf63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0b54add1e6f02cd88ce630aaa83dccc7') in 0.006795 seconds
+  Import took 0.009613 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 170.234080 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Large.prefab
+  artifactKey: Guid(408a5ab39934aed409e45d1f58c4bf9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Large.prefab using Guid(408a5ab39934aed409e45d1f58c4bf9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a110339bd8c64cfe74471dd70d4788f') in 0.056355 seconds
+  Import took 0.060214 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 257.407262 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Launcher.prefab
+  artifactKey: Guid(e6e6ce70e6fed554291876ad5cb9a34a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Launcher.prefab using Guid(e6e6ce70e6fed554291876ad5cb9a34a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d30f7451422c938ab8bea9dac8b9fca') in 0.075576 seconds
+  Import took 0.078860 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.651733 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Medium.prefab
+  artifactKey: Guid(5dcf41ce23d3f0f4f9b8807aec679272) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Medium.prefab using Guid(5dcf41ce23d3f0f4f9b8807aec679272) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '582e3d25e6cfaa1e9086953ea8fb0689') in 0.011944 seconds
+  Import took 0.015495 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 287.470602 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Small.prefab
+  artifactKey: Guid(243b6017d462c2c44b2d63b4ec1d1bad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Turrets/Turret_Small.prefab using Guid(243b6017d462c2c44b2d63b4ec1d1bad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd340520adb43f94540650e24522ea52c') in 0.233693 seconds
+  Import took 0.259854 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 25.589114 seconds.
+  path: Assets/Prefabs/Enemies/FinalBoss/Destroyer_Boss.prefab
+  artifactKey: Guid(24bd2027d42d82641999af7764c67908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/FinalBoss/Destroyer_Boss.prefab using Guid(24bd2027d42d82641999af7764c67908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb7dd60b93283565b6c3727e9e62db00') in 0.043625 seconds
+  Import took 0.061147 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 30.877321 seconds.
+  path: Assets/Scripts/FinalBoss.cs
+  artifactKey: Guid(303d80d1192345b4fa34e6d45ec3d888) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/FinalBoss.cs using Guid(303d80d1192345b4fa34e6d45ec3d888) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ea91a717eb581671e38389719002982b') in 0.006178 seconds
+  Import took 0.009291 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.322032 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.38 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.387 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.39 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1530 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 78.0 MB.
+System memory in use after: 78.1 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 2191.
+Total: 2.065300 ms (FindLiveObjects: 0.175700 ms CreateObjectMapping: 0.042400 ms MarkObjects: 1.820000 ms  DeleteObjects: 0.026000 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 42.421522 seconds.
+  path: Assets/Scripts/BossComponent.cs
+  artifactKey: Guid(7c1e7dfec9882404db049fb5e0e0d604) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/BossComponent.cs using Guid(7c1e7dfec9882404db049fb5e0e0d604) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f723f656218c15ea0fb8b892a43726c') in 0.006882 seconds
+  Import took 0.028912 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 420.240740 seconds.
+  path: Assets/Prefabs/Powerups/Powerup_LandMine.prefab
+  artifactKey: Guid(85031ef79475bec43aa015901a960941) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Powerups/Powerup_LandMine.prefab using Guid(85031ef79475bec43aa015901a960941) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b2d110fe1dcaf0770b5fb03cda7d3734') in 0.173565 seconds
+  Import took 0.201920 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 206.295827 seconds.
+  path: Assets/Prefabs/Player/Fire_Left.prefab
+  artifactKey: Guid(ede07f7f4f9120d4290ba09c9ef354c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Player/Fire_Left.prefab using Guid(ede07f7f4f9120d4290ba09c9ef354c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '120b100ba94cabf6a29055706daebe98') in 0.127538 seconds
+  Import took 0.143905 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.596190 seconds.
+  path: Assets/Prefabs/Player/Fire_Right.prefab
+  artifactKey: Guid(bca5c6a3d624f1f439490c74da74a267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Player/Fire_Right.prefab using Guid(bca5c6a3d624f1f439490c74da74a267) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fee2a372090a1f143a3eb0b659008b24') in 0.053460 seconds
+  Import took 0.056625 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 22.395247 seconds.
+  path: Assets/Prefabs/Player/Fire_Left.prefab
+  artifactKey: Guid(ede07f7f4f9120d4290ba09c9ef354c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Player/Fire_Left.prefab using Guid(ede07f7f4f9120d4290ba09c9ef354c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2ffcf0ce2ccd51206c085ccad58bd18f') in 0.008448 seconds
+  Import took 0.011846 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3441.326529 seconds.
+  path: Assets/Scenes/Game.unity
+  artifactKey: Guid(b1036c7b7bb3f1842a8e514c5f1ba88b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Game.unity using Guid(b1036c7b7bb3f1842a8e514c5f1ba88b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'de62740d57f8eb515b93fa5d0067416e') in 0.050950 seconds
+  Import took 0.081843 seconds .
+
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 2.57 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 11 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 49.4 MB.
+System memory in use after: 49.5 MB.
+
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2192.
+Total: 65.560000 ms (FindLiveObjects: 0.332300 ms CreateObjectMapping: 0.063900 ms MarkObjects: 65.136000 ms  DeleteObjects: 0.026700 ms)
+
