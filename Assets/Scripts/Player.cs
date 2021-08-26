@@ -784,6 +784,21 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if(other.transform.tag == "Laser")
+        {
+            GiantLaser giantLaser = other.transform.GetComponent<GiantLaser>();
+            if (giantLaser != null)
+            {
+                if (giantLaser.CallAllegiance() == true)
+                {
+                    Damage();
+                }
+            }
+        }
+    }
+
     public void GameStart()
     {
         consumeAmmo = false;

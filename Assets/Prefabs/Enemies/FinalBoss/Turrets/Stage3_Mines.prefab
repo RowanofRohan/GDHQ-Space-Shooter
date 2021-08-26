@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5766502782576578563}
   - component: {fileID: 4859747350940081398}
   - component: {fileID: 2343868437922603825}
+  - component: {fileID: 1138670303231922145}
   m_Layer: 0
   m_Name: Stage3_Mines
   m_TagString: Untagged
@@ -116,3 +117,26 @@ CircleCollider2D:
   m_Offset: {x: 2.065802, y: 0}
   serializedVersion: 2
   m_Radius: 0.1541987
+--- !u!114 &1138670303231922145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3276420336134059771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1e7dfec9882404db049fb5e0e0d604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDestructable: 1
+  maxHealth: 30
+  currentHealth: 0
+  isDestroyed: 0
+  isInvulnerable: 1
+  flashDuration: 0.15
+  flashCooldown: 0.4
+  damageSprites:
+  - {fileID: 21300000, guid: dd261503734ad0b4a8d894095e3e6d33, type: 3}
+  - {fileID: 21300000, guid: 3381ce73be7b16042bce3f636f9d8fba, type: 3}
+  - {fileID: 21300000, guid: a763af0fa26a8a847baeb6ecc0951ee9, type: 3}

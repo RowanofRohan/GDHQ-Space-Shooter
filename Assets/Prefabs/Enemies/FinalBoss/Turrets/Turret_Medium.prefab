@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5707166548809741375}
   - component: {fileID: 1844144333752623647}
   - component: {fileID: 3979194334385531872}
+  - component: {fileID: 3074927942328841576}
   m_Layer: 0
   m_Name: Turret_Medium
   m_TagString: Untagged
@@ -131,3 +132,26 @@ PolygonCollider2D:
       - {x: 0.35762346, y: -0.6626304}
       - {x: 0.48239163, y: -0.5743087}
       - {x: 0.47983855, y: -0.52587044}
+--- !u!114 &3074927942328841576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7107684635393592572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1e7dfec9882404db049fb5e0e0d604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDestructable: 1
+  maxHealth: 30
+  currentHealth: 0
+  isDestroyed: 0
+  isInvulnerable: 1
+  flashDuration: 0.15
+  flashCooldown: 0.4
+  damageSprites:
+  - {fileID: 21300008, guid: df5b36181bfe91b49917f3ce042bf339, type: 3}
+  - {fileID: 8785816778340161906, guid: 84da014281809294182d2563f3390f3e, type: 3}
+  - {fileID: -1269752801399784754, guid: 98a331cefcadaa447a7aeefabceb686b, type: 3}

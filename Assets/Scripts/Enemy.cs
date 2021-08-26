@@ -24,7 +24,6 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float movementDelay = 0.0f;
     private bool timerActive = false;
-    [SerializeField]
     private float moveTimeTracker = 0.0f;
     private bool isDirectionReversed = false;
     private int currentCycle = 0;
@@ -119,6 +118,8 @@ public class Enemy : MonoBehaviour
     private float laserMaxCD = 7.0f;
     [SerializeField]
     private AudioClip laserShot;
+    [SerializeField]
+    private bool canShootPowerups = false;
 
     void Start()
     {
@@ -423,12 +424,12 @@ public class Enemy : MonoBehaviour
                 canFire = Time.time + laserCooldown;
                 FireLaser();
             }
-            else
+            else if (canShootPowerups && Time.time > altFire)
             {
                 RaycastHit2D detect = Physics2D.Raycast(transform.position - new Vector3(0, 2, 0), new Vector3(0,-1,0));
                 if(detect.collider != null)
                 {
-                    if (detect.collider.transform.tag == "Powerup" && Time.time > altFire && detect.collider.transform.GetComponent<Powerup>().hazardCheck() == false)
+                    if (detect.collider.transform.tag == "Powerup" && detect.collider.transform.GetComponent<Powerup>().hazardCheck() == false)
                     {
                         laserCooldown = Random.Range(laserMinCD,laserMaxCD);
                         altFire = Time.time + laserCooldown;
