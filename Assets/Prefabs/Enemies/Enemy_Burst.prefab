@@ -56,6 +56,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6898410624868289551, guid: a317d6075101f4f47a14101b74ff350e, type: 3}
+      propertyPath: laserAngle
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 6898410624868289551, guid: a317d6075101f4f47a14101b74ff350e, type: 3}
       propertyPath: movementID
       value: 2
       objectReference: {fileID: 0}

@@ -52,13 +52,22 @@ MonoBehaviour:
   verticalSpeed: 3
   horizontalSpeed: 0
   accelerationFactor: 0.15
-  randomRespawn: 0
+  respawnType: 0
   initialAngle: 0
   currentDirection: 0
   movementDelay: 0
-  timerActive: 0
-  destination: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0, w: 0}
+  maxCycles: 0
+  spawnLocation: {x: 0, y: 0, z: 0}
+  movementIDList: 
+  moveDurationList: []
+  vertSpeedList: []
+  horzSpeedList: []
+  moveAngleList: []
+  moveDelayList: []
+  accelerationList: []
+  reverseDirectionList: 
+  teleportLocations: []
+  respawnTypeList: 
   rammingSpeed: 0
   isAggro: 0
   aggroVelocity: 6
@@ -73,9 +82,13 @@ MonoBehaviour:
   explosionSound: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
   laserPrefab: {fileID: 4176383718462431938, guid: 219c07c51b11bab46b29b92a125fba2e, type: 3}
   laserCooldown: 0.2
+  laserSpeed: 24
+  laserAngle: 180
+  laserLife: 2
   laserMinCD: 3
   laserMaxCD: 7
   laserShot: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
+  canShootPowerups: 0
 --- !u!212 &3269986490534592268
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -115,7 +128,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 30
   m_Sprite: {fileID: 21300000, guid: 3154912113cbb4a498df6f571c74e18c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

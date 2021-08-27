@@ -9,6 +9,16 @@ public class FinalBoss : MonoBehaviour
     private bool nextPhaseDebug = false;
     [SerializeField]
     private bool prevPhaseDebug = false;
+    [SerializeField]
+    private bool changePhase = false;
+    [SerializeField]
+    private int whichPhase = -1;
+    [SerializeField]
+    private bool startAttack = false;
+    [SerializeField]
+    private int whichAttack = -1;
+    [SerializeField]
+    private int whichTurret = -1;
 
     //Movement Controls
     [SerializeField]
@@ -63,6 +73,8 @@ public class FinalBoss : MonoBehaviour
     private GameObject bossMissilePrefab;
     [SerializeField]
     private GameObject explosionPrefab;
+    [SerializeField]
+    private GameObject tracerPrefab;
 
     private AudioSource audioSource;
     [SerializeField]
@@ -113,7 +125,7 @@ public class FinalBoss : MonoBehaviour
         destination = transform.position;
         
         InitializeMovement();
-        InitializeHealth();
+        InitializeComponents();
     }
 
     // Update is called once per frame
@@ -149,6 +161,56 @@ public class FinalBoss : MonoBehaviour
             }
             EndPhase();
         }
+        if(changePhase == true)
+        {
+            changePhase = false;
+            if(whichPhase != -1)
+            {
+                currentTransition = whichPhase - 1;
+                EndPhase();
+                currentStep = data.GetLength() - 1;
+                NextMoveStep();
+            }
+        }
+        if(startAttack == true)
+        {
+            startAttack = false;
+            switch(whichAttack)
+            {
+                case 0:
+                    StartTracking();
+                    break;
+                case 1:
+                    StopTracking();
+                    break;
+                case 2:
+                    StartCoroutine(SummonBackup());
+                    break;
+                case 3:
+                    StartCoroutine(MegaLaserBarrage(reverseConvergence));
+                    break;
+                case 4:
+                    WaveLasers();
+                    break;
+                case 5:
+                    StartCoroutine(MissileBarrage());
+                    break;
+                case 6:
+                    LaserDiamond();
+                    break;
+                case 7:
+                    SideLaserBarrage();
+                    break;
+                case 8:
+                    MissileSweep();
+                    break;
+                case 9:
+                    MegaLaserSweep();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     private void InitializeMovement()
@@ -159,20 +221,23 @@ public class FinalBoss : MonoBehaviour
         NextMoveStep();
     }
 
-    private void InitializeHealth()
+    private void InitializeComponents()
     {
         maxHealth = 0.0f;
         for(int i = 0; i < phase1Components.Length; i++)
         {
             maxHealth += phase1Components[i].GetMaxHealth();
+            phase1Components[i].SetPlayer(player);
         }
         for(int i = 0; i < phase2Components.Length; i++)
         {
             maxHealth += phase2Components[i].GetMaxHealth();
+            phase2Components[i].SetPlayer(player);
         }
         for(int i = 0; i < phase3Components.Length; i++)
         {
             maxHealth += phase3Components[i].GetMaxHealth();
+            phase3Components[i].SetPlayer(player);
         }
         currentHealth = maxHealth;
         SendHealthUpdate();
@@ -385,33 +450,333 @@ public class FinalBoss : MonoBehaviour
         }
     }
 
-    // public Player GetPlayer()
-    // {
-    //     return player;
-    // }
-
     //UNIVERSAL ATTACK CONTROLLERS
-    
-    private void SummonBackup()
+
+    [SerializeField]
+    private float summonDelay = 2.0f;
+    [SerializeField]
+    private float summonVulnerableWindow = 2.0f;
+    [SerializeField]
+    private Vector3 waveSpawn = new Vector3(0,8,0);
+
+
+    private IEnumerator SummonBackup()
     {
-        //Summons a short wave of enemies
-        //Used in all three phases
+        BossComponent component = null;
+        switch(currentTransition)
+        {
+            case 1:
+                component = phase1Components[4].GetComponent<BossComponent>();
+                break;
+            case 2:
+                component = phase2Components[8].GetComponent<BossComponent>();
+                break;
+            case 3:
+                component = phase3Components[10].GetComponent<BossComponent>();
+                break;
+            default:
+                break;
+        }
+        if(component != null)
+        {
+            if(component.GetState() == false)
+            {
+                component.ShieldController(false);
+                yield return new WaitForSeconds(summonDelay);
+                if(component.GetState() == false)
+                {
+                    Instantiate(enemyWave, waveSpawn, Quaternion.identity);
+                }
+                yield return new WaitForSeconds(summonVulnerableWindow);
+                if(component.GetState() == false)
+                {
+                    component.ShieldController(true);
+                }
+            }
+        }
     }
 
-    private void MegaLaserBarrage()
+    //Laser Positions are static; other variables account for phase 1 vs phase 3
+    [SerializeField]
+    private Vector3[] laserPositions;
+    [SerializeField]
+    private float[] tracerDuration;
+    [SerializeField]
+    private float[] gigaLaserDuration;
+    [SerializeField]
+    private float[] gigaLaserDelays;
+    [SerializeField]
+    private bool reverseConvergence = false;
+
+    private IEnumerator MegaLaserBarrage(bool laserDirection)
     {
-        //fires giant laser barrages converging towards center
+        int currentPhase = currentTransition;
+        int i = 0;
+        switch(currentTransition)
+        {
+            case 1:
+                i = 0;
+                break;
+            case 3:
+                i = 1;
+                break;
+            default:
+                i = 0;
+                break;
+        }
+        if(laserDirection == false)
+        {
+            StartCoroutine(GigaLaserController(i, laserPositions[0]));
+            StartCoroutine(GigaLaserController(i, laserPositions[1]));
+            yield return new WaitForSeconds(gigaLaserDelays[i]);
+            if(currentPhase == currentTransition)
+            {
+                StartCoroutine(GigaLaserController(i, laserPositions[2]));
+                StartCoroutine(GigaLaserController(i, laserPositions[3]));
+            }
+            yield return new WaitForSeconds(gigaLaserDelays[i]);
+            if(currentPhase == currentTransition)
+            {
+                StartCoroutine(GigaLaserController(i, laserPositions[4]));
+            }
+        }
+        else
+        {
+            StartCoroutine(GigaLaserController(i, laserPositions[4]));
+            yield return new WaitForSeconds(gigaLaserDelays[i]);
+            if(currentPhase == currentTransition)
+            {
+                StartCoroutine(GigaLaserController(i, laserPositions[3]));
+                StartCoroutine(GigaLaserController(i, laserPositions[2]));
+            }
+            yield return new WaitForSeconds(gigaLaserDelays[i]);
+            if(currentPhase == currentTransition)
+            {
+                StartCoroutine(GigaLaserController(i, laserPositions[1]));
+                StartCoroutine(GigaLaserController(i, laserPositions[0]));
+            }
+        }  
     }
+
+    private IEnumerator GigaLaserController(int j, Vector3 laserSpawn)
+    {
+        GameObject tracer = Instantiate(tracerPrefab, laserSpawn, Quaternion.identity);
+        yield return new WaitForSeconds(tracerDuration[j]);
+        if(tracer != null)
+        {
+            Destroy(tracer.gameObject);
+            GameObject gigaLaser = Instantiate(giantLaserPrefab, laserSpawn, Quaternion.identity);
+            StartCoroutine(TracerPulse(1, gigaLaserDuration[j]*1.5f,gigaLaser.GetComponent<Laser>()));
+            yield return new WaitForSeconds(gigaLaserDuration[j]);
+            if(gigaLaser != null)
+            {
+                Destroy(gigaLaser.gameObject);
+            }
+        }
+    }
+
+    [SerializeField]
+    private int[] waveShots;
+    [SerializeField]
+    private float[] waveAngle;
+    [SerializeField]
+    private int[] waveSweeps;
+    [SerializeField]
+    private float[] waveShotDelay;
+    [SerializeField]
+    private float[] waveStartAngle;
+    [SerializeField]
+    private float[] waveInitialDelay;
+    [SerializeField]
+    private float[] waveInitialSpeed;
+    [SerializeField]
+    private float[] waveShotSpeed;
+    [SerializeField]
+    private bool alternateTurrets = false;
 
     private void WaveLasers()
     {
-        //Short attack firing waves of lasers from small turrets
-        //Used in stages 1 and 2; direction reversed in stage 2
+        int i = 0;
+        BossComponent leftTurret = null;
+        BossComponent rightTurret = null;
+        switch(currentTransition)
+        {
+            case 1:
+                i = 0;
+                leftTurret = phase1Components[0].GetComponent<BossComponent>();
+                rightTurret = phase1Components[1].GetComponent<BossComponent>();
+                break;
+            case 2:
+                i = 1;
+                leftTurret = phase2Components[7].GetComponent<BossComponent>();
+                rightTurret = phase2Components[6].GetComponent<BossComponent>();
+                break;
+            case 3:
+                i = 2;
+                if(alternateTurrets == false)
+                { 
+                    leftTurret = phase3Components[9].GetComponent<BossComponent>();
+                    rightTurret = phase3Components[7].GetComponent<BossComponent>();
+                }
+                else
+                {
+                    leftTurret = phase3Components[8].GetComponent<BossComponent>();
+                    rightTurret = phase3Components[6].GetComponent<BossComponent>();
+                }
+                break;
+            default:
+                i = 0;
+                break;
+        }
+        if(leftTurret != null && leftTurret.GetState() == false)
+        {
+            StartCoroutine(WaveLaserController(leftTurret, i, 1));
+        }
+        if(rightTurret != null && rightTurret.GetState() == false)
+        {
+            StartCoroutine(WaveLaserController(rightTurret, i, -1));
+        }
     }
 
+    private IEnumerator WaveLaserController(BossComponent turret, int j, int flip)
+    {
+        int currentPhase = currentTransition;
+        turret.Swivel(waveStartAngle[j]*flip, waveInitialSpeed[j]);
+        yield return new WaitForSeconds(waveInitialDelay[j]);
+        turret.StopSwivel();
+        float currentAngle = waveStartAngle[j]*flip;
+        turret.transform.rotation = Quaternion.Euler(new Vector3(0,0,currentAngle));
+        for(int l = 0; l < waveSweeps[j]; l++)
+        {
+            for(int k = 0; k < waveShots[j] && turret.GetState() == false; k++)
+            {
+                Laser newLaser = turret.Fire(laserPrefab).GetComponent<Laser>();
+                newLaser.transform.SetParent(projectileContainer.transform);
+                newLaser.SetSpeed(waveShotSpeed[j]);
+                AudioSource.PlayClipAtPoint(laserSound, turret.transform.position,1.0f);
+                currentAngle += waveAngle[j]*flip*-1;
+                turret.Swivel(currentAngle, waveShotDelay[j]);
+                yield return new WaitForSeconds(waveShotDelay[j]);
+                turret.StopSwivel();
+                turret.transform.rotation = Quaternion.Euler(new Vector3(0,0,currentAngle));
+                //turret.transform.Rotate(new Vector3(0, 0, waveAngle[j] * flip * -1));
+            }
+            flip = flip * -1;
+        }
+    }
+    
+    [SerializeField]
+    private float[] megaSweepStartAngle;
+    [SerializeField]
+    private float[] megaSweepEndAngle;
+    [SerializeField]
+    private float[] megaSweepSwivelWait;
+    [SerializeField]
+    private float[] megaSweepSwivelTime;
+    [SerializeField]
+    private float[] megaSweepDuration;
+    [SerializeField]
+    private int[] megaSweepTracerPulses;
+    [SerializeField]
+    private float[] megaSweepTracerPulseDuration;
+    [SerializeField]
+    private float[] megaSweepStartDelay;
+    [SerializeField]
+    private float[] megaSweepStartSpeed;
 
-    //Rework tracking: 
-    //Whenever needing to track player, handle it on boss and just point at player.
+    private void MegaLaserSweep()
+    {
+        BossComponent turretL = null;
+        BossComponent turretR = null;
+        switch(currentTransition)
+        {
+            case 1:
+                    turretL = phase2Components[1].GetComponent<BossComponent>();
+                    if(turretL.GetState() == false)
+                    {
+                        StartCoroutine(MegaSweepController(turretL, 0, 1, megaSweepStartAngle[0], megaSweepEndAngle[0]));
+                    }
+                    turretR = phase2Components[0].GetComponent<BossComponent>();
+                    if(turretR.GetState() == false)
+                    {
+                        StartCoroutine(MegaSweepController(turretR, 0, -1, megaSweepStartAngle[0], megaSweepEndAngle[0]));
+                    }
+                break;
+            case 2:
+                if(alternateTurrets == false)
+                {
+                    turretL = phase2Components[1].GetComponent<BossComponent>();
+                    if(turretL.GetState() == false)
+                    {
+                        StartCoroutine(MegaSweepController(turretL, 1, 1, megaSweepStartAngle[1], megaSweepEndAngle[1]));
+                    }
+                    turretR = phase2Components[0].GetComponent<BossComponent>();
+                    if(turretR.GetState() == false)
+                    {
+                        StartCoroutine(MegaSweepController(turretR, 1, -1, megaSweepStartAngle[1], megaSweepEndAngle[1]));
+                    }
+                }
+                else
+                {
+                    turretL = phase2Components[3].GetComponent<BossComponent>();
+                    if(turretL.GetState() == false)
+                    {
+                        StartCoroutine(MegaSweepController(turretL, 1, -1, megaSweepStartAngle[1] - 90.0f, megaSweepEndAngle[1] - 90.0f));
+                    }
+                    turretR = phase2Components[2].GetComponent<BossComponent>();
+                    if(turretR.GetState() == false)
+                    {
+                        StartCoroutine(MegaSweepController(turretR, 1, 1, megaSweepStartAngle[1] - 90.0f, megaSweepEndAngle[1] - 90.0f));
+                    }
+                }
+                break;
+            case 3: 
+                turretL = phase3Components[0].GetComponent<BossComponent>();
+                if(turretL.GetState() == false)
+                {
+                    StartCoroutine(MegaSweepController(turretL, 2, 1, megaSweepStartAngle[2], megaSweepEndAngle[2]));
+                }
+                turretR = phase3Components[1].GetComponent<BossComponent>();
+                if(turretR.GetState() == false)
+                {
+                    StartCoroutine(MegaSweepController(turretR, 2, -1, megaSweepStartAngle[2], megaSweepEndAngle[2]));
+                }
+                break;
+            default:
+                break;
+        }
+        //Sweeps mega lasers back and forth from large turrets
+        //Can be used in all 3 phases
+    }
+
+    private IEnumerator MegaSweepController(BossComponent turret, int j, int flip, float startAngle, float endAngle)
+    {
+        int currentPhase = currentTransition;
+        turret.Swivel(startAngle*flip, megaSweepStartSpeed[j]);
+        yield return new WaitForSeconds(megaSweepStartDelay[j]);
+        turret.StopSwivel();
+        turret.transform.rotation = Quaternion.Euler(new Vector3(0,0,startAngle*flip));
+        
+        Laser tracer = turret.Fire(tracerPrefab).GetComponent<Laser>();
+        StartCoroutine(TracerPulse(megaSweepTracerPulses[j], megaSweepTracerPulseDuration[j], tracer));
+        StartCoroutine(turret.WatchLaser(tracer));
+        yield return new WaitForSeconds(megaSweepTracerPulseDuration[j] * megaSweepTracerPulses[j]);
+        Destroy(tracer.gameObject);
+        if(turret.GetState() == false)
+        {
+            Laser newGigaLaser = turret.Fire(giantLaserPrefab).GetComponent<Laser>();
+            StartCoroutine(turret.WatchLaser(newGigaLaser));
+            newGigaLaser.transform.SetParent(turret.transform);
+            yield return new WaitForSeconds(megaSweepSwivelWait[j]);
+            turret.Swivel(endAngle*flip, megaSweepSwivelTime[j]);
+            yield return new WaitForSeconds(megaSweepDuration[j] - megaSweepSwivelWait[j]);
+            if(newGigaLaser != null)
+            {
+                Destroy(newGigaLaser.gameObject);
+            }
+        }
+    }
+
     //Use global cooldowns for certain tracking (e.g. multiple missile turrets)
     private void StartTracking()
     {
@@ -425,23 +790,171 @@ public class FinalBoss : MonoBehaviour
 
     //STAGE 1 ATTACK CONTROLLERS
 
-    private void MissileBarrage1()
+    [SerializeField]
+    private int missileBarrageCycles = 2;
+    [SerializeField]
+    private float missileBarrageStartSpeed = 4;
+    [SerializeField]
+    private float missileBarrageDelays = 0.2f;
+    [SerializeField]
+    private float missileBarrageTopSpeed = 4.0f;
+    [SerializeField]
+    private float missileBarrageAcceleration = 4.0f;
+    [SerializeField]
+    private float missileBarrageInitialDelay = 4.0f;
+    [SerializeField]
+    private Vector3[] missileSpawnLocations;
+    [SerializeField]
+    private GameObject fakeMissilePrefab;
+
+
+    private IEnumerator MissileBarrage()
     {
-        //Fires missiles sequentially outwards from launchers, then converging from sides
+        int currentPhase = currentTransition;
+        BossComponent launcherTL = phase1Components[5].GetComponent<BossComponent>();
+        BossComponent launcherTR = phase1Components[6].GetComponent<BossComponent>();
+        BossComponent launcherBL = phase1Components[7].GetComponent<BossComponent>();
+        BossComponent launcherBR = phase1Components[8].GetComponent<BossComponent>();
+        StartCoroutine(FakeMissiles(launcherBL));
+        StartCoroutine(FakeMissiles(launcherTL));
+        StartCoroutine(FakeMissiles(launcherBR));
+        StartCoroutine(FakeMissiles(launcherTR));
+        yield return new WaitForSeconds(missileBarrageInitialDelay);
+        for(int k = 0; k < missileBarrageCycles; k++)
+        {
+            for(int i = 0; i < missileSpawnLocations.Length && currentTransition == currentPhase; i += 0)
+            {
+                for(int j = 0; j < 4; j++)
+                {
+                    if(missileSpawnLocations[i] != null)
+                    {
+                        int flip = 1;
+                        if(missileSpawnLocations[i].x < 0)
+                        {
+                            flip = -1;
+                        }
+                        Laser newMissile = Instantiate(bossMissilePrefab, missileSpawnLocations[i], Quaternion.Euler(new Vector3(0,0,90*flip))).GetComponent<Laser>();
+                        newMissile.SetBaseProperties(missileBarrageStartSpeed, 90*flip, 10.0f);
+                        newMissile.SetMissileProperties(missileBarrageAcceleration, missileBarrageTopSpeed);
+                        newMissile.transform.SetParent(projectileContainer.transform);
+                    }
+                    i++;
+                }
+                yield return new WaitForSeconds(missileBarrageDelays);
+            }
+            yield return new WaitForSeconds(missileBarrageInitialDelay);
+        }
+    }
+    
+    private IEnumerator FakeMissiles(BossComponent turret)
+    {
+        for(int j = 0; j < missileBarrageCycles; j++)
+        {
+            for(int i = 0; i < turret.GetSpawnContainers().Length; i++)
+            {
+                Laser newMissile = turret.Fire(fakeMissilePrefab, i).GetComponent<Laser>();
+                newMissile.transform.SetParent(projectileContainer.transform);
+                yield return new WaitForSeconds(missileBarrageDelays);
+            }
+        }
     }
 
     //Additional stage 1 attacks:
     //Summon Backup
     //Medium turret tracks and fires dumb missiles
     //Mega Laser Barrage
+    //Wave Lasers
 
     //STAGE 2 ATTACK CONTROLLERS
 
+    [SerializeField]
+    private float diamondTracerPulseDuration = 0.5f;
+    [SerializeField]
+    private int diamondTracerPulses = 2;
+    [SerializeField]
+    private float diamondLaserDuration = 5.0f;
+    [SerializeField]
+    private float turretAngles = 120.0f;
+    private bool diamondActive = false;
+    [SerializeField]
+    private float diamondSwivelTime = 1.0f;
+
     private void LaserDiamond()
     {
-        //Giant turrets fire large laser diamond around player
+        diamondActive = true;
+        StartCoroutine(DiamondTimer());
+        BossComponent turretTL = phase2Components[1].GetComponent<BossComponent>();
+        BossComponent turretTR = phase2Components[0].GetComponent<BossComponent>();
+        BossComponent turretBL = phase2Components[3].GetComponent<BossComponent>();
+        BossComponent turretBR = phase2Components[2].GetComponent<BossComponent>();
+
+        if(turretTL.GetState() == false)
+        {
+            turretTL.Swivel(turretAngles, diamondSwivelTime/4);
+            StartCoroutine(DiamondController(turretTL));
+        }
+        if(turretTR.GetState() == false)
+        {
+            turretTR.Swivel(turretAngles * -1, diamondSwivelTime/4);
+            StartCoroutine(DiamondController(turretTR));
+        }
+        if(turretBL.GetState() == false)
+        {
+            turretBL.Swivel(turretAngles * -1, diamondSwivelTime/4);
+            StartCoroutine(DiamondController(turretBL));
+        }
+        if(turretBR.GetState() == false)
+        {
+            turretBR.Swivel(turretAngles, diamondSwivelTime/4);
+            StartCoroutine(DiamondController(turretBR));
+        }
+
         //Followed up by converging laser rings OR enemy summon OR Wave Lasers OR multiple of these
 
+    }
+
+    private IEnumerator DiamondController(BossComponent turret)
+    {
+        yield return new WaitForSeconds(diamondSwivelTime);
+        Laser tracer = turret.Fire(tracerPrefab).GetComponent<Laser>();
+        StartCoroutine(TracerPulse(diamondTracerPulses, diamondTracerPulseDuration, tracer));
+        StartCoroutine(turret.WatchLaser(tracer));
+        yield return new WaitForSeconds(diamondTracerPulseDuration * diamondTracerPulses);
+        Destroy(tracer.gameObject);
+        if(turret.GetState() == false)
+        {
+            Laser newGigaLaser = turret.Fire(giantLaserPrefab).GetComponent<Laser>();
+            newGigaLaser.transform.position = turret.transform.position;
+            StartCoroutine(turret.WatchLaser(newGigaLaser));
+            yield return new WaitForSeconds(diamondLaserDuration);
+            if(newGigaLaser != null)
+            {
+                Destroy(newGigaLaser.gameObject);
+            }
+        }
+    }
+
+    private IEnumerator TracerPulse(int pulses, float duration, Laser beam)
+    {
+        SpriteRenderer beamSprite = beam.GetComponent<SpriteRenderer>();
+        for(int i = 0; i < pulses; i++)
+        {
+            float alpha = 1.0f;
+            while(alpha > 0.0f && beam != null)
+            {
+                Color beamColor = Color.white;
+                beamColor.a = alpha;
+                beamSprite.color = beamColor;
+                alpha -= Time.deltaTime/duration;
+                yield return null;
+            }
+        }
+    }
+
+    private IEnumerator DiamondTimer()
+    {
+        yield return new WaitForSeconds(diamondLaserDuration + diamondTracerPulseDuration*diamondTracerPulses);
+        diamondActive = false;
     }
 
     //Additional stage 2 attacks:
@@ -454,11 +967,6 @@ public class FinalBoss : MonoBehaviour
     private void SideLaserBarrage()
     {
         //fires walls of lasers from either side
-    }
-
-    private void LaserSpiral()
-    {
-        //small turrets start sending out spirals of lasers
     }
 
     private void MissileSweep()

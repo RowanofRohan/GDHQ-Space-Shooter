@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    //DEBUG
+    [SerializeField]
+    private bool godMode = false;
+
     //Movement
     [SerializeField]
     private float horizontalSpeed = 3.5f;
@@ -38,6 +42,14 @@ public class Player : MonoBehaviour
     private bool laserOverride = false;
     [SerializeField]
     private float stunTimer = 1.0f;
+
+    //Laser Properties
+    [SerializeField]
+    private float laserSpeed = 24.0f;
+    [SerializeField]
+    private float laserAngle = 180.0f;
+    [SerializeField]
+    private float laserLife = 5.0f;
 
     //Triple Shot
     [SerializeField]
@@ -327,11 +339,15 @@ public class Player : MonoBehaviour
                     playerAudio.clip = laserShot;
                     if (tripleShot == true)
                     {
-                        Instantiate(tripleShotPrefab, transform.position + new Vector3 (0,0,0), Quaternion.identity);
+                        GameObject tripleShotContainer = Instantiate(tripleShotPrefab, transform.position + new Vector3 (0,0,0), Quaternion.identity);
+                        tripleShotContainer.transform.DetachChildren();
+                        Destroy(tripleShotContainer.gameObject);
                     }
                     else 
                     {
-                        Instantiate(laserPrefab, transform.position + new Vector3(0,0.7f,0), Quaternion.identity);
+                        Laser newLaser = Instantiate(laserPrefab, transform.position + new Vector3(0,0.7f,0), Quaternion.identity).GetComponent<Laser>();
+                        newLaser.SetHostile(false);
+                        newLaser.SetBaseProperties(laserSpeed, laserAngle, laserLife);
                     }
                     if(infiniteAmmo != true && consumeAmmo != true)
                     {
@@ -356,20 +372,47 @@ public class Player : MonoBehaviour
             {
                 canMissile = Time.time + missileCooldown;
 
+                // Enemy enemyScript;
+                // BossComponent bossScript;
+                // bool isBossComponent = false;
+
                 GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
+                bool[] isAlive = new bool[targets.Length];
                 int livingTargets = 0;
                 for (int i = 0; i < targets.Length; i++)
                 {
-                    if (targets[i].transform.GetComponent<Enemy>().DeathCheck() == false)
+                    Enemy enemyScript = targets[i].GetComponent<Enemy>();
+                    BossComponent bossScript = targets[i].GetComponent<BossComponent>();
+                    if(enemyScript != null)
                     {
-                        livingTargets += 1;
+                        if (targets[i].transform.GetComponent<Enemy>().DeathCheck() == false)
+                        {
+                            isAlive[i] = true;
+                            livingTargets += 1;
+                        }
+                        else
+                        {
+                            isAlive[i] = false;
+                        }
+                    }
+                    else if(bossScript != null)
+                    {
+                        if (targets[i].transform.GetComponent<BossComponent>().CanBeTargeted() == true)
+                        {
+                            isAlive[i] = true;
+                            livingTargets += 1;
+                        }
+                        else
+                        {
+                            isAlive[i] = false;
+                        }
                     }
                 }
                 GameObject[] sortedTargets = new GameObject[livingTargets];
 
                 for (int i = 0; i < targets.Length; i++)
                 {
-                    if (targets[i].GetComponent<Enemy>().DeathCheck() == false)
+                    if (isAlive[i] == true)
                     {
                         for (int j = 0; j < sortedTargets.Length; j++)
                         {
@@ -775,10 +818,20 @@ public class Player : MonoBehaviour
             if (laser != null)
             {
                 //Checks hostilitiy; "true" represents hostile
-                if(other.GetComponent<Laser>().CallAllegiance() == true)
+                if(laser.CallAllegiance() == true)
                 {
-                    Damage();
-                    Destroy(other.gameObject);
+                    if(godMode == false)
+                    {
+                        Damage();
+                    }
+                    if(laser.GetLaserID() == 1)
+                    {
+                        laser.Explode();
+                    }
+                    else if(laser.GetLaserID() != 2)
+                    {
+                        Destroy(other.gameObject);
+                    }
                 }
             }
         }

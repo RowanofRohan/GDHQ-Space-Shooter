@@ -108,6 +108,12 @@ public class Enemy : MonoBehaviour
     private GameObject laserPrefab;
     [SerializeField]
     private float laserCooldown = 3.0f;
+    [SerializeField]
+    private float laserSpeed = 24.0f;
+    [SerializeField]
+    private float laserAngle = 0.0f;
+    [SerializeField]
+    private float laserLife = 2.0f;
 
     //Fire Controller
     private float canFire = -1.0f;
@@ -443,8 +449,9 @@ public class Enemy : MonoBehaviour
 
     private void FireLaser()
     {
-        GameObject newLaser = Instantiate(laserPrefab, transform.position + new Vector3 (0,-0.7f,0), Quaternion.identity);
-        newLaser.GetComponent<Laser>().SetHostile(true);
+        Laser newLaser = Instantiate(laserPrefab, transform.position + new Vector3 (0,-0.7f,0), Quaternion.identity).GetComponent<Laser>();
+        newLaser.SetHostile(true);
+        newLaser.SetBaseProperties(laserSpeed, laserAngle, laserLife);
         audioSource.clip = laserShot;
         audioSource.Play();
     }

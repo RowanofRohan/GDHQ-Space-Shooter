@@ -24,6 +24,9 @@ public class Missiles : MonoBehaviour
     [SerializeField]
     private float angle;
 
+    private Enemy enemyScript;
+    private BossComponent bossScript;
+
     [SerializeField]
     private ParticleSystem emitter;
 
@@ -45,17 +48,21 @@ public class Missiles : MonoBehaviour
 
     private void MovementController()
     {
-        if(target != null)
+        if(enemyScript != null)
         {
-            targetDead = target.transform.GetComponent<Enemy>().DeathCheck();
-            if (targetDead == false)
-            {
-                targetPosition = target.transform.position;
-            }
+            targetDead = enemyScript.DeathCheck();
+        }
+        else if(bossScript != null)
+        {
+            targetDead = !bossScript.CanBeTargeted();
         }
         else
         {
             targetDead = true;
+        }
+        if (targetDead == false)
+        {
+            targetPosition = target.transform.position;
         }
         targetDirection = targetPosition - gameObject.transform.position;
         angle = Mathf.Atan2(targetDirection.y,targetDirection.x)*Mathf.Rad2Deg;
@@ -78,6 +85,8 @@ public class Missiles : MonoBehaviour
         target = newTarget;
         crosshair = newCrosshair;
         initialDirection = startingAngle;
+        enemyScript = target.transform.GetComponent<Enemy>();
+        bossScript = target.transform.GetComponent<BossComponent>();
     }
 
     public float CallDamage()
@@ -99,6 +108,15 @@ public class Missiles : MonoBehaviour
             {
                 enemy.TakeDamage(damage);
                 Explode();
+            }
+            else
+            {
+                BossComponent bossPiece = other.transform.GetComponent<BossComponent>();
+                if(bossPiece != null)
+                {
+                    bossPiece.TakeDamage(damage);
+                    Explode();
+                }
             }
         }
     }

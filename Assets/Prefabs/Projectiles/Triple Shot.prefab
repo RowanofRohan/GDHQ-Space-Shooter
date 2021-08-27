@@ -40,6 +40,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5989915514239975302}
     m_Modifications:
+    - target: {fileID: 788528755865709923, guid: 219c07c51b11bab46b29b92a125fba2e, type: 3}
+      propertyPath: fireAngle
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 788528755865709923, guid: 219c07c51b11bab46b29b92a125fba2e, type: 3}
+      propertyPath: laserLifespan
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4176383718462431938, guid: 219c07c51b11bab46b29b92a125fba2e, type: 3}
       propertyPath: m_Name
       value: Laser (1)
@@ -102,6 +110,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5989915514239975302}
     m_Modifications:
+    - target: {fileID: 788528755865709923, guid: 219c07c51b11bab46b29b92a125fba2e, type: 3}
+      propertyPath: fireAngle
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 788528755865709923, guid: 219c07c51b11bab46b29b92a125fba2e, type: 3}
+      propertyPath: laserLifespan
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4176383718462431938, guid: 219c07c51b11bab46b29b92a125fba2e, type: 3}
       propertyPath: m_Name
       value: Laser (2)
@@ -164,6 +180,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5989915514239975302}
     m_Modifications:
+    - target: {fileID: 788528755865709923, guid: 219c07c51b11bab46b29b92a125fba2e, type: 3}
+      propertyPath: fireAngle
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 788528755865709923, guid: 219c07c51b11bab46b29b92a125fba2e, type: 3}
+      propertyPath: laserLifespan
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4176383718462431938, guid: 219c07c51b11bab46b29b92a125fba2e, type: 3}
       propertyPath: m_Name
       value: Laser
