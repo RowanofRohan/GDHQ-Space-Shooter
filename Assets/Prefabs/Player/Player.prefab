@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6862985006160e6439d84922ea2b747f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  godMode: 0
   horizontalSpeed: 9
   verticalSpeed: 9
   upperScreenBound: 6
@@ -193,6 +194,9 @@ MonoBehaviour:
   maxHealth: 3
   leftDamageFire: {fileID: 547761067615175526}
   rightDamageFire: {fileID: 547761065993025574}
+  iframeDuration: 3
+  flickerDuration: 0.25
+  flickerAlpha: 0.2
   currentMissiles: 3
   maxMissiles: 3
   missileCooldown: 3
@@ -209,6 +213,8 @@ MonoBehaviour:
   playerAudio: {fileID: 0}
   laserShot: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   laserEmptySound: {fileID: 8300000, guid: dc2baec24f6375a4fbe951aa94800c47, type: 3}
+  missileSound: {fileID: 8300000, guid: d2a63f671bb973243ab23098e1f76db0, type: 3}
+  megaLaserSound: {fileID: 8300000, guid: de6c9a53e97b7c845bd6b28be476566f, type: 3}
   explosionPrefab: {fileID: 520391828762354306, guid: 88e9e55d16641f24c9235d5876ff18c8, type: 3}
 --- !u!212 &547761066684764011
 SpriteRenderer:
@@ -299,7 +305,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -559,6 +565,10 @@ PrefabInstance:
     - target: {fileID: 4118510308762921213, guid: a625a3ffe999fe1488521a167c9e5e68, type: 3}
       propertyPath: m_SortingOrder
       value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4118510308762921214, guid: a625a3ffe999fe1488521a167c9e5e68, type: 3}
+      propertyPath: damage
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a625a3ffe999fe1488521a167c9e5e68, type: 3}

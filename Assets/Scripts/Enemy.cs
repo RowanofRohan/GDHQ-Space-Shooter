@@ -117,15 +117,15 @@ public class Enemy : MonoBehaviour
 
     //Fire Controller
     private float canFire = -1.0f;
-    private float altFire = -1.0f;
+    //private float altFire = -1.0f;
     [SerializeField]
     private float laserMinCD = 3.0f;
     [SerializeField]
     private float laserMaxCD = 7.0f;
     [SerializeField]
     private AudioClip laserShot;
-    [SerializeField]
-    private bool canShootPowerups = false;
+    // [SerializeField]
+    // private bool canShootPowerups = false;
 
     void Start()
     {
@@ -430,19 +430,19 @@ public class Enemy : MonoBehaviour
                 canFire = Time.time + laserCooldown;
                 FireLaser();
             }
-            else if (canShootPowerups && Time.time > altFire)
-            {
-                RaycastHit2D detect = Physics2D.Raycast(transform.position - new Vector3(0, 2, 0), new Vector3(0,-1,0));
-                if(detect.collider != null)
-                {
-                    if (detect.collider.transform.tag == "Powerup" && detect.collider.transform.GetComponent<Powerup>().hazardCheck() == false)
-                    {
-                        laserCooldown = Random.Range(laserMinCD,laserMaxCD);
-                        altFire = Time.time + laserCooldown;
-                        FireLaser();
-                    }
-                }
-            }
+            // else if (canShootPowerups && Time.time > altFire)
+            // {
+            //     RaycastHit2D detect = Physics2D.Raycast(transform.position - new Vector3(0, 2, 0), new Vector3(0,-1,0));
+            //     if(detect.collider != null)
+            //     {
+            //         if (detect.collider.gameObject.CompareTag("Powerup") && detect.collider.transform.GetComponent<Powerup>().hazardCheck() == false)
+            //         {
+            //             laserCooldown = Random.Range(laserMinCD,laserMaxCD);
+            //             altFire = Time.time + laserCooldown;
+            //             FireLaser();
+            //         }
+            //     }
+            // }
         }
         
     }
@@ -468,7 +468,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.transform.tag == "Laser")
+        if(other.gameObject.CompareTag("Laser"))
         {
             Laser laser = other.transform.GetComponent<Laser>();
             if(laser != null)
@@ -481,7 +481,7 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-        else if (other.transform.tag == "Player")
+        else if (other.gameObject.CompareTag("Player"))
         {
             if (player != null)
             {
@@ -489,7 +489,7 @@ public class Enemy : MonoBehaviour
             }
             DeathTrigger();
         }
-        else if (other.transform.tag == "Aggro Radius" && isAggro == true)
+        else if (other.gameObject.CompareTag("Aggro Radius") && isAggro == true)
         {
             rammingSpeed = true;
             //aggroDestination = destination;
@@ -499,7 +499,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if(other.transform.tag == "Laser")
+        if(other.gameObject.CompareTag("Laser"))
         {
             GiantLaser giantLaser = other.transform.GetComponent<GiantLaser>();
             if (giantLaser != null)
@@ -514,7 +514,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.transform.tag == "Aggro Radius")
+        if(other.gameObject.CompareTag("Aggro Radius"))
         {
             rammingSpeed = false;
         }

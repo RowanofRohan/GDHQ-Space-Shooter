@@ -26,9 +26,9 @@ public class BossComponent : MonoBehaviour
     //Flashing FX Data
     [SerializeField]
     private float flashDuration = 0.2f;
-    [SerializeField]
-    private float flashCooldown = 0.5f;
-    private float canFlash = -0.1f;
+    //[SerializeField]
+    //private float flashCooldown = 0.5f;
+    private bool canFlash = true;
 
     //Object Handles
     private FinalBoss boss;
@@ -66,6 +66,9 @@ public class BossComponent : MonoBehaviour
     private bool fireSomething = false;
     [SerializeField]
     private bool changeShieldState = false;
+
+    [SerializeField]
+    private GameObject[] damageFXSprites;
 
     void Start()
     {
@@ -132,12 +135,12 @@ public class BossComponent : MonoBehaviour
         if(isInvulnerable == false)
         {
             currentHealth -= damageTaken;
-            boss.TakeDamage(damageTaken);
+            boss.TakeDamage(damageTaken/2);
             if (currentHealth <= 0)
             {
                 DeathTrigger();
             }
-            else if (Time.time >= canFlash)
+            else if (canFlash)
             {
                 StartCoroutine(DamageFlash());
             }
@@ -146,14 +149,16 @@ public class BossComponent : MonoBehaviour
 
     private IEnumerator DamageFlash()
     {
-        canFlash = Time.time + flashCooldown;
+        //canFlash = Time.time + flashCooldown;
+        canFlash = false;
         if(isDestroyed == false)
         {
             spriteRenderer.sprite = damageSprites[1];
         }
         yield return new WaitForSeconds(flashDuration);
         if(isDestroyed == false)
-        {
+        {   
+            canFlash = true;
             spriteRenderer.sprite = damageSprites[0];
         }
     }
@@ -163,8 +168,17 @@ public class BossComponent : MonoBehaviour
         isDestroyed = true;
         isInvulnerable = true;
         GameObject deathExplosion = Instantiate(boss.GetPrefab(0), transform.position, Quaternion.identity);
+        for(int i = 0; i < damageFXSprites.Length; i++)
+        {
+            damageFXSprites[i].gameObject.SetActive(true);
+            damageFXSprites[i].transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
+        }
         Destroy(deathExplosion.gameObject, 2.0f);
         spriteRenderer.sprite = damageSprites[2];
+        StopTracking();
+        StopSwivel();
+        boss.TakeDamage(maxHealth/2);
+        boss.PowerupDrop(transform.position);
         boss.CheckPhaseChange();
         //try to spawn powerup via function in boss?
         //Set children damage fx to active
@@ -195,31 +209,21 @@ public class BossComponent : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.transform.tag == "Laser" && isInvulnerable == false)
+        if(other.gameObject.CompareTag("Laser") && isInvulnerable == false && isShielded == false)
         {
             Laser laser = other.transform.GetComponent<Laser>();
-            if(laser != null)
+            if(laser != null && laser.CallAllegiance() == false)
             {
-                if (other.GetComponent<Laser>().CallAllegiance() == false)
-                {
-                    if(isShielded == false)
-                    {
-                        float damageTemp = laser.CallDamage();
-                        Destroy(other.gameObject);
-                        TakeDamage(damageTemp);
-                    }
-                    else
-                    {
-                        Destroy(other.gameObject);
-                    }
-                }
+                float damageTemp = laser.CallDamage();
+                Destroy(other.gameObject);
+                TakeDamage(damageTemp);
             }
         }
     }
     
     private void OnTriggerStay2D(Collider2D other)
     {
-        if(other.transform.tag == "Laser" && isInvulnerable == false)
+        if(other.gameObject.CompareTag("Laser") && isInvulnerable == false)
         {
             GiantLaser giantLaser = other.transform.GetComponent<GiantLaser>();
             if (giantLaser != null)
@@ -247,10 +251,11 @@ public class BossComponent : MonoBehaviour
         player = newPlayer;
     }
 
-    public void StartTracking()
+    public void StartTracking(float newDuration = 0.0f)
     {
         isTracking = true;
         timeTracker = 0.0f;
+        trackingTime = newDuration;
     }
 
     public void StopTracking()
@@ -317,10 +322,13 @@ public class BossComponent : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0,0,angle));
     }
 
-    public GameObject Fire(GameObject prefabObject, int location = 0)
+    public GameObject Fire(GameObject prefabObject, int location = 0, bool laser = true)
     {
         GameObject newObject = Instantiate(prefabObject, projectileSpawnContainers[location].transform.position, this.transform.rotation);
-        newObject.GetComponent<Laser>().SetAngle(transform.rotation.eulerAngles.z);
+        if(laser)
+        {
+            newObject.GetComponent<Laser>().SetAngle(transform.rotation.eulerAngles.z);
+        }
         return newObject;
     }
 
@@ -340,11 +348,14 @@ public class BossComponent : MonoBehaviour
 
     public IEnumerator WatchLaser(Laser gigaLaser)
     {
+        int checkPhase = boss.GetPhase();
+        gigaLaser.transform.SetParent(gameObject.transform);
         while(gigaLaser != null)
         {
-            if(isDestroyed == true)
+            if(isDestroyed == true || boss.GetPhase() != checkPhase || boss.ChangingPhase() == true)
             {
                 Destroy(gigaLaser.gameObject);
+                yield break;
             }
             else
             {

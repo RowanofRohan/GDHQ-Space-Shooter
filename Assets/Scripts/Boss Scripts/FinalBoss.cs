@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FinalBoss : MonoBehaviour
 {
+    [Space(20)]
+    [Header("DEBUG/AI controls")]
     //DEBUG Control
     [SerializeField]
     private bool nextPhaseDebug = false;
@@ -19,7 +21,11 @@ public class FinalBoss : MonoBehaviour
     private int whichAttack = -1;
     [SerializeField]
     private int whichTurret = -1;
+    [SerializeField]
+    private float howLong = 5.0f;
 
+    [Space(20)]
+    [Header("Movement and Patterning")]
     //Movement Controls
     [SerializeField]
     private int movementID = 0;
@@ -47,20 +53,30 @@ public class FinalBoss : MonoBehaviour
     // private bool isDying = false;
     private bool isChangingPhases = true;
 
+    [Space(20)]
+    [Header("Health")]
     //Health
     [SerializeField]
     private float maxHealth = 100.0f;
     [SerializeField]
     private float currentHealth;
+    private float phase1HP;
+    private float phase2HP;
+    private float phase3HP;
 
+    [Space(20)]
+    [Header("Manager Handles")]
     //Object/Audio Handles
     private SpawnManager spawnManager;
     private Player player;
-    [SerializeField]
     private UIManager uiManager;
     [SerializeField]
     private GameObject projectileContainer;
+    [SerializeField]
+    private BossAI bossAI;
 
+    [Space(20)]
+    [Header("Object Prefab Handles")]
     [SerializeField]
     private GameObject enemyWave;
     [SerializeField]
@@ -76,6 +92,8 @@ public class FinalBoss : MonoBehaviour
     [SerializeField]
     private GameObject tracerPrefab;
 
+    [Space(20)]
+    [Header("Audio Handles")]
     private AudioSource audioSource;
     [SerializeField]
     private AudioClip explosionSound;
@@ -85,7 +103,13 @@ public class FinalBoss : MonoBehaviour
     private AudioClip laserSound;
     [SerializeField]
     private AudioClip missileSound;
+    [SerializeField]
+    private AudioClip bigMissileSound;
+    [SerializeField]
+    private AudioClip megaLaserSound;
 
+    [Space(20)]
+    [Header("Boss Component Handles")]
     //Component Handles
     [SerializeField]
     private BossComponent[] phase1Components;
@@ -94,15 +118,16 @@ public class FinalBoss : MonoBehaviour
     [SerializeField]
     private BossComponent[] phase3Components;
 
+    // [Space(20)]
+    // [Header("Powerups")]
+    // [SerializeField]
+    // private GameObject[] powerupsSpawnable;
+    // [SerializeField]
+    // private float powerupSpawnRate = 100.0f;
+
     // [SerializeField]
     // private int killScore = 2000;
 
-    //ATTACK AI/PATTERNING GOES HERE
-
-
-    
-
-    // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
@@ -121,8 +146,15 @@ public class FinalBoss : MonoBehaviour
         {
             Debug.LogError("Boss Audio source is NULL");
         }
+        uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        if (uiManager == null)
+        {
+            Debug.LogError("UI Manager is NULL");
+        }
+        uiManager.InitializeBoss();
 
         destination = transform.position;
+        //AudioSource.PlayClipAtPoint(rumblingSound, Vector3.zero);
         
         InitializeMovement();
         InitializeComponents();
@@ -178,10 +210,10 @@ public class FinalBoss : MonoBehaviour
             switch(whichAttack)
             {
                 case 0:
-                    StartTracking();
+                    StartTracking(whichTurret);
                     break;
                 case 1:
-                    StopTracking();
+                    StopTracking(whichTurret);
                     break;
                 case 2:
                     StartCoroutine(SummonBackup());
@@ -199,17 +231,142 @@ public class FinalBoss : MonoBehaviour
                     LaserDiamond();
                     break;
                 case 7:
-                    SideLaserBarrage();
+                    LaserRing();
                     break;
                 case 8:
-                    MissileSweep();
+                    StartCoroutine(MissileSweep());
                     break;
                 case 9:
                     MegaLaserSweep();
                     break;
+                case 10:
+                    CreateMine();
+                    break;
+                case 11:
+                    StartTracking(whichTurret, howLong);
+                    break;
                 default:
                     break;
             }
+        }
+    }
+
+    public void AICommander(int attack, bool flipflop = false)
+    {
+        switch(attack)
+        {
+            case 2:
+                StartCoroutine(SummonBackup());
+                break;
+            case 3:
+                StartCoroutine(MegaLaserBarrage(flipflop));
+                break;
+            case 4:
+                alternateTurrets = flipflop;
+                WaveLasers();
+                break;
+            case 5:
+                StartCoroutine(MissileBarrage());
+                break;
+            case 6:
+                LaserDiamond();
+                break;
+            case 7:
+                LaserRing();
+                break;
+            case 8:
+                StartCoroutine(MissileSweep());
+                break;
+            case 9:
+                alternateTurrets = flipflop;
+                MegaLaserSweep();
+                break;
+            case 10:
+                CreateMine();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public GameObject FireTurret(int turretID, int prefabType, int location = 0)
+    {
+        GameObject whichPrefab = null;
+        AudioClip newAudio = laserSound;
+        bool isLaser = true;
+        switch(prefabType)
+        {
+            case 0: 
+                whichPrefab = laserPrefab;
+                newAudio = laserSound;
+                break;
+            case 1:
+                whichPrefab = giantLaserPrefab;
+                newAudio = megaLaserSound;
+                break;
+            case 2: 
+                whichPrefab = minePrefab;
+                isLaser = false;
+                break;
+            case 3:
+                whichPrefab = bossMissilePrefab;
+                newAudio = bigMissileSound;
+                break;
+            case 4: 
+                whichPrefab = tracerPrefab;
+                break;
+            default:
+                break;
+        }
+        GameObject newProjectile = null;
+        switch(currentTransition)
+        {
+            case 1:
+                newProjectile = phase1Components[turretID].Fire(whichPrefab, location, isLaser);
+                if(prefabType != 2 && prefabType != 4)
+                {
+                    AudioSource.PlayClipAtPoint(newAudio, phase1Components[turretID].transform.position,1.0f);
+                }
+                break;
+            case 2:
+                newProjectile = phase2Components[turretID].Fire(whichPrefab, location, isLaser);
+                if(prefabType != 2 && prefabType != 4)
+                {
+                    AudioSource.PlayClipAtPoint(newAudio, phase2Components[turretID].transform.position,1.0f);
+                }
+                break;
+            case 3:
+                newProjectile = phase3Components[turretID].Fire(whichPrefab, location, isLaser);
+                if(prefabType != 2 && prefabType != 4)
+                {
+                    AudioSource.PlayClipAtPoint(newAudio, phase3Components[turretID].transform.position,1.0f);
+                }
+                break;
+        }
+        if(prefabType != 1 && prefabType != 4)
+        {
+            newProjectile.transform.SetParent(projectileContainer.transform);
+        }
+        return newProjectile;
+    }
+
+    public bool AreTurretsBusy()
+    {
+        return turretsBusy;
+    }
+
+    public bool GetTurretState(int newturret)
+    {
+        switch(currentTransition)
+        {
+            case 1: 
+                return phase1Components[newturret].GetState();
+            case 2:
+                return phase2Components[newturret].GetState();
+            case 3:
+                return phase3Components[newturret].GetState();
+            default:
+                return true;
         }
     }
 
@@ -224,21 +381,25 @@ public class FinalBoss : MonoBehaviour
     private void InitializeComponents()
     {
         maxHealth = 0.0f;
+        phase1HP = 0.0f;
+        phase2HP = 0.0f;
+        phase3HP = 0.0f;
         for(int i = 0; i < phase1Components.Length; i++)
         {
-            maxHealth += phase1Components[i].GetMaxHealth();
+            phase1HP += phase1Components[i].GetMaxHealth();
             phase1Components[i].SetPlayer(player);
         }
         for(int i = 0; i < phase2Components.Length; i++)
         {
-            maxHealth += phase2Components[i].GetMaxHealth();
+            phase2HP += phase2Components[i].GetMaxHealth();
             phase2Components[i].SetPlayer(player);
         }
         for(int i = 0; i < phase3Components.Length; i++)
         {
-            maxHealth += phase3Components[i].GetMaxHealth();
+            phase3HP += phase3Components[i].GetMaxHealth();
             phase3Components[i].SetPlayer(player);
         }
+        maxHealth = phase3HP + phase2HP + phase1HP;
         currentHealth = maxHealth;
         SendHealthUpdate();
     }
@@ -276,6 +437,8 @@ public class FinalBoss : MonoBehaviour
                     if(phase1Components[i].GetDestroyable() == true)
                     {
                         phase1Components[i].SetInvuln(false);
+                        phase1Components[i].StopSwivel();
+                        phase1Components[i].StopTracking();
                     }
                 }
                 //START ATTACK PATTERNS
@@ -303,6 +466,7 @@ public class FinalBoss : MonoBehaviour
             default:
                 break;
         }
+        bossAI.StartPhase(currentTransition);
     }
 
     private void EndPhase()
@@ -311,6 +475,22 @@ public class FinalBoss : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+        for(int i = 0; i < phase1Components.Length; i++)
+        {
+            phase1Components[i].StopSwivel();
+            phase1Components[i].StopTracking();
+        }
+        for(int i = 0; i < phase2Components.Length; i++)
+        {
+            phase2Components[i].StopSwivel();
+            phase2Components[i].StopTracking();
+        }
+        for(int i = 0; i < phase3Components.Length; i++)
+        {
+            phase3Components[i].StopSwivel();
+            phase3Components[i].StopTracking();
+        }
+        bossAI.EndPhase();
 
         InitializeMovement();
         //Projectile Cleanup
@@ -390,16 +570,42 @@ public class FinalBoss : MonoBehaviour
 
     private void SendHealthUpdate()
     {
-        //Sends health to UI manager on every frame
+        uiManager.UpdateBossHP(maxHealth, currentHealth);
     }
 
     public void TakeDamage(float damage)
     {
-        //Called whenever a component takes damage; updates current HP
-        //Also checks how many components are remaining and triggers the next phase change if necessary
-        //Can De-shield radar scanner once X components are destroyed
-        
+        currentHealth -= damage;
+        switch(currentTransition)
+        {
+            case 1: 
+                if(currentHealth < (phase2HP + phase3HP))
+                {
+                    currentHealth = phase3HP + phase2HP;
+                }
+                break;
+            case 2: 
+                if(currentHealth < phase3HP)
+                {
+                    currentHealth = phase3HP;
+                }
+                break;
+            case 3: 
+                if(currentHealth < 0.0f)
+                {
+                    currentHealth = 0.0f;
+                }
+                break;
+            default: 
+                currentHealth = maxHealth;
+                break;
+        }
         SendHealthUpdate();
+    }
+
+    public void PowerupDrop(Vector3 spawnPosition)
+    {
+        spawnManager.SpawnPowerup(spawnPosition);
     }
 
     public void CheckPhaseChange()
@@ -451,13 +657,20 @@ public class FinalBoss : MonoBehaviour
     }
 
     //UNIVERSAL ATTACK CONTROLLERS
-
+    [Space(20)]
+    [Header("Backup Summon Parameters")]
     [SerializeField]
     private float summonDelay = 2.0f;
     [SerializeField]
     private float summonVulnerableWindow = 2.0f;
     [SerializeField]
     private Vector3 waveSpawn = new Vector3(0,8,0);
+
+
+
+
+    [SerializeField]
+    private bool turretsBusy = false;
 
 
     private IEnumerator SummonBackup()
@@ -496,7 +709,9 @@ public class FinalBoss : MonoBehaviour
         }
     }
 
+    [Space(20)]
     //Laser Positions are static; other variables account for phase 1 vs phase 3
+    [Header("Mega Laser Barrage Parameters")]
     [SerializeField]
     private Vector3[] laserPositions;
     [SerializeField]
@@ -529,13 +744,13 @@ public class FinalBoss : MonoBehaviour
             StartCoroutine(GigaLaserController(i, laserPositions[0]));
             StartCoroutine(GigaLaserController(i, laserPositions[1]));
             yield return new WaitForSeconds(gigaLaserDelays[i]);
-            if(currentPhase == currentTransition)
+            if(currentPhase == currentTransition && isChangingPhases == false)
             {
                 StartCoroutine(GigaLaserController(i, laserPositions[2]));
                 StartCoroutine(GigaLaserController(i, laserPositions[3]));
             }
             yield return new WaitForSeconds(gigaLaserDelays[i]);
-            if(currentPhase == currentTransition)
+            if(currentPhase == currentTransition && isChangingPhases == false)
             {
                 StartCoroutine(GigaLaserController(i, laserPositions[4]));
             }
@@ -544,13 +759,13 @@ public class FinalBoss : MonoBehaviour
         {
             StartCoroutine(GigaLaserController(i, laserPositions[4]));
             yield return new WaitForSeconds(gigaLaserDelays[i]);
-            if(currentPhase == currentTransition)
+            if(currentPhase == currentTransition && isChangingPhases == false)
             {
                 StartCoroutine(GigaLaserController(i, laserPositions[3]));
                 StartCoroutine(GigaLaserController(i, laserPositions[2]));
             }
             yield return new WaitForSeconds(gigaLaserDelays[i]);
-            if(currentPhase == currentTransition)
+            if(currentPhase == currentTransition && isChangingPhases == false)
             {
                 StartCoroutine(GigaLaserController(i, laserPositions[1]));
                 StartCoroutine(GigaLaserController(i, laserPositions[0]));
@@ -561,12 +776,15 @@ public class FinalBoss : MonoBehaviour
     private IEnumerator GigaLaserController(int j, Vector3 laserSpawn)
     {
         GameObject tracer = Instantiate(tracerPrefab, laserSpawn, Quaternion.identity);
+        tracer.transform.SetParent(projectileContainer.transform);
         yield return new WaitForSeconds(tracerDuration[j]);
         if(tracer != null)
         {
             Destroy(tracer.gameObject);
-            GameObject gigaLaser = Instantiate(giantLaserPrefab, laserSpawn, Quaternion.identity);
-            StartCoroutine(TracerPulse(1, gigaLaserDuration[j]*1.5f,gigaLaser.GetComponent<Laser>()));
+            Laser gigaLaser = Instantiate(giantLaserPrefab, laserSpawn, Quaternion.identity).GetComponent<Laser>();
+            gigaLaser.transform.SetParent(projectileContainer.transform);
+            AudioSource.PlayClipAtPoint(megaLaserSound, Vector3.zero);
+            StartCoroutine(TracerPulse(1, gigaLaserDuration[j]*1.5f,gigaLaser));
             yield return new WaitForSeconds(gigaLaserDuration[j]);
             if(gigaLaser != null)
             {
@@ -575,6 +793,8 @@ public class FinalBoss : MonoBehaviour
         }
     }
 
+    [Space(20)]
+    [Header("Spiral/Wave Laser Parameters")]
     [SerializeField]
     private int[] waveShots;
     [SerializeField]
@@ -653,7 +873,7 @@ public class FinalBoss : MonoBehaviour
                 Laser newLaser = turret.Fire(laserPrefab).GetComponent<Laser>();
                 newLaser.transform.SetParent(projectileContainer.transform);
                 newLaser.SetSpeed(waveShotSpeed[j]);
-                AudioSource.PlayClipAtPoint(laserSound, turret.transform.position,1.0f);
+                AudioSource.PlayClipAtPoint(laserSound, turret.transform.position, 0.25f);
                 currentAngle += waveAngle[j]*flip*-1;
                 turret.Swivel(currentAngle, waveShotDelay[j]);
                 yield return new WaitForSeconds(waveShotDelay[j]);
@@ -665,6 +885,8 @@ public class FinalBoss : MonoBehaviour
         }
     }
     
+    [Space(20)]
+    [Header("Mega Laser Sweep Parameters")]
     [SerializeField]
     private float[] megaSweepStartAngle;
     [SerializeField]
@@ -745,51 +967,106 @@ public class FinalBoss : MonoBehaviour
             default:
                 break;
         }
-        //Sweeps mega lasers back and forth from large turrets
-        //Can be used in all 3 phases
     }
 
     private IEnumerator MegaSweepController(BossComponent turret, int j, int flip, float startAngle, float endAngle)
     {
+        turretsBusy = true;
         int currentPhase = currentTransition;
         turret.Swivel(startAngle*flip, megaSweepStartSpeed[j]);
         yield return new WaitForSeconds(megaSweepStartDelay[j]);
-        turret.StopSwivel();
-        turret.transform.rotation = Quaternion.Euler(new Vector3(0,0,startAngle*flip));
-        
-        Laser tracer = turret.Fire(tracerPrefab).GetComponent<Laser>();
-        StartCoroutine(TracerPulse(megaSweepTracerPulses[j], megaSweepTracerPulseDuration[j], tracer));
-        StartCoroutine(turret.WatchLaser(tracer));
-        yield return new WaitForSeconds(megaSweepTracerPulseDuration[j] * megaSweepTracerPulses[j]);
-        Destroy(tracer.gameObject);
-        if(turret.GetState() == false)
+        if(currentPhase == currentTransition && isChangingPhases == false && turret.GetState() == false)
         {
-            Laser newGigaLaser = turret.Fire(giantLaserPrefab).GetComponent<Laser>();
-            StartCoroutine(turret.WatchLaser(newGigaLaser));
-            newGigaLaser.transform.SetParent(turret.transform);
-            yield return new WaitForSeconds(megaSweepSwivelWait[j]);
-            turret.Swivel(endAngle*flip, megaSweepSwivelTime[j]);
-            yield return new WaitForSeconds(megaSweepDuration[j] - megaSweepSwivelWait[j]);
-            if(newGigaLaser != null)
+            turret.StopSwivel();
+            turret.transform.rotation = Quaternion.Euler(new Vector3(0,0,startAngle*flip));
+            
+            Laser tracer = turret.Fire(tracerPrefab).GetComponent<Laser>();
+            StartCoroutine(TracerPulse(megaSweepTracerPulses[j], megaSweepTracerPulseDuration[j], tracer));
+            StartCoroutine(turret.WatchLaser(tracer));
+            yield return new WaitForSeconds(megaSweepTracerPulseDuration[j] * megaSweepTracerPulses[j]);
+            if(tracer != null)
             {
-                Destroy(newGigaLaser.gameObject);
+                Destroy(tracer.gameObject);
+            }
+            if(currentPhase == currentTransition && isChangingPhases == false && turret.GetState() == false)
+            {
+                Laser newGigaLaser = turret.Fire(giantLaserPrefab).GetComponent<Laser>();
+                AudioSource.PlayClipAtPoint(megaLaserSound, turret.transform.position);
+                StartCoroutine(turret.WatchLaser(newGigaLaser));
+                yield return new WaitForSeconds(megaSweepSwivelWait[j]);
+                if(currentPhase == currentTransition && isChangingPhases == false && turret.GetState() == false)
+                {
+                    turret.Swivel(endAngle*flip, megaSweepSwivelTime[j]);
+                    yield return new WaitForSeconds(megaSweepDuration[j] - megaSweepSwivelWait[j]);
+                    if(newGigaLaser != null)
+                    {
+                        Destroy(newGigaLaser.gameObject);
+                    }
+                }
             }
         }
+        turretsBusy = false;
     }
 
     //Use global cooldowns for certain tracking (e.g. multiple missile turrets)
-    private void StartTracking()
+    public void StartTracking(int turretNumber, float trackDuration = 0.0f)
     {
-        //tells a turret to start tracking player, with a specific fire mode
+        switch(currentTransition)
+        {
+            case 1: 
+                phase1Components[turretNumber].StartTracking(trackDuration);
+                break;
+            case 2: 
+                phase2Components[turretNumber].StartTracking(trackDuration);
+                break;
+            case 3:
+                phase3Components[turretNumber].StartTracking(trackDuration);
+                break;
+            default:
+                break;
+        }
     }
 
-    private void StopTracking()
+    public void TurretWatch(int turretNumber, Laser newBeam)
     {
-        //Stops a turret from tracking to start a new attack
+        switch(currentTransition)
+        {
+            case 1: 
+                StartCoroutine(phase1Components[turretNumber].WatchLaser(newBeam));
+                break;
+            case 2: 
+                StartCoroutine(phase2Components[turretNumber].WatchLaser(newBeam));
+                break;
+            case 3:
+                StartCoroutine(phase3Components[turretNumber].WatchLaser(newBeam));
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void StopTracking(int turretNumber)
+    {
+        switch(currentTransition)
+        {
+            case 1: 
+                phase1Components[turretNumber].StopTracking();
+                break;
+            case 2: 
+                phase2Components[turretNumber].StopTracking();
+                break;
+            case 3:
+                phase3Components[turretNumber].StopTracking();
+                break;
+            default:
+                break;
+        }
     }
 
     //STAGE 1 ATTACK CONTROLLERS
 
+    [Space(20)]
+    [Header("Phase 1 Missile Barrage Parameters")]
     [SerializeField]
     private int missileBarrageCycles = 2;
     [SerializeField]
@@ -854,6 +1131,7 @@ public class FinalBoss : MonoBehaviour
             {
                 Laser newMissile = turret.Fire(fakeMissilePrefab, i).GetComponent<Laser>();
                 newMissile.transform.SetParent(projectileContainer.transform);
+                AudioSource.PlayClipAtPoint(missileSound, turret.transform.position);
                 yield return new WaitForSeconds(missileBarrageDelays);
             }
         }
@@ -866,7 +1144,8 @@ public class FinalBoss : MonoBehaviour
     //Wave Lasers
 
     //STAGE 2 ATTACK CONTROLLERS
-
+    [Space(20)]
+    [Header("Phase 2 Laser Diamond Parameters")]
     [SerializeField]
     private float diamondTracerPulseDuration = 0.5f;
     [SerializeField]
@@ -875,13 +1154,12 @@ public class FinalBoss : MonoBehaviour
     private float diamondLaserDuration = 5.0f;
     [SerializeField]
     private float turretAngles = 120.0f;
-    private bool diamondActive = false;
     [SerializeField]
     private float diamondSwivelTime = 1.0f;
 
     private void LaserDiamond()
     {
-        diamondActive = true;
+        turretsBusy = true;
         StartCoroutine(DiamondTimer());
         BossComponent turretTL = phase2Components[1].GetComponent<BossComponent>();
         BossComponent turretTR = phase2Components[0].GetComponent<BossComponent>();
@@ -924,6 +1202,7 @@ public class FinalBoss : MonoBehaviour
         if(turret.GetState() == false)
         {
             Laser newGigaLaser = turret.Fire(giantLaserPrefab).GetComponent<Laser>();
+            AudioSource.PlayClipAtPoint(megaLaserSound, Vector3.zero);
             newGigaLaser.transform.position = turret.transform.position;
             StartCoroutine(turret.WatchLaser(newGigaLaser));
             yield return new WaitForSeconds(diamondLaserDuration);
@@ -934,12 +1213,13 @@ public class FinalBoss : MonoBehaviour
         }
     }
 
-    private IEnumerator TracerPulse(int pulses, float duration, Laser beam)
+    public IEnumerator TracerPulse(int pulses, float duration, Laser beam)
     {
         SpriteRenderer beamSprite = beam.GetComponent<SpriteRenderer>();
+        float alpha = 1.0f;
         for(int i = 0; i < pulses; i++)
         {
-            float alpha = 1.0f;
+            alpha = 1.0f;
             while(alpha > 0.0f && beam != null)
             {
                 Color beamColor = Color.white;
@@ -954,7 +1234,49 @@ public class FinalBoss : MonoBehaviour
     private IEnumerator DiamondTimer()
     {
         yield return new WaitForSeconds(diamondLaserDuration + diamondTracerPulseDuration*diamondTracerPulses);
-        diamondActive = false;
+        turretsBusy = false;
+    }
+
+    [Space(20)]
+    [Header("Laser Ring Parameters")]
+    [SerializeField]
+    private int laserCount = 36;
+    [SerializeField]
+    private float ringSpeed = 3.0f;
+    [SerializeField]
+    private int ringCount = 2;
+    [SerializeField]
+    private float ringDelay = 3.0f;
+    [SerializeField]
+    private float laserSpawnDistance = 5.0f;
+    [SerializeField]
+    private float ringLifetime = 5.0f;
+    [SerializeField]
+    private Vector3 centerpoint = new Vector3(0,0,0);
+
+    private void LaserRing()
+    {
+        float tempDelay = 0.0f;
+        for(int i = 0; i < ringCount; i++)
+        {
+            StartCoroutine(RingController(tempDelay));
+            tempDelay += ringDelay;
+        }
+    }
+
+    private IEnumerator RingController(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        float tempAngle = 0.0f;
+        for (float minAngle = 360.0f/laserCount; tempAngle < 360.0f; tempAngle += minAngle)
+        {
+            //Vector3 spawnPoint = centerpoint + laserSpawnDistance * Quaternion.Euler(new Vector3(0,0,tempAngle)).eulerAngles.normalized;
+            Vector3 spawnPoint = centerpoint + Quaternion.AngleAxis(tempAngle, Vector3.forward) * new Vector3(0, laserSpawnDistance, 0);
+            Laser newLaser = Instantiate(laserPrefab, spawnPoint, Quaternion.identity).GetComponent<Laser>();
+            newLaser.SetBaseProperties(ringSpeed * -1, tempAngle, ringLifetime);
+            newLaser.transform.SetParent(projectileContainer.transform);
+        }
+        AudioSource.PlayClipAtPoint(laserSound, Vector3.zero);
     }
 
     //Additional stage 2 attacks:
@@ -964,15 +1286,97 @@ public class FinalBoss : MonoBehaviour
 
     //STAGE 3 ATTACK CONTROLLERS
 
-    private void SideLaserBarrage()
+    [Space(20)]
+    [Header("Phase 3 Missile Sweep Parameters")]
+    [SerializeField]
+    private float missileSweepDelays = 0.2f;
+    [SerializeField]
+    private float missileSweepStartSpeed = 2.0f;
+    [SerializeField]
+    private float missileSweepStartAccel = 0.0f;
+    [SerializeField]
+    private float missileSweepStartTopSpeed = 2.0f;
+    [SerializeField]
+    private float[] missileSweepTurnDelay = {0.7f, 1.0f, 1.3f};
+    [SerializeField]
+    private float missileSweepDownSpeed = 2.0f;
+    [SerializeField]
+    private float missileSweepDownAccel = 6.0f;
+    [SerializeField]
+    private float missileSweepDownTopSpeed = 12.0f;
+    [SerializeField]
+    private float missileSweepLifetime = 5.0f;
+
+
+
+    private IEnumerator MissileSweep()
     {
-        //fires walls of lasers from either side
+        BossComponent missileBayHandle = phase3Components[12];
+        float tempTimer = 0.0f;
+        MissileSweepController(missileBayHandle, 0, 0);
+        tempTimer += missileSweepDelays;
+        yield return new WaitForSeconds(tempTimer);
+        MissileSweepController(missileBayHandle, 1, 2);
+        tempTimer += missileSweepDelays;
+        yield return new WaitForSeconds(tempTimer);
+        MissileSweepController(missileBayHandle, 2, 4);
+
     }
 
-    private void MissileSweep()
+    private void MissileSweepController(BossComponent missileBay, int i, int j)
     {
-        //Fires a sweep of accelerating missiles from missile bay
+        if(missileBay.GetState() == false)
+        {
+            Laser missile1 = missileBay.Fire(bossMissilePrefab, j).GetComponent<Laser>();
+            Laser missile2 = missileBay.Fire(bossMissilePrefab, j + 1).GetComponent<Laser>();
+            AudioSource.PlayClipAtPoint(missileSound, missileBay.transform.position);
+            missile1.SetBaseProperties(missileSweepStartSpeed, 90.0f, missileSweepLifetime);
+            missile1.SetMissileProperties(missileSweepStartAccel, missileSweepStartTopSpeed);
+            missile1.transform.SetParent(projectileContainer.transform);
+            missile2.SetBaseProperties(missileSweepStartSpeed, -90.0f, missileSweepLifetime);
+            missile2.SetMissileProperties(missileSweepStartAccel, missileSweepStartTopSpeed);
+            missile2.transform.SetParent(projectileContainer.transform);
+            StartCoroutine(MissileSweepTurn(missile1, missileSweepTurnDelay[i]));
+            StartCoroutine(MissileSweepTurn(missile2, missileSweepTurnDelay[i]));
+        }
     }
+
+    private IEnumerator MissileSweepTurn(Laser tempMissile, float turnDelay)
+    {
+        yield return new WaitForSeconds(turnDelay);
+        if(tempMissile != null)
+        {
+            tempMissile.SetBaseProperties(missileSweepDownSpeed, 180, missileSweepLifetime);
+            tempMissile.SetMissileProperties(missileSweepDownAccel, missileSweepDownTopSpeed);
+        }
+
+    }
+
+    [Space(20)]
+    [Header("Phase 3 Mine Parameters")]
+    [SerializeField]
+    private float mineCooldown;
+    private int currentMineSide = 0;
+
+    private void CreateMine()
+    {
+        BossComponent mineLayer = phase3Components[11];
+        if(mineLayer.GetState() == false)
+        {
+            GameObject newMine = mineLayer.Fire(minePrefab, currentMineSide);
+            newMine.transform.SetParent(projectileContainer.transform);
+            if(currentMineSide == 0)
+            {
+                currentMineSide = 1;
+            }
+            else
+            {
+                currentMineSide = 0;
+            }
+        }
+    }
+
+    
 
     //Additionals:
     //Mines will drop periodically but consistently
@@ -998,6 +1402,28 @@ public class FinalBoss : MonoBehaviour
                 return giantLaserPrefab;
             default:
                 return null;
+        }
+    }
+
+    public int GetPhase()
+    {
+        return currentTransition;
+    }
+
+    public bool ChangingPhase()
+    {
+        return isChangingPhases;
+    }
+
+    public bool CanAttack()
+    {
+        if(isChangingPhases == false && currentTransition != 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

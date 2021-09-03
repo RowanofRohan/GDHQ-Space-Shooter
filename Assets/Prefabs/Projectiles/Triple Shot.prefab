@@ -42,7 +42,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 788528755865709923, guid: 219c07c51b11bab46b29b92a125fba2e, type: 3}
       propertyPath: fireAngle
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 788528755865709923, guid: 219c07c51b11bab46b29b92a125fba2e, type: 3}
       propertyPath: laserLifespan
@@ -112,7 +112,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 788528755865709923, guid: 219c07c51b11bab46b29b92a125fba2e, type: 3}
       propertyPath: fireAngle
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 788528755865709923, guid: 219c07c51b11bab46b29b92a125fba2e, type: 3}
       propertyPath: laserLifespan
@@ -182,7 +182,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 788528755865709923, guid: 219c07c51b11bab46b29b92a125fba2e, type: 3}
       propertyPath: fireAngle
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 788528755865709923, guid: 219c07c51b11bab46b29b92a125fba2e, type: 3}
       propertyPath: laserLifespan

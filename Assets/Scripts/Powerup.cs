@@ -53,17 +53,20 @@ public class Powerup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.transform.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             Player player = other.transform.GetComponent<Player>();
             if (player != null)
             {
-                player.collectPowerup(powerupID);
+                if(hazardFlag == false || (hazardFlag == true && player.CanHitMines()))
+                {
+                    player.collectPowerup(powerupID);
+                }
             }
             AudioSource.PlayClipAtPoint(audioClip,transform.position,1.0f);
             Destroy(this.gameObject);
         }
-        else if(other.transform.tag == "Laser")
+        else if(other.gameObject.CompareTag("Laser"))
         {
             Laser laser = other.transform.GetComponent<Laser>();
             GiantLaser giantLaser = other.transform.GetComponent<GiantLaser>();
@@ -79,11 +82,11 @@ public class Powerup : MonoBehaviour
                     Destroy(explosion.gameObject,2.0f);
                     Destroy(this.gameObject);
                 }
-                else if (laserAllegience == true && hazardFlag == false)
-                {
-                    Destroy(other.gameObject);
-                    Destroy(this.gameObject);
-                }
+                // else if (laserAllegience == true && hazardFlag == false)
+                // {
+                //     Destroy(other.gameObject);
+                //     Destroy(this.gameObject);
+                // }
             }
             else if(giantLaser != null)
             {
@@ -94,10 +97,10 @@ public class Powerup : MonoBehaviour
                     Destroy(explosion.gameObject,2.0f);
                     Destroy(this.gameObject);
                 }
-                else if (laserAllegience == true && hazardFlag == false)
-                {
-                    Destroy(this.gameObject);
-                }
+                // else if (laserAllegience == true && hazardFlag == false)
+                // {
+                //     Destroy(this.gameObject);
+                // }
             }
         }
     }

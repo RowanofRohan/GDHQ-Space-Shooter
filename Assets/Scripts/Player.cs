@@ -30,14 +30,14 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float laserCooldown = 0.2f;
     private float canFire = -1f;
-    [SerializeField]
-    private int maxAmmo = 15;
-    [SerializeField]
-    private int currentAmmo = 0;
-    [SerializeField]
-    private bool infiniteAmmo = false;
-    [SerializeField]
-    private bool consumeAmmo = false;
+    // [SerializeField]
+    // private int maxAmmo = 15;
+    // [SerializeField]
+    // private int currentAmmo = 0;
+    // [SerializeField]
+    // private bool infiniteAmmo = false;
+    // [SerializeField]
+    // private bool consumeAmmo = false;
     [SerializeField]
     private bool laserOverride = false;
     [SerializeField]
@@ -128,6 +128,14 @@ public class Player : MonoBehaviour
     private GameObject leftDamageFire;
     [SerializeField]
     private GameObject rightDamageFire;
+    [SerializeField]
+    private float iframeDuration = 3.0f;
+    [SerializeField]
+    private float flickerDuration = 0.25f;
+    private bool recentlyDamaged = false;
+    private SpriteRenderer spriteRenderer;
+    [SerializeField]
+    private float flickerAlpha = 0.2f;
 
     //Missiles
     [SerializeField]
@@ -173,6 +181,10 @@ public class Player : MonoBehaviour
     private AudioClip laserShot;
     [SerializeField]
     private AudioClip laserEmptySound;
+    [SerializeField]
+    private AudioClip missileSound;
+    [SerializeField]
+    private AudioClip megaLaserSound;
 
     //Explosion Handles
     [SerializeField]
@@ -187,6 +199,7 @@ public class Player : MonoBehaviour
             Debug.LogError("Spawn Manager is NULL");
         }
         shieldRenderer = shieldVisualizer.GetComponent<SpriteRenderer>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         shieldRenderer.color = shieldStrongColor;
         shieldVisualizer.SetActive(shieldsUp);
         giantLaserPrefab.SetActive(false);
@@ -206,10 +219,10 @@ public class Player : MonoBehaviour
         canChargeThrusters = true;
         canUsethrusters = true;
 
-        currentAmmo = maxAmmo;
-        infiniteAmmo = false;
-        consumeAmmo = true;
-        SendAmmoUpdate();
+        //currentAmmo = maxAmmo;
+        //infiniteAmmo = false;
+        //consumeAmmo = true;
+        //SendAmmoUpdate();
     }
 
     void Update()
@@ -334,8 +347,8 @@ public class Player : MonoBehaviour
             if (Input.GetKey(KeyCode.Space) && Time.time > canFire)
             {
                 canFire = Time.time + laserCooldown;
-                if(currentAmmo > 0)
-                {
+                // if(currentAmmo > 0)
+                // {
                     playerAudio.clip = laserShot;
                     if (tripleShot == true)
                     {
@@ -349,16 +362,16 @@ public class Player : MonoBehaviour
                         newLaser.SetHostile(false);
                         newLaser.SetBaseProperties(laserSpeed, laserAngle, laserLife);
                     }
-                    if(infiniteAmmo != true && consumeAmmo != true)
-                    {
-                        currentAmmo -= 1;
-                    }
-                    SendAmmoUpdate();
-                }
-                else
-                {
-                    playerAudio.clip = laserEmptySound;
-                }
+                    // if(infiniteAmmo != true && consumeAmmo != true)
+                    // {
+                    //     currentAmmo -= 1;
+                    // }
+                    // SendAmmoUpdate();
+                // }
+                // else
+                // {
+                //     playerAudio.clip = laserEmptySound;
+                // }
                 playerAudio.Play();
             }
         }
@@ -503,6 +516,7 @@ public class Player : MonoBehaviour
         GameObject newCrosshair = Instantiate(targetCrosshairPrefab, enemyTarget.transform.position, Quaternion.identity);
         newMissile.GetComponent<Missiles>().SetTargets(enemyTarget,newCrosshair,launchAngle);
         newCrosshair.transform.SetParent(enemyTarget.transform);
+        AudioSource.PlayClipAtPoint(missileSound, transform.position);
     }
 
     public void Damage()
@@ -535,6 +549,48 @@ public class Player : MonoBehaviour
                 Destroy(explosion.gameObject,2.0f);
                 Destroy(this.gameObject);
             }
+        }
+    }
+
+    private IEnumerator DamageFlicker()
+    {
+        recentlyDamaged = true;
+        StartCoroutine(DamageTimer());
+        Color spriteColor = Color.white;
+        float alpha = flickerAlpha;
+        while(recentlyDamaged)
+        {
+            if(alpha == 1.0f)
+            {
+                alpha = flickerAlpha;
+            }
+            else
+            {
+                alpha = 1.0f;
+            }
+            spriteColor.a = alpha;
+            spriteRenderer.color = spriteColor;
+            yield return new WaitForSeconds(flickerDuration);
+        }
+        spriteColor.a = 1.0f;
+        spriteRenderer.color = spriteColor;
+    }
+
+    private IEnumerator DamageTimer()
+    {
+        yield return new WaitForSeconds(iframeDuration);
+        recentlyDamaged = false;
+    }
+
+    public bool CanHitMines()
+    {
+        if(godMode == false && recentlyDamaged == false)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
@@ -600,7 +656,7 @@ public class Player : MonoBehaviour
                 break;
             case 4:
                 //Ammo ID: 4
-                AmmoController();
+                //AmmoController();
                 break;
             case 5:
                 //1UP ID: 5
@@ -640,13 +696,13 @@ public class Player : MonoBehaviour
 
     IEnumerator TripleShotTimer()
     {
-        currentAmmo = maxAmmo;
-        infiniteAmmo = true;
-        SendAmmoUpdate();
+        //currentAmmo = maxAmmo;
+        //infiniteAmmo = true;
+        //SendAmmoUpdate();
         yield return new WaitForSeconds(tripleShotDuration);
-        infiniteAmmo = false;
+        //infiniteAmmo = false;
         tripleShot = false;
-        SendAmmoUpdate();
+        //SendAmmoUpdate();
     }
 
     private void GiantLaserController()
@@ -660,6 +716,7 @@ public class Player : MonoBehaviour
         {
             giantLaser = true;
             StartCoroutine(GiantLaserTimer());
+            AudioSource.PlayClipAtPoint(megaLaserSound, transform.position);
         }
     }
 
@@ -669,27 +726,30 @@ public class Player : MonoBehaviour
         {
             yield return null;
         }
-        infiniteAmmo = true;
+        //infiniteAmmo = true;
         laserOverride = true;
         giantLaserPrefab.SetActive(true);
-        SendAmmoUpdate();
+        //SendAmmoUpdate();
         yield return new WaitForSeconds(giantLaserDuration);
-        infiniteAmmo = false;
-        currentAmmo = maxAmmo;
+        //infiniteAmmo = false;
+        //currentAmmo = maxAmmo;
         giantLaser = false;
         laserOverride = false;
         giantLaserPrefab.SetActive(false);
-        SendAmmoUpdate();
+        //SendAmmoUpdate();
     }
 
     private void LandMineController()
     {
-        Damage();
-        if(playerHealth > 0)
+        if(godMode == false && recentlyDamaged == false)
         {
-            GameObject explosion = Instantiate(explosionPrefab,transform.position, Quaternion.identity);
-            Destroy(explosion.gameObject,2.0f);
-            StartCoroutine(StunPlayer());
+            Damage();
+            if(playerHealth > 0)
+            {
+                GameObject explosion = Instantiate(explosionPrefab,transform.position, Quaternion.identity);
+                Destroy(explosion.gameObject,2.0f);
+                StartCoroutine(StunPlayer());
+            }
         }
     }
 
@@ -766,11 +826,11 @@ public class Player : MonoBehaviour
         shieldRenderer.color = Color.Lerp(shieldWeakcolor,shieldStrongColor,shieldPercent);
     }
 
-    private void AmmoController()
-    {
-        currentAmmo = maxAmmo;
-        SendAmmoUpdate();
-    }
+    // private void AmmoController()
+    // {
+    //     currentAmmo = maxAmmo;
+    //     SendAmmoUpdate();
+    // }
 
     private void OneUPController()
     {
@@ -783,17 +843,17 @@ public class Player : MonoBehaviour
         RepairFX();
     }
 
-    private void SendAmmoUpdate()
-    {
-        if (infiniteAmmo != true)
-        {
-            uiManager.UpdateAmmo(currentAmmo,maxAmmo);
-        }
-        else
-        {
-            uiManager.UpdateAmmo(999,999);
-        }
-    }
+    // private void SendAmmoUpdate()
+    // {
+    //     if (infiniteAmmo != true)
+    //     {
+    //         uiManager.UpdateAmmo(currentAmmo,maxAmmo);
+    //     }
+    //     else
+    //     {
+    //         uiManager.UpdateAmmo(999,999);
+    //     }
+    // }
 
     IEnumerator ShieldTimer()
     {
@@ -812,26 +872,19 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.transform.tag == "Laser")
+        if(godMode == false && recentlyDamaged == false && other.gameObject.CompareTag("Laser"))
         {
             Laser laser = other.transform.GetComponent<Laser>();
-            if (laser != null)
+            if (laser != null && laser.CallAllegiance() == true)
             {
-                //Checks hostilitiy; "true" represents hostile
-                if(laser.CallAllegiance() == true)
+                Damage();
+                if(laser.GetLaserID() == 1)
                 {
-                    if(godMode == false)
-                    {
-                        Damage();
-                    }
-                    if(laser.GetLaserID() == 1)
-                    {
-                        laser.Explode();
-                    }
-                    else if(laser.GetLaserID() != 2)
-                    {
-                        Destroy(other.gameObject);
-                    }
+                    laser.Explode();
+                }
+                else if(laser.GetLaserID() != 2)
+                {
+                    Destroy(other.gameObject);
                 }
             }
         }
@@ -839,22 +892,19 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if(other.transform.tag == "Laser")
+        if(godMode == false && recentlyDamaged == false && other.gameObject.CompareTag("Laser"))
         {
             GiantLaser giantLaser = other.transform.GetComponent<GiantLaser>();
-            if (giantLaser != null)
+            if (giantLaser != null && giantLaser.CallAllegiance() == true)
             {
-                if (giantLaser.CallAllegiance() == true)
-                {
-                    Damage();
-                }
+                Damage();
             }
         }
     }
 
-    public void GameStart()
-    {
-        consumeAmmo = false;
-        SendAmmoUpdate();
-    }
+    // public void GameStart()
+    // {
+    //     consumeAmmo = false;
+    //     SendAmmoUpdate();
+    // }
 }

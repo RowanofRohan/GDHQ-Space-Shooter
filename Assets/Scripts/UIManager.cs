@@ -45,6 +45,12 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Color thrusterEmptyColor = Color.red;
 
+    //Boss Handles
+    [SerializeField]
+    private Image bossStatus;
+    [SerializeField]
+    private Image bossStatusBG;
+
     //Ammo Handles
     [SerializeField]
     private Text ammoText;
@@ -133,6 +139,18 @@ public class UIManager : MonoBehaviour
         restartText.gameObject.SetActive(true);
         gameManager.GameOver();
         StartCoroutine(GameOverFlicker());
+    }
+
+    public void InitializeBoss()
+    {
+        bossStatus.gameObject.SetActive(true);
+        bossStatusBG.gameObject.SetActive(true);
+    }
+
+    public void UpdateBossHP(float bossMaxHealth, float bossCurrentHealth)
+    {
+        float bossPercentage = bossCurrentHealth/bossMaxHealth;
+        bossStatus.fillAmount = bossPercentage;
     }
 
     IEnumerator GameOverFlicker()

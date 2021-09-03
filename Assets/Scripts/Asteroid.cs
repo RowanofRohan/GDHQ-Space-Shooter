@@ -43,7 +43,7 @@ public class Asteroid : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.transform.tag == "Laser")
+        if(other.gameObject.CompareTag("Laser"))
         {
             Laser laser = other.transform.GetComponent<Laser>();
             if(laser != null)
@@ -52,7 +52,7 @@ public class Asteroid : MonoBehaviour
                 DestroyTrigger();
             }
         }
-        else if (other.transform.tag == "Player")
+        else if (other.gameObject.CompareTag("Player"))
         {
             if (player != null)
             {
@@ -67,7 +67,7 @@ public class Asteroid : MonoBehaviour
         GameObject explosion = Instantiate(explosionPrefab,transform.position, Quaternion.identity);
         asteroidCollider.enabled = false;
         spawnManager.StartSpawning();
-        player.GameStart();
+        //player.GameStart();
         Destroy(explosion.gameObject, 1.5f);
         Destroy(this.gameObject,0.5f);
     }
