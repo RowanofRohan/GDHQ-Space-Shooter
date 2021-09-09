@@ -550,6 +550,7 @@ public class Player : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+        StartCoroutine(DamageFlicker());
     }
 
     private IEnumerator DamageFlicker()

@@ -6,21 +6,21 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField]
+    private AudioClip buttonHoverSound;
 
     public void LoadGame()
     {
         SceneManager.LoadScene("Game");
+    }
+
+    public void LoadBoss()
+    {
+        SceneManager.LoadScene("Boss_Game");
+    }
+
+    public void MouseButtonHoverSound()
+    {
+        AudioSource.PlayClipAtPoint(buttonHoverSound, Vector3.zero);
     }
 }

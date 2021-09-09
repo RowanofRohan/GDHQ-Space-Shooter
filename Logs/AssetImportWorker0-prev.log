@@ -1,0 +1,192 @@
+Using pre-set license
+Built from '2020.3/staging' branch; Version is '2020.3.11f1 (99c7afb366b3) revision 10078127'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Home; OS build 19042.1165; Version 2009; 64bit' Language: 'en' Physical Memory: 16344 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+G:\Program Files\Unity\2020.3.11f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+G:/Users/RowanofRohan/Documents/Unity/Space Shooter
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+64224
+Successfully changed project path to: G:/Users/RowanofRohan/Documents/Unity/Space Shooter
+G:/Users/RowanofRohan/Documents/Unity/Space Shooter
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 147.51 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.11f1 (99c7afb366b3)
+[Subsystems] Discovering subsystems at path G:/Program Files/Unity/2020.3.11f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path G:/Users/RowanofRohan/Documents/Unity/Space Shooter/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 970 (ID=0x13c2)
+    Vendor:   
+    VRAM:     4043 MB
+    Driver:   27.21.14.6089
+Initialize mono
+Mono path[0] = 'G:/Program Files/Unity/2020.3.11f1/Editor/Data/Managed'
+Mono path[1] = 'G:/Program Files/Unity/2020.3.11f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'G:/Program Files/Unity/2020.3.11f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56028
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: G:/Program Files/Unity/2020.3.11f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: G:/Program Files/Unity/2020.3.11f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.074089 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 31.86 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  8.784 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.104048 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.37 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.301 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.11 seconds
+Refreshing native plugins compatible for Editor in 0.87 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1558 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 77.5 MB.
+System memory in use after: 77.6 MB.
+
+Unloading 17 unused Assets to reduce memory usage. Loaded Objects now: 1998.
+Total: 1.822500 ms (FindLiveObjects: 0.161500 ms CreateObjectMapping: 0.038200 ms MarkObjects: 1.596200 ms  DeleteObjects: 0.025900 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Prefabs/Enemies/Enemy.prefab
+  artifactKey: Guid(a317d6075101f4f47a14101b74ff350e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Enemy.prefab using Guid(a317d6075101f4f47a14101b74ff350e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '12f582e379f44a58a79b9a74573edb03') in 0.436443 seconds
+  Import took 0.538478 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 21142.652951 seconds.
+  path: Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Left Side/Wave1_Left_1.prefab
+  artifactKey: Guid(33b4ec9aeaa57234e8e5ecceb3f78f20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Left Side/Wave1_Left_1.prefab using Guid(33b4ec9aeaa57234e8e5ecceb3f78f20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bd5e91d0501e4f23dd3bf74b8a7a3e16') in 0.071372 seconds
+  Import took 0.197806 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 616.784287 seconds.
+  path: Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Left Side/Wave1_Left_2.prefab
+  artifactKey: Guid(7eb9d1e125cb72e4a9b4460737a9cf4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Left Side/Wave1_Left_2.prefab using Guid(7eb9d1e125cb72e4a9b4460737a9cf4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dddafac91673887c55a8a2cb7e2c5ada') in 0.061345 seconds
+  Import took 0.104959 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 71.886748 seconds.
+  path: Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Left Side/Wave1_Left_3.prefab
+  artifactKey: Guid(1ef94fded0e02bc498a388110e99034f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Left Side/Wave1_Left_3.prefab using Guid(1ef94fded0e02bc498a388110e99034f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6bafe1c62e66d17ab7510aa03ce3d2ef') in 0.020342 seconds
+  Import took 0.184137 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 90.763398 seconds.
+  path: Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Left Side/Wave1_Left_4.prefab
+  artifactKey: Guid(dbcd00f31c3f37e4a940d41768767225) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Left Side/Wave1_Left_4.prefab using Guid(dbcd00f31c3f37e4a940d41768767225) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '637d7dcaafa064e779da60c50fe81c8c') in 0.021483 seconds
+  Import took 0.070935 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 81.423926 seconds.
+  path: Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Right Side/Wave1_Right_1.prefab
+  artifactKey: Guid(d0a9614ece19a1143b3480ffe85e8e94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Right Side/Wave1_Right_1.prefab using Guid(d0a9614ece19a1143b3480ffe85e8e94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'df3b5a4ebe1e1f9cd14bf9b3f41b4380') in 0.013478 seconds
+  Import took 0.041836 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.009947 seconds.
+  path: Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Right Side/Wave1_Right_1.prefab
+  artifactKey: Guid(d0a9614ece19a1143b3480ffe85e8e94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Right Side/Wave1_Right_1.prefab using Guid(d0a9614ece19a1143b3480ffe85e8e94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'df3b5a4ebe1e1f9cd14bf9b3f41b4380') in 0.012555 seconds
+  Import took 0.049754 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 84.853263 seconds.
+  path: Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Right Side/Wave1_Right_2.prefab
+  artifactKey: Guid(0f39c3c0efd12a1478d5cae373610832) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Right Side/Wave1_Right_2.prefab using Guid(0f39c3c0efd12a1478d5cae373610832) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c69e02f8785d8a137ff6318158a119b6') in 0.015390 seconds
+  Import took 0.072597 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.029180 seconds.
+  path: Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Right Side/Wave1_Right_2.prefab
+  artifactKey: Guid(0f39c3c0efd12a1478d5cae373610832) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Right Side/Wave1_Right_2.prefab using Guid(0f39c3c0efd12a1478d5cae373610832) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c69e02f8785d8a137ff6318158a119b6') in 0.010387 seconds
+  Import took 0.013407 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 110.071552 seconds.
+  path: Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Right Side/Wave1_Right_3.prefab
+  artifactKey: Guid(59c05e38be9753c4580ff0e7328da188) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Right Side/Wave1_Right_3.prefab using Guid(59c05e38be9753c4580ff0e7328da188) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e020c808984ccd8bdf42ee9742d1b2e') in 0.020572 seconds
+  Import took 0.335879 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 64.283437 seconds.
+  path: Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Right Side/Wave1_Right_4.prefab
+  artifactKey: Guid(3609a18ce19498142a9fa35b917df94c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Patterned Enemies/Wave 1/Right Side/Wave1_Right_4.prefab using Guid(3609a18ce19498142a9fa35b917df94c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8273a2cb4475d8643ef5ec0ca5008603') in 0.013968 seconds
+  Import took 0.330027 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4486.849032 seconds.
+  path: Assets/Prefabs/Enemies/Patterned Enemies/Wave 2/Wave2_Left.prefab
+  artifactKey: Guid(9254bbca98ef9da448dad8ed83b71a6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Patterned Enemies/Wave 2/Wave2_Left.prefab using Guid(9254bbca98ef9da448dad8ed83b71a6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0caea22ae2d796d08f0ab7e85199372a') in 0.041442 seconds
+  Import took 0.126772 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 241.783906 seconds.
+  path: Assets/Prefabs/Enemies/Patterned Enemies/Wave 2/Wave2_Right.prefab
+  artifactKey: Guid(54f31f402514fdb4990717716e0acb5b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Patterned Enemies/Wave 2/Wave2_Right.prefab using Guid(54f31f402514fdb4990717716e0acb5b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0aa31e5394fac266b985afe4931cc0c7') in 0.016740 seconds
+  Import took 0.157061 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.040648 seconds.
+  path: Assets/Prefabs/Enemies/Patterned Enemies/Wave 2/Wave2_Right.prefab
+  artifactKey: Guid(54f31f402514fdb4990717716e0acb5b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Patterned Enemies/Wave 2/Wave2_Right.prefab using Guid(54f31f402514fdb4990717716e0acb5b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0aa31e5394fac266b985afe4931cc0c7') in 0.011362 seconds
+  Import took 0.014519 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 498.003171 seconds.
+  path: Assets/Prefabs/Enemies/Patterned Enemies/Wave3/Wave3_Aggro.prefab
+  artifactKey: Guid(0b7b3d76b169e6c4eb0ba8ad6413f84e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Patterned Enemies/Wave3/Wave3_Aggro.prefab using Guid(0b7b3d76b169e6c4eb0ba8ad6413f84e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a7060a7064daadae5b896f7854895d7') in 0.015170 seconds
+  Import took 0.095705 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

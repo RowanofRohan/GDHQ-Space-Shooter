@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     private float gameOverFlickerTimer = 1.0f;
     [SerializeField]
     private Text restartText;
+    [SerializeField]
+    private Text victoryText;
 
     //Health Handles
     [SerializeField]
@@ -58,6 +60,12 @@ public class UIManager : MonoBehaviour
     private Image ammoImage;
     private int ammoCount = 15;
 
+    //Screen Flash
+    [SerializeField]
+    private Image screenFlashImage;
+    [SerializeField]
+    private float screenFlashDuration = 5.0f;
+
     void Start()
     {
         gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
@@ -70,11 +78,6 @@ public class UIManager : MonoBehaviour
         restartText.gameObject.SetActive(false);
         shieldStatus.gameObject.SetActive(false);
         ammoText.text = "x " + ammoCount;
-    }
-
-    void Update()
-    {
-
     }
 
     public void UpdateScore(int currentScore)
@@ -162,5 +165,28 @@ public class UIManager : MonoBehaviour
             gameOvertext.gameObject.SetActive(false);
             yield return new WaitForSeconds(gameOverFlickerTimer);
         }
+    }
+
+    public void Victory()
+    {
+        StartCoroutine(ScreenFlash());
+        victoryText.gameObject.SetActive(true);
+        restartText.gameObject.SetActive(true);
+        gameManager.GameOver();
+    }
+
+    private IEnumerator ScreenFlash()
+    {
+        float screenFlashTimer = screenFlashDuration;
+        screenFlashImage.gameObject.SetActive(true);
+        Color screenColor = screenFlashImage.color;
+        while(screenFlashTimer >= 0.0f)
+        {
+            screenColor.a = Mathf.Lerp(0.0f, 1.0f, screenFlashTimer/screenFlashDuration);
+            screenFlashImage.color = screenColor;
+            screenFlashTimer -= Time.deltaTime;
+            yield return null;
+        }
+        screenFlashImage.gameObject.SetActive(false);
     }
 }

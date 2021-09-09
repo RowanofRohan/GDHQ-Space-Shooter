@@ -74,6 +74,8 @@ public class FinalBoss : MonoBehaviour
     private GameObject projectileContainer;
     [SerializeField]
     private BossAI bossAI;
+    [SerializeField]
+    private AudioClip giantExplosionSound;
 
     [Space(20)]
     [Header("Object Prefab Handles")]
@@ -466,7 +468,10 @@ public class FinalBoss : MonoBehaviour
             default:
                 break;
         }
-        bossAI.StartPhase(currentTransition);
+        if(currentTransition <= 3)
+        {
+            bossAI.StartPhase(currentTransition);
+        }
     }
 
     private void EndPhase()
@@ -492,9 +497,56 @@ public class FinalBoss : MonoBehaviour
         }
         bossAI.EndPhase();
 
+        if(currentTransition == 3)
+        {
+            Victory();
+        }
         InitializeMovement();
-        //Projectile Cleanup
-        //Cleanup Coroutines for Attack Patterns
+    }
+
+    private void Victory()
+    {
+        StartCoroutine(ExplosionSequence());
+    }
+
+    [Space(20)]
+    [Header("Victory Sequence")]
+    [SerializeField]
+    private float explosionStagger = 0.2f;
+    [SerializeField]
+    private float explosionSequenceDuration = 10.0f;
+    private bool isExploding = false;
+    [SerializeField]
+    private float explosionRangeX = 6.0f;
+    [SerializeField]
+    private float explosionRangeY = 6.0f;
+
+    private IEnumerator ExplosionSequence()
+    {
+        isExploding = true;
+        StartCoroutine(ExplosionSequenceTimer());
+        WaitForSeconds explodeStagger = new WaitForSeconds(explosionStagger);
+        Vector3 explodePoint = new Vector3(0, 0, 0);
+        Vector3 explodeRotate = new Vector3(0, 0, 0);
+        Quaternion explodeRotation;
+        while(isExploding == true)
+        {
+            explodeRotate.z = Random.Range(0.0f, 360.0f);
+            explodeRotation = Quaternion.Euler(explodeRotate);
+            explodePoint = new Vector3((Random.value - 0.5f) * explosionRangeX, (Random.value - 0.5f) * explosionRangeY, 0);
+            GameObject newExplosion = Instantiate(explosionPrefab, explodePoint, explodeRotation);
+            newExplosion.transform.SetParent(projectileContainer.transform);
+            yield return explodeStagger;
+        }
+        uiManager.Victory();
+        AudioSource.PlayClipAtPoint(giantExplosionSound, Vector3.zero, 1.2f);
+        Destroy(this.gameObject);
+    }
+
+    private IEnumerator ExplosionSequenceTimer()
+    {
+        yield return new WaitForSeconds(explosionSequenceDuration);
+        isExploding = false;
     }
 
     private void MovementController()

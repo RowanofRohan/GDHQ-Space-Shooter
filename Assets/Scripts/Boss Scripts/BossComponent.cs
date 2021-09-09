@@ -73,7 +73,7 @@ public class BossComponent : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        boss = GameObject.Find("Destroyer_Boss").GetComponent<FinalBoss>();
+        boss = GameObject.FindWithTag("Boss").GetComponent<FinalBoss>();
         prefabContainer = boss.GetPrefab(0);
         isDestroyed = false;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -272,18 +272,25 @@ public class BossComponent : MonoBehaviour
 
     public void TrackPlayer()
     {
-        Vector3 targetDirection = player.transform.position - gameObject.transform.position;
-        angle = Mathf.Atan2(targetDirection.y,targetDirection.x)*Mathf.Rad2Deg - 90;
-        //float newAngle = Mathf.LerpAngle(transform.rotation.eulerAngles.z, angle, trackingStickiness/100);
-        float newAngle = Mathf.SmoothDampAngle(transform.rotation.eulerAngles.z, angle, ref tempVelocity, trackingStickiness);
-        transform.rotation = Quaternion.Euler(new Vector3(0,0,newAngle));
-        if(trackingTime > 0)
+        if(player != null)
         {
-            timeTracker += Time.deltaTime;
-            if(timeTracker >= trackingTime)
+            Vector3 targetDirection = player.transform.position - gameObject.transform.position;
+            angle = Mathf.Atan2(targetDirection.y,targetDirection.x)*Mathf.Rad2Deg - 90;
+            //float newAngle = Mathf.LerpAngle(transform.rotation.eulerAngles.z, angle, trackingStickiness/100);
+            float newAngle = Mathf.SmoothDampAngle(transform.rotation.eulerAngles.z, angle, ref tempVelocity, trackingStickiness);
+            transform.rotation = Quaternion.Euler(new Vector3(0,0,newAngle));
+            if(trackingTime > 0)
             {
-                isTracking = false;
+                timeTracker += Time.deltaTime;
+                if(timeTracker >= trackingTime)
+                {
+                    isTracking = false;
+                }
             }
+        }
+        else
+        {
+            isTracking = false;
         }
     }
 

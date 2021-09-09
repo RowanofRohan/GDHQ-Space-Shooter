@@ -162,10 +162,6 @@ MonoBehaviour:
   leftScreenBound: -9.2
   rightScreenBound: 9.2
   laserCooldown: 0.2
-  maxAmmo: 15
-  currentAmmo: 0
-  infiniteAmmo: 0
-  consumeAmmo: 0
   laserOverride: 0
   stunTimer: 1
   laserSpeed: 24
@@ -194,8 +190,8 @@ MonoBehaviour:
   maxHealth: 3
   leftDamageFire: {fileID: 547761067615175526}
   rightDamageFire: {fileID: 547761065993025574}
-  iframeDuration: 3
-  flickerDuration: 0.25
+  iframeDuration: 2.5
+  flickerDuration: 0.15
   flickerAlpha: 0.2
   currentMissiles: 3
   maxMissiles: 3

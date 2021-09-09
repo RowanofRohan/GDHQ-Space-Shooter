@@ -48,5 +48,5 @@ MonoBehaviour:
   firstSpawnDelays:
   - 0
   firstSpawnLocations:
-  - {x: 0, y: 8, z: 0}
+  - {x: 0, y: 50, z: 0}
   selfDestructTimer: 30

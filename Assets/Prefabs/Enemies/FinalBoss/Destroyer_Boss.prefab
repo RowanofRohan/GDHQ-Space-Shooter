@@ -306,7 +306,7 @@ MonoBehaviour:
   - 24
   - 12
   - 12
-  - 12
+  - 24
   - 12
   - 10
   - 12
@@ -317,7 +317,7 @@ MonoBehaviour:
   - 3
   - 4.5
   - 4
-  - 8
+  - 7
   - 6
   - 6.5
   - 0
@@ -353,7 +353,7 @@ MonoBehaviour:
   - 2.5
   - 1.5
   - 1
-  - 6
+  - 8
   - 3
   - 0
   - 0
@@ -472,7 +472,7 @@ GameObject:
   - component: {fileID: 4275373345776777846}
   m_Layer: 0
   m_Name: Destroyer_Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -486,7 +486,7 @@ Transform:
   m_GameObject: {fileID: 5593626987795313430}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
   - {fileID: 7477395989123431959}
   - {fileID: 3151681745391879592}
@@ -583,6 +583,7 @@ MonoBehaviour:
   currentHealth: 0
   projectileContainer: {fileID: 6331019114716366328}
   bossAI: {fileID: 3625243350060976680}
+  giantExplosionSound: {fileID: 8300000, guid: 1aec8fc4025d8d04384539a1fb8b3c6f, type: 3}
   enemyWave: {fileID: 6931548271071625976, guid: 1f67e5da0362c4747b1455ac2efd86a7, type: 3}
   laserPrefab: {fileID: 5746437233156866967, guid: a0b0206563f2f36429af3542bc89d1b1, type: 3}
   giantLaserPrefab: {fileID: 3391914939951711884, guid: c56c254c59f7a3e40b24d5959af9d8ba, type: 3}
@@ -630,6 +631,10 @@ MonoBehaviour:
   - {fileID: 5124356751685351861}
   - {fileID: 2677027169914931876}
   - {fileID: 8701148186302481821}
+  explosionStagger: 0.2
+  explosionSequenceDuration: 7
+  explosionRangeX: 10
+  explosionRangeY: 10
   summonDelay: 1.5
   summonVulnerableWindow: 3
   waveSpawn: {x: 0, y: 8, z: 0}
@@ -650,10 +655,10 @@ MonoBehaviour:
   - 0.3
   - 0.2
   reverseConvergence: 0
-  waveShots: 5e0000007400000048000000
+  waveShots: 5e0000003a00000048000000
   waveAngle:
   - 32
-  - 32
+  - 48
   - -32
   waveSweeps: 010000000100000001000000
   waveShotDelay:

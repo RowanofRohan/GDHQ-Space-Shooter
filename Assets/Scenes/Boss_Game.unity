@@ -2199,19 +2199,9 @@ MonoBehaviour:
   enemyPrefab: {fileID: 1450494416923494977, guid: a317d6075101f4f47a14101b74ff350e, type: 3}
   enemyContainer: {fileID: 478048717}
   wavePrefabs:
-  - {fileID: 2303150409266962249, guid: 38b357cd498ea8f4185c7457e143e66d, type: 3}
-  - {fileID: 8984572856800832880, guid: f5fa1c2314d74fd4cbbd7a725bf3a28d, type: 3}
-  - {fileID: 6931548271071625976, guid: 1f67e5da0362c4747b1455ac2efd86a7, type: 3}
-  - {fileID: 6931548271071625976, guid: 1f67e5da0362c4747b1455ac2efd86a7, type: 3}
-  - {fileID: 6931548271071625976, guid: 1f67e5da0362c4747b1455ac2efd86a7, type: 3}
   - {fileID: 6931548271071625976, guid: c9f2ff3d401bca94595340e6597fc59f, type: 3}
   waveDelays:
   - 1
-  - 12
-  - 29
-  - 5
-  - 5
-  - 10
   powerups:
   - {fileID: 1225035351572904696, guid: 87a63fbaa3ef94a44ac3f3db63662b60, type: 3}
   - {fileID: 4391880903207725464, guid: 96ff93a45f594fa4980cff16d61ee874, type: 3}
